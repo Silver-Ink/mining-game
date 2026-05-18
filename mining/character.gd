@@ -1,6 +1,9 @@
 extends Area2D
+class_name Character
 
 const STEP_DURATION := .24
+
+var walls : WallTileMapLayer
 
 var tile_edge : int
 
@@ -39,9 +42,12 @@ func _step() -> void:
 		_last_direction = Vector2i.ZERO
 
 func _move(movement : Vector2i) -> void:
+	var new_position = global_position + Vector2(movement) * tile_edge;
+	if (walls.test_wall_at(new_position)):
+		return
 	_can_step = false
 	var step_tween = create_tween()
-	step_tween.tween_property(self, "position", position + Vector2(movement) * tile_edge, STEP_DURATION)
+	step_tween.tween_property(self, "position", new_position, STEP_DURATION)
 	step_tween.finished.connect(_on_step_timer_end)
 	step_tween.play()
 	
