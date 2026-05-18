@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://cn7250215l36p"]
+
+[ext_resource type="Script" uid="uid://dnqfcxe3o5f5i" path="res://tile/shape_sprite.gd" id="1_xcoul"]
+[ext_resource type="Texture2D" uid="uid://dm8giu5744mra" path="res://tile/sprite/background_rock.png" id="2_fsrd7"]
+
+[node name="Background" type="Node2D" unique_id=1396729678 node_paths=PackedStringArray("tiled_sprite")]
+script = ExtResource("1_xcoul")
+tiled_sprite = NodePath("bg")
+metadata/_custom_type_script = "uid://dnqfcxe3o5f5i"
+
+[node name="bg" type="Sprite2D" parent="." unique_id=1796748360]
+texture = ExtResource("2_fsrd7")

@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://b4kqni15kcqb5"]
+
+[ext_resource type="Texture2D" uid="uid://8dcmyskgwm57" path="res://assets/tools/hammer.png" id="1_jdm0x"]
+[ext_resource type="Script" uid="uid://b0c08wt6v8c2k" path="res://ui/custom_cursor.gd" id="2_og5gq"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=740858997]
+layer = 1000
+follow_viewport_enabled = true
+script = ExtResource("2_og5gq")
+
+[node name="CustomCursor" type="Sprite2D" parent="." unique_id=879143426]
+unique_name_in_owner = true
+z_index = 1000
+texture = ExtResource("1_jdm0x")
+offset = Vector2(3, -1)

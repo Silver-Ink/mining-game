@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://6be6wpwdvekm"]
+
+[ext_resource type="Script" uid="uid://byeal2tb066q7" path="res://level/test_tiled.gd" id="1_pq0o5"]
+
+[node name="TestTiled" type="Node2D" unique_id=1802790867]
+script = ExtResource("1_pq0o5")
+
+[node name="camera" type="Camera2D" parent="." unique_id=1074128323]
