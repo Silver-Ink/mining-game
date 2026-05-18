@@ -1,0 +1,14 @@
+[gd_scene format=4 uid="uid://ceipsfqcffaj5"]
+
+[ext_resource type="TileSet" uid="uid://c50wvgvfyx2fk" path="res://resources/mining_tileset.tres" id="1_4xfmi"]
+[ext_resource type="PackedScene" uid="uid://dyfcv20bbelti" path="res://mining/character.tscn" id="1_que5h"]
+
+[node name="MiningArea" type="Node2D" unique_id=1928987283]
+
+[node name="Walls" type="TileMapLayer" parent="." unique_id=99872177]
+tile_map_data = PackedByteArray("AAAAAP//AAADAAMAAAACAP//AAADAAMAAAADAAAAAAADAAMAAAACAAEAAAADAAMAAAAAAAEAAAADAAMAAAD+/wEAAAADAAMAAAD+////AAADAAMAAAD//wAAAAADAAMAAAABAAAAAAADAAMAAAD9/wAAAAADAAMAAAD///7/AAADAAMAAAABAP7/AAADAAMAAAADAP7/AAADAAMAAAAEAP//AAADAAMAAAAEAAEAAAADAAMAAAADAAIAAAADAAMAAAABAAIAAAADAAMAAAD//wIAAAADAAMAAAD9/wIAAAADAAMAAAD8/wEAAAADAAMAAAD8////AAADAAMAAAD9//7/AAADAAMAAAA=")
+tile_set = ExtResource("1_4xfmi")
+
+[node name="Floor" type="TileMapLayer" parent="." unique_id=2126815474]
+
+[node name="Character" parent="." unique_id=1243292103 instance=ExtResource("1_que5h")]

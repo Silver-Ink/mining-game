@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dyfcv20bbelti"]
+
+[ext_resource type="Script" uid="uid://7iv84dg76hg8" path="res://mining/character.gd" id="1_carah"]
+[ext_resource type="Texture2D" uid="uid://drphnmpmg4p6t" path="res://icon.svg" id="1_qgp2w"]
+[ext_resource type="PackedScene" uid="uid://bmyn78otm2kag" path="res://mining/top_down_camera.tscn" id="3_3x6sv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bbvrw"]
+
+[node name="Character" type="Area2D" unique_id=1243292103]
+script = ExtResource("1_carah")
+
+[node name="HitBox" type="CollisionShape2D" parent="." unique_id=500828552]
+shape = SubResource("RectangleShape2D_bbvrw")
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=351997469]
+scale = Vector2(0.15625, 0.15625)
+texture = ExtResource("1_qgp2w")
+
+[node name="TopDownCamera" parent="." unique_id=516610765 instance=ExtResource("3_3x6sv")]
+
+[node name="StepTimer" type="Timer" parent="." unique_id=2058452303]
+wait_time = 0.3
