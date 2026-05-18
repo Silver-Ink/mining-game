@@ -17,6 +17,3 @@ scale = Vector2(0.15625, 0.15625)
 texture = ExtResource("1_qgp2w")
 
 [node name="TopDownCamera" parent="." unique_id=516610765 instance=ExtResource("3_3x6sv")]
-
-[node name="StepTimer" type="Timer" parent="." unique_id=2058452303]
-wait_time = 0.3

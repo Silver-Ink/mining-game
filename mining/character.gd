@@ -1,7 +1,8 @@
 extends Area2D
 
+const STEP_DURATION := .24
+
 var tile_edge : int
-@onready var step_timer: Timer = $StepTimer
 
 var _can_step := true
 var _last_direction : Vector2i
@@ -10,7 +11,7 @@ func _ready() -> void:
 	# watch if id ref creates conflicts with vcs
 	tile_edge = load("uid://c50wvgvfyx2fk").tile_size.x # Assuming we have square tiles
 	
-	step_timer.timeout.connect(_on_step_timer_end)
+	
 
 func _process(_delta: float) -> void:
 	_step()
@@ -38,9 +39,11 @@ func _step() -> void:
 		_last_direction = Vector2i.ZERO
 
 func _move(movement : Vector2i) -> void:
-	position += Vector2(movement) * tile_edge
 	_can_step = false
-	step_timer.start()
+	var step_tween = create_tween()
+	step_tween.tween_property(self, "position", position + Vector2(movement) * tile_edge, STEP_DURATION)
+	step_tween.finished.connect(_on_step_timer_end)
+	step_tween.play()
 	
 func _is_input_orthogonal(movement : Vector2i) -> bool:
 	return abs(movement.x + movement.y) == 1

@@ -3,4 +3,5 @@
 [ext_resource type="Script" uid="uid://bmv0x4dxl6lbv" path="res://mining/top_down_camera.gd" id="1_obx23"]
 
 [node name="TopDownCamera" type="Camera2D" unique_id=516610765]
+zoom = Vector2(6, 6)
 script = ExtResource("1_obx23")
