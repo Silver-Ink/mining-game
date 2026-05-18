@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://lbmd6ee4jn8h"]
+
+[ext_resource type="Script" uid="uid://5ulwe0bin4ks" path="res://excavating/rock_tile.gd" id="1_brxdv"]
+[ext_resource type="Texture2D" uid="uid://dyl73dkxd0r8i" path="res://crack.png" id="1_riu25"]
+[ext_resource type="Texture2D" uid="uid://dhbu6te3a8xq0" path="res://assets/tools/pickaxe_preview.png" id="2_cs206"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_brxdv"]
+size = Vector2(8, 8)
+
+[node name="rockTile" type="Area2D" unique_id=1812799171]
+script = ExtResource("1_brxdv")
+
+[node name="shape" type="CollisionShape2D" parent="." unique_id=1709289793]
+shape = SubResource("RectangleShape2D_brxdv")
+
+[node name="digPreview" type="Sprite2D" parent="." unique_id=1646186067]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0.46666667)
+z_index = 1
+position = Vector2(7.1054274e-15, 0)
+texture = ExtResource("2_cs206")
+
+[node name="rockSprite" type="Sprite2D" parent="." unique_id=1057005586]
+unique_name_in_owner = true
+position = Vector2(4.2351647e-22, 0)
+scale = Vector2(0.99999994, 0.99999994)
+texture = ExtResource("1_riu25")
+region_enabled = true
+region_rect = Rect2(0, 0, 8, 8)

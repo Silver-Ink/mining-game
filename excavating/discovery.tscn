@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://cqcaqae4xk31j"]
+
+[ext_resource type="Script" uid="uid://bw6e4q0uns33o" path="res://excavating/discovery.gd" id="1_jje6t"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jje6t"]
+size = Vector2(128.00003, 298.66672)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_jje6t"]
+load_path = "res://.godot/imported/treasures.png-aa0065a29f4caf88c155f8ec3b8fd2a7.ctex"
+
+[node name="discovery" type="Area2D" unique_id=858089778]
+scale = Vector2(0.046874996, 0.046874993)
+script = ExtResource("1_jje6t")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=252574960]
+position = Vector2(-7.6293945e-06, 0)
+scale = Vector2(0.9999999, 0.9999999)
+shape = SubResource("RectangleShape2D_jje6t")
+
+[node name="sprite" type="Sprite2D" parent="." unique_id=1231461306]
+unique_name_in_owner = true
+z_index = 1
+position = Vector2(7.6293945e-06, 7.6293945e-06)
+scale = Vector2(2.6666667, 2.666667)
+texture = SubResource("CompressedTexture2D_jje6t")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

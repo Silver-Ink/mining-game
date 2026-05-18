@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://0ppk6ut2oibx"]
+
+[ext_resource type="PackedScene" uid="uid://cqcaqae4xk31j" path="res://excavating/discovery.tscn" id="1_je80v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_je80v"]
+size = Vector2(298.66675, 298.66672)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fkjrb"]
+load_path = "res://.godot/imported/treasures.png-aa0065a29f4caf88c155f8ec3b8fd2a7.ctex"
+
+[node name="big_gem" unique_id=858089778 instance=ExtResource("1_je80v")]
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=252574960]
+position = Vector2(85.33334, 85.33335)
+shape = SubResource("RectangleShape2D_je80v")
+
+[node name="sprite" parent="." index="1" unique_id=1231461306]
+position = Vector2(85.333336, 85.33335)
+scale = Vector2(21.333332, 21.333336)
+texture = SubResource("CompressedTexture2D_fkjrb")
+region_enabled = true
+region_rect = Rect2(16, 0, 16, 16)

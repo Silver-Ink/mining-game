@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://o67ltb868dvr"]
+
+[ext_resource type="Script" uid="uid://c82bkpxk4m6j6" path="res://ui/toolbar.gd" id="1_q26sa"]
+
+[node name="CanvasLayer" type="CanvasLayer" unique_id=613856723]
+script = ExtResource("1_q26sa")
+
+[node name="toolbar" type="Control" parent="." unique_id=1978458542]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Panel" type="Panel" parent="toolbar" unique_id=607345789]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 997.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="toolbar/Panel" unique_id=1002885927]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VFlowContainer" type="VFlowContainer" parent="toolbar/Panel/MarginContainer" unique_id=1758186660]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Pickaxe" type="Button" parent="toolbar/Panel/MarginContainer/VFlowContainer" unique_id=1858854856]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Pickaxe"
+
+[node name="Hammer" type="Button" parent="toolbar/Panel/MarginContainer/VFlowContainer" unique_id=428251050]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Hammer
+"
+
+[node name="CollapseProgress" type="ProgressBar" parent="toolbar" unique_id=183648561]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.921
+anchor_right = 0.86500007
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
+show_percentage = false

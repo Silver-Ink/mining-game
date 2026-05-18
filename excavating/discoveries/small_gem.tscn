@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://dlksrpgtr6r6i"]
+
+[ext_resource type="PackedScene" uid="uid://cqcaqae4xk31j" path="res://excavating/discovery.tscn" id="1_ww2yn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ww2yn"]
+size = Vector2(128.00003, 298.66672)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ww2yn"]
+load_path = "res://.godot/imported/treasures.png-aa0065a29f4caf88c155f8ec3b8fd2a7.ctex"
+
+[node name="discovery" unique_id=858089778 instance=ExtResource("1_ww2yn")]
+
+[node name="CollisionShape2D" parent="." index="0" unique_id=252574960]
+position = Vector2(-1.1368684e-13, 85.33334)
+shape = SubResource("RectangleShape2D_ww2yn")
+
+[node name="sprite" parent="." index="1" unique_id=1231461306]
+position = Vector2(4.5474735e-13, 85.33334)
+scale = Vector2(21.333332, 21.333334)
+texture = SubResource("CompressedTexture2D_ww2yn")
+region_enabled = true
+region_rect = Rect2(8, 0, 8, 16)
