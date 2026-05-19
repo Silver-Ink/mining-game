@@ -6,6 +6,7 @@ var _list : Array[Shape] = [];
 
 # Dictionary[Vector2i, Array[Shape]]
 var lookup: Dictionary[Vector2i, Array] = {} 
+var game : Game = null;
 
 func insert(tiled : Shape):
 	tiled.map = self

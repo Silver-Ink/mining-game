@@ -1,6 +1,7 @@
 extends Node2D
 class_name Shape
 
+
 var tile: Tiles = Tiles.new():
 	get:
 		return tile
@@ -45,6 +46,8 @@ func move(delta: Vector2i):
 
 func on_tiles_changed():
 	self.sprite.update(self)
+	
+
 	
 func _ready() -> void:
 	add_child(self.sprite)

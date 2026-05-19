@@ -1,7 +1,11 @@
 extends Node2D
+class_name Game
 
 @onready var shapes : ShapeManager = ShapeManager.new()
+
 const SPRITE_BACKGROUND = preload("uid://cn7250215l36p")
+const SPRITE_ROCK = preload("uid://cgx2owg5pg03n")
+
 @onready var camera: Camera2D = $camera
 
 func _ready() -> void:
@@ -39,6 +43,12 @@ func _generate(size: Vector2i):
 	shape.tile = Tiles.new().add_rect(Rect2i(0,0,size.x,size.y));
 	shape.sprite = SPRITE_BACKGROUND.instantiate()
 	shapes.insert(shape)
+	
+	var shape2 = Shape.new();
+	shape2.tile = Tiles.new().add_rect(Rect2i(0,0,size.x / 2,size.y / 2));
+	shape2.sprite = SPRITE_ROCK.instantiate()
+	shape2.level = 5
+	shapes.insert(shape2)
 	#shape.move(Vector2i(3,5))
 
 
