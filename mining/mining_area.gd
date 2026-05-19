@@ -1,12 +1,17 @@
 extends Node2D
+class_name MiningArea
 
 @onready var walls: WallTileMapLayer = $Walls
-@onready var character: Character = $Character
 
+var character_ref : Character
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func set_as_current_level(character : Character) -> void:
+	character_ref = character
+	if (character.get_parent() != null):
+		character.reparent(self)
+	else:
+		add_child(character)
 	_bind_references()
 	
 func _bind_references() -> void:
-	character.walls = walls
+	character_ref.walls = walls

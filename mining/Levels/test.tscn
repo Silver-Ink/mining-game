@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://foflltovwb8j"]
+
+[ext_resource type="PackedScene" uid="uid://ceipsfqcffaj5" path="res://mining/mining_area.tscn" id="1_15hte"]
+
+[node name="Test" unique_id=1928987283 instance=ExtResource("1_15hte")]
