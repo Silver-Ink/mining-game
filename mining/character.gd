@@ -1,6 +1,8 @@
 extends Area2D
 class_name Character
 
+signal step_completed(character : Character)
+
 const STEP_DURATION := .24
 
 var walls : WallTileMapLayer
@@ -42,7 +44,7 @@ func _step() -> void:
 		_last_direction = Vector2i.ZERO
 
 func _move(movement : Vector2i) -> void:
-	var new_position = global_position + Vector2(movement) * tile_edge;
+	var new_position = position + Vector2(movement) * tile_edge;
 	if (walls.test_wall_at(new_position)):
 		return
 	_can_step = false
@@ -56,5 +58,6 @@ func _is_input_orthogonal(movement : Vector2i) -> bool:
 	
 func _on_step_timer_end():
 	_can_step = true
+	step_completed.emit(self)
 	
 	

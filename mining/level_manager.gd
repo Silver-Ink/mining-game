@@ -23,16 +23,19 @@ func start_game(callback : Callable) -> void:
 	change_level(LevelManager.LevelID.Hub)
 	callback.call()
 	
-func change_level(levelID : LevelID) -> void:
-	if (!level_instances.keys().has(levelID)):
-		level_instances[levelID] = load(LEVEL_SCENES[levelID]).instantiate()
+func change_level(level_id : LevelID, warp_id := -1) -> void:
+	if (!level_instances.keys().has(level_id)):
+		level_instances[level_id] = load(LEVEL_SCENES[level_id]).instantiate()
 	
+	_change_level_internal.call_deferred(level_id, warp_id)
+	
+func _change_level_internal(level_id : LevelID, warp_id : int) -> void:
 	var parent := _get_current_level_parent()
 	if (current_level != null):
 		parent.remove_child(current_level)
-	current_level = level_instances[levelID]
+	current_level = level_instances[level_id]
 	parent.add_child(current_level)
-	current_level.set_as_current_level(character_instance)
+	current_level.set_as_current_level(character_instance, warp_id)
 	
 func _get_current_level_parent() -> Node:
 	return get_tree().root
