@@ -7,6 +7,7 @@
 size = Vector2(4, 4)
 
 [node name="WarpZone" type="Area2D" unique_id=310336776]
+monitorable = false
 script = ExtResource("1_7wt5e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1603684427]

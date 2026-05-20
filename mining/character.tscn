@@ -8,7 +8,10 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bbvrw"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f2bh4"]
+
 [node name="Character" type="Area2D" unique_id=1243292103]
+monitoring = false
 script = ExtResource("1_carah")
 
 [node name="HitBox" type="CollisionShape2D" parent="." unique_id=500828552]
@@ -21,11 +24,21 @@ texture = ExtResource("1_qgp2w")
 [node name="TopDownCamera" parent="." unique_id=516610765 instance=ExtResource("3_3x6sv")]
 zoom = Vector2(2.725, 2.725)
 
-[node name="CursorPivot" type="Node2D" parent="." unique_id=1862386368]
+[node name="CursorPivot" type="Node2D" parent="." unique_id=1862386368 node_paths=PackedStringArray("character")]
 script = ExtResource("4_f2bh4")
+character = NodePath("..")
 
 [node name="Pivot" type="Node2D" parent="CursorPivot" unique_id=1853567228]
+unique_name_in_owner = true
 
 [node name="Cursor" type="Sprite2D" parent="CursorPivot/Pivot" unique_id=417693135]
 position = Vector2(32, 0)
 texture = ExtResource("4_3x6sv")
+
+[node name="CursorArea" type="Area2D" parent="CursorPivot/Pivot/Cursor" unique_id=1782668464]
+unique_name_in_owner = true
+monitorable = false
+metadata/_edit_group_ = true
+
+[node name="CursorHitBox" type="CollisionShape2D" parent="CursorPivot/Pivot/Cursor/CursorArea" unique_id=1354768777]
+shape = SubResource("RectangleShape2D_f2bh4")
