@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://7iv84dg76hg8" path="res://mining/character.gd" id="1_carah"]
 [ext_resource type="Texture2D" uid="uid://drphnmpmg4p6t" path="res://icon.svg" id="1_qgp2w"]
 [ext_resource type="PackedScene" uid="uid://bmyn78otm2kag" path="res://mining/top_down_camera.tscn" id="3_3x6sv"]
+[ext_resource type="Texture2D" uid="uid://dw1mrsiw64b80" path="res://assets/tools/hammer_preview.png" id="4_3x6sv"]
+[ext_resource type="Script" uid="uid://xo1abt53080k" path="res://mining/cursor_pivot.gd" id="4_f2bh4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bbvrw"]
 
@@ -18,3 +20,12 @@ texture = ExtResource("1_qgp2w")
 
 [node name="TopDownCamera" parent="." unique_id=516610765 instance=ExtResource("3_3x6sv")]
 zoom = Vector2(2.725, 2.725)
+
+[node name="CursorPivot" type="Node2D" parent="." unique_id=1862386368]
+script = ExtResource("4_f2bh4")
+
+[node name="Pivot" type="Node2D" parent="CursorPivot" unique_id=1853567228]
+
+[node name="Cursor" type="Sprite2D" parent="CursorPivot/Pivot" unique_id=417693135]
+position = Vector2(32, 0)
+texture = ExtResource("4_3x6sv")

@@ -33,7 +33,6 @@ func _on_area_entered(area : Area2D):
 func _on_area_exited(area : Area2D):
 	if (area is Character):
 		contains_character = false
-		area.step_completed.disconnect(_on_character_steped_in)
 		
 func _on_character_steped_in(character : Character):
 	LevelManager.change_level(dest_level, dest_warp_id)
@@ -43,5 +42,4 @@ func _on_character_steped_in(character : Character):
 func receive_character(character : Character):
 	contains_character = true
 	character.position = position
-	print("warp position ", global_position, " player ", character.position)
 		
