@@ -42,4 +42,4 @@ func _on_character_steped_in(character : Character):
 func receive_character(character : Character):
 	contains_character = true
 	character.position = position
-		
+	

@@ -30,12 +30,17 @@ func _step() -> void:
 							  int(Input.get_axis("ui_up", "ui_down"))) 
 	var direction : Vector2i
 	
-	if (_is_input_orthogonal(input)):
+	if (_is_vector_orthonormal(input)):
 		direction = input
 		_move(direction)
 		_last_direction = direction
 	elif (input != Vector2i.ZERO):
 		direction = input - _last_direction
+		if (!_is_vector_orthonormal(direction)):
+			if (abs(direction.y) > 1):
+				direction = Vector2(0, direction.y / abs(direction.y))
+			else:
+				direction = Vector2(direction.x / abs(direction.x), 0)
 		if (_last_direction == Vector2i.ZERO):
 			# prevent two keys pressed at the same time, making moving diagonaly
 			direction.y = 0 
@@ -53,8 +58,10 @@ func _move(movement : Vector2i) -> void:
 	step_tween.finished.connect(_on_step_timer_end)
 	step_tween.play()
 	
-func _is_input_orthogonal(movement : Vector2i) -> bool:
-	return abs(movement.x + movement.y) == 1
+func _is_vector_orthonormal(movement : Vector2i) -> bool:
+	var x : bool = abs(movement.x) == 1
+	var y : bool = abs(movement.y) == 1
+	return (x || y) && !(x && y) && movement.length() == 1
 	
 func _on_step_timer_end():
 	_can_step = true
