@@ -1,12 +1,21 @@
 extends Node2D
-class_name ShapeManager 
+class_name GameArea 
 
 var _bounding_box : Rect2i = Rect2i();
 var _list : Array[Shape] = [];
 
 # Dictionary[Vector2i, Array[Shape]]
-var lookup: Dictionary[Vector2i, Array] = {} 
-var game : Game = null;
+var _lookup: Dictionary[Vector2i, Array] = {}
+
+var layout : GameAreaLayout = null
+
+var game : Game = null:
+	get:
+		return game
+	set(value):
+		assert(game == null)
+		assert(value != null)
+		game = value
 
 func insert(tiled : Shape):
 	tiled.map = self
@@ -14,7 +23,7 @@ func insert(tiled : Shape):
 	_list.append(tiled)
 
 	for t in tiled.tiles():
-		var array = lookup.get_or_add(t, [])
+		var array = _lookup.get_or_add(t, [])
 		array.append(tiled)
 		
 	add_child(tiled)
@@ -30,11 +39,11 @@ func remove(tiled : Shape):
 	_list.erase(tiled)
 
 	for pos in tiled.tiles():
-		var array = lookup.get(pos)
+		var array = _lookup.get(pos)
 		if array:
 			array.erase(tiled)
 		if array.is_empty():
-			lookup.erase(pos)
+			_lookup.erase(pos)
 			
 	remove_child(tiled)
 	tiled.on_tiles_changed()
@@ -62,7 +71,7 @@ func _recompute_bounding_box() -> void:
 
 
 func get_at(pos: Vector2i) -> Array[Shape]:
-	var result: Array[Shape] = lookup.get(pos, [])
+	var result: Array[Shape] = _lookup.get(pos, [])
 	result.sort_custom(func(a, b): return a.level < b.level)
 	return result.duplicate()
 
@@ -79,7 +88,7 @@ func clear() -> void:
 	for tiled in _list:
 		tiled.map = null
 		_list.clear()
-		lookup.clear()
+		_lookup.clear()
 		_bounding_box = Rect2i()
 
 func contains(tiled : Shape) -> bool:
@@ -108,20 +117,75 @@ func move(tiled: Shape, delta: Vector2i):
 		return
 
 	for pos in tiled.tiles():
-		var array = lookup.get(pos)
+		var array = _lookup.get(pos)
 		if array != null:
 			array.erase(tiled)
 			if array.is_empty():
-				lookup.erase(pos)
+				_lookup.erase(pos)
 
 	tiled.tile.move_all(delta)
 
 	for pos in tiled.tiles():
-		var array = lookup.get(pos)
+		var array = _lookup.get(pos)
 		if array == null:
 			array = []
-			lookup[pos] = array
+			_lookup[pos] = array
 		array.append(tiled)
 		
 	tiled.on_tiles_changed()
 	_recompute_bounding_box()
+	
+	
+	
+	
+func _init(layout : GameAreaLayout) -> void:
+	assert(layout != null)
+	self.layout = layout
+
+func _ready() -> void:
+	_generate()
+
+func update_camera(camera: Camera2D, viewport: Viewport):
+	assert(viewport)
+	var game_bounding_box = Rect2(self.bounding_box())
+	
+	game_bounding_box.position *= ShapeSprite.TILE_SIZE
+	game_bounding_box.position -= Vector2(ShapeSprite.TILE_SIZE / 2., ShapeSprite.TILE_SIZE / 2.)
+	game_bounding_box.size *= ShapeSprite.TILE_SIZE
+	
+	# Calculate required zoom to fit bounding box
+	var viewport_size = viewport.get_visible_rect().size
+	var zoom = viewport_size / game_bounding_box.size
+	var min_zoom = min(zoom.x, zoom.y) * 0.9
+	zoom = Vector2(min_zoom,min_zoom)
+	
+	camera.zoom = zoom
+	camera.position = game_bounding_box.get_center()
+	
+
+func enter():
+	pass
+	
+func leave():
+	pass
+
+func _generate():
+	self.clear()
+	
+	var bg = Shape.new();
+	bg.tile = Tiles.new().add_rect(Rect2i(0,0,layout.size.x,layout.size.y))
+	bg.sprite = Assets.sprite_rock_background
+	self.insert(bg)
+	
+	#var bg = BACKGROUND.instantiate()
+	#var shape = Shape.new();
+	#shape.tile = Tiles.new().add_rect(Rect2i(0,0,size.x,size.y));
+	#shape.sprite = SPRITE_BACKGROUND.instantiate()
+	#shapes.insert(shape)
+	
+	#var shape2 = Shape.new();
+	#shape2.tile = Tiles.new().add_rect(Rect2i(0,0,size.x / 2,size.y / 2));
+	#shape2.sprite = SPRITE_ROCK.instantiate()
+	#shape2.level = 5
+	#shapes.insert(shape2)
+	#shape.move(Vector2i(3,5))

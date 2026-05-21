@@ -1,56 +1,43 @@
 extends Node2D
 class_name Game
 
-@onready var shapes : ShapeManager = ShapeManager.new()
+var areas : Array[GameArea] = []
 
-const SPRITE_BACKGROUND = preload("uid://cn7250215l36p")
-const SPRITE_ROCK = preload("uid://cgx2owg5pg03n")
+var area_active : GameArea = null:
+	get:
+		return area_active
+	set(value):
+		if not value in areas and value != null:
+			areas.append(value)
+		if area_active != null:
+			area_active.leave()
+			remove_child(area_active)
+		
+		area_active = value
+		if area_active != null:
+			area_active.enter()
+			add_child(area_active)
+		update_camera()
+
 
 @onready var camera: Camera2D = $camera
+var asset : GameAsset = GameAsset.new()
 
-func _ready() -> void:
-	add_child(shapes)
-	_generate(Vector2i(16,9))
-	_camera_focus()
-	get_tree().root.connect("size_changed", _camera_focus)
-	
-func _camera_focus():
-	var game_bounding_box = Rect2(shapes.bounding_box())
-	
-	game_bounding_box.position *= ShapeSprite.TILE_SIZE
-	game_bounding_box.position -= Vector2(ShapeSprite.TILE_SIZE / 2., ShapeSprite.TILE_SIZE / 2.)
-	game_bounding_box.size *= ShapeSprite.TILE_SIZE
-	
-	# Calculate required zoom to fit bounding box
-	var viewport_size = get_viewport().get_visible_rect().size
-	var zoom = viewport_size / game_bounding_box.size
-	var min_zoom = min(zoom.x, zoom.y) * 0.9
-	zoom = Vector2(min_zoom,min_zoom)
-	
-	camera.zoom = zoom
-	camera.position = game_bounding_box.get_center()
-	
 func _on_window_resized():
 	# Use call_deferred to avoid layout issues
-	call_deferred("_camera_focus")
+	call_deferred("update_camera")
 
+func _ready() -> void:
+	var layout = GameAreaLayout.default();
+	area_active = layout.generate()
+	update_camera()
+	get_tree().root.connect("size_changed", update_camera)
 	
-func _generate(size: Vector2i):
-	shapes.clear()
-	
-	#var bg = BACKGROUND.instantiate()
-	var shape = Shape.new();
-	shape.tile = Tiles.new().add_rect(Rect2i(0,0,size.x,size.y));
-	shape.sprite = SPRITE_BACKGROUND.instantiate()
-	shapes.insert(shape)
-	
-	var shape2 = Shape.new();
-	shape2.tile = Tiles.new().add_rect(Rect2i(0,0,size.x / 2,size.y / 2));
-	shape2.sprite = SPRITE_ROCK.instantiate()
-	shape2.level = 5
-	shapes.insert(shape2)
-	#shape.move(Vector2i(3,5))
+func update_camera():
+	if area_active != null:
+		area_active.update_camera(self.camera, get_viewport())
 
 
 func _process(delta: float) -> void:
 	pass
+	

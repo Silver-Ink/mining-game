@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 CustomCursor="*uid://b4kqni15kcqb5"
 ToolManager="*uid://d110db83owyoi"
+Assets="*uid://g10fuqh71i6q"
 
 [input]
 

@@ -1,35 +1,35 @@
 extends Node2D
 class_name Shape
 
-
 var tile: Tiles = Tiles.new():
 	get:
 		return tile
 	set(value):
-		if map:
-			map.remove(self)
+		if area:
+			area.remove(self)
 		tile = value
-		if map:
-			map.insert(self)
-			
-var level : int = 0:
+		if area:
+			area.insert(self)
+
+# Z level
+var height : int = 0:
 	get:
-		return level
+		return height
 	set(value):
-		level = value
-	
-var map: ShapeManager = null:
+		height = value
+
+var area: GameArea = null:
 	get:
-		return map
+		return area
 	set(value):
-		if map == value:
+		if area == value:
 			return
-		if map != null:
-			var m = map;
-			map = null;
+		if area != null:
+			var m = area;
+			area = null;
 			m.remove(self)
 		
-		map = value
+		area = value
 		if value != null:
 			value.insert(self)
 			
@@ -46,8 +46,6 @@ func move(delta: Vector2i):
 
 func on_tiles_changed():
 	self.sprite.update(self)
-	
-
 	
 func _ready() -> void:
 	add_child(self.sprite)
