@@ -1,6 +1,7 @@
 [gd_resource type="TileSet" format=3 uid="uid://c50wvgvfyx2fk"]
 
 [ext_resource type="Texture2D" uid="uid://cy26gc16g8lwk" path="res://assets/tilesets/wall_temple.png" id="1_wtr07"]
+[ext_resource type="Texture2D" uid="uid://b8cbdtkkncjru" path="res://assets/tilesets/floor_stone_tiles.png" id="2_xu6nc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_8u7ja"]
 texture = ExtResource("1_wtr07")
@@ -357,9 +358,32 @@ texture_region_size = Vector2i(32, 32)
 0:15/0 = 0
 0:16/0 = 0
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4owyo"]
+texture = ExtResource("2_xu6nc")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = true
+1:0/0 = 0
+1:0/0/custom_data_0 = true
+2:0/0 = 0
+2:0/0/custom_data_0 = true
+3:0/0 = 0
+3:0/0/custom_data_0 = true
+0:1/0 = 0
+0:1/0/custom_data_0 = true
+1:1/0 = 0
+1:1/0/custom_data_0 = true
+2:1/0 = 0
+2:1/0/custom_data_0 = true
+3:1/0 = 0
+3:1/0/custom_data_0 = true
+
 [resource]
 tile_size = Vector2i(32, 32)
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Walls"
 terrain_set_0/terrain_0/color = Color(0.49088377, 0.003088069, 0.87998414, 1)
+custom_data_layer_0/name = "diggable"
+custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_8u7ja")
+sources/1 = SubResource("TileSetAtlasSource_4owyo")

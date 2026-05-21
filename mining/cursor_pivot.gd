@@ -11,6 +11,20 @@ func _ready() -> void:
 	cursor_area.area_entered.connect(_on_area_entered)
 	cursor_area.area_exited.connect(_on_area_exited)
 
+
+func _process(_delta: float) -> void:
+	var mouse_dir := get_local_mouse_position()
+	pivot.rotation = _get_quadran(atan2(mouse_dir.y, mouse_dir.x))
+	
+func interract() -> bool:
+	if (_contained_interractible != null):
+		_contained_interractible.interract(character)
+		return true
+	return false
+	
+func get_targeted_position() -> Vector2i:
+	return cursor_area.global_position
+		
 func _get_quadran(fine_angle : float) -> float:
 	if (fine_angle < -3 * PI / 4. ):
 		return -PI # upper left
@@ -21,16 +35,6 @@ func _get_quadran(fine_angle : float) -> float:
 	if (fine_angle < 3. * PI / 4. ):
 		return PI / 2. # down
 	return -PI # lower left
-
-func _process(_delta: float) -> void:
-	var mouse_dir := get_local_mouse_position()
-	pivot.rotation = _get_quadran(atan2(mouse_dir.y, mouse_dir.x))
-	
-func _unhandled_input(event: InputEvent) -> void:
-	if (event.is_action_pressed("interract") &&\
-		_contained_interractible != null):
-			_contained_interractible.interract(character)
-		
 	
 func _on_area_entered(area : Area2D):
 	if (area is Interractible):

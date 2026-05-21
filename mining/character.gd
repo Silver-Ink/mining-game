@@ -6,6 +6,7 @@ signal step_completed(character : Character)
 const STEP_DURATION := .24
 
 var walls : WallTileMapLayer
+@onready var cursor_pivot: CursorPivot = $CursorPivot
 
 var tile_edge : int
 
@@ -16,7 +17,10 @@ func _ready() -> void:
 	# watch if id ref creates conflicts with vcs
 	tile_edge = load("uid://c50wvgvfyx2fk").tile_size.x # Assuming we have square tiles
 	
-	
+func _unhandled_input(event: InputEvent) -> void:
+	if (event.is_action_pressed("interract")):
+		if (!cursor_pivot.interract()):
+			_dig()
 
 func _process(_delta: float) -> void:
 	_step()
@@ -67,4 +71,8 @@ func _on_step_timer_end():
 	_can_step = true
 	step_completed.emit(self)
 	
+
+func _dig():
+	var target := cursor_pivot.get_targeted_position()
+	walls.dig_at(target)
 	
