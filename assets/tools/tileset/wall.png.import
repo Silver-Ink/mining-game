@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cxmvu2xtnig8y"
-path="res://.godot/imported/sand.png-abe10d798b201ce3c442a8fee474d9d4.ctex"
+uid="uid://cwwys7ffxaml7"
+path="res://.godot/imported/wall.png-7bfae57d5555a73da619f33f2454eea8.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tools/tileset/sand.png"
-dest_files=["res://.godot/imported/sand.png-abe10d798b201ce3c442a8fee474d9d4.ctex"]
+source_file="res://assets/tools/tileset/wall.png"
+dest_files=["res://.godot/imported/wall.png-7bfae57d5555a73da619f33f2454eea8.ctex"]
 
 [params]
 

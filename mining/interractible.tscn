@@ -4,6 +4,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bl27q"]
 resource_local_to_scene = true
+size = Vector2(8, 8)
 
 [node name="Interractible" type="Area2D" unique_id=1254601983]
 monitoring = false
