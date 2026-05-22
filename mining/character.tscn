@@ -10,6 +10,16 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f2bh4"]
 
+[sub_resource type="Gradient" id="Gradient_f2bh4"]
+offsets = PackedFloat32Array(0, 0.42408377, 0.8115183)
+colors = PackedColorArray(1, 1, 1, 1, 0.9483871, 0.9483871, 0.9483871, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nvurs"]
+gradient = SubResource("Gradient_f2bh4")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.46581197)
+
 [node name="Character" type="Area2D" unique_id=1243292103]
 monitoring = false
 script = ExtResource("1_carah")
@@ -42,3 +52,12 @@ metadata/_edit_group_ = true
 
 [node name="CursorHitBox" type="CollisionShape2D" parent="CursorPivot/Pivot/Cursor/CursorArea" unique_id=1354768777]
 shape = SubResource("RectangleShape2D_f2bh4")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2086776871]
+color = Color(0.60933006, 0.6093301, 0.60933006, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=829355235]
+scale = Vector2(2.40625, 2.40625)
+blend_mode = 2
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_nvurs")
