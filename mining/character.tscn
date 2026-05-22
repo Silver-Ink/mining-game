@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://dyfcv20bbelti"]
+
+[ext_resource type="Script" uid="uid://7iv84dg76hg8" path="res://mining/character.gd" id="1_carah"]
+[ext_resource type="Texture2D" uid="uid://drphnmpmg4p6t" path="res://icon.svg" id="1_qgp2w"]
+[ext_resource type="PackedScene" uid="uid://bmyn78otm2kag" path="res://mining/top_down_camera.tscn" id="3_3x6sv"]
+[ext_resource type="Texture2D" uid="uid://dw1mrsiw64b80" path="res://assets/tools/hammer_preview.png" id="4_3x6sv"]
+[ext_resource type="Script" uid="uid://xo1abt53080k" path="res://mining/cursor_pivot.gd" id="4_f2bh4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bbvrw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_f2bh4"]
+
+[sub_resource type="Gradient" id="Gradient_f2bh4"]
+offsets = PackedFloat32Array(0, 0.42408377, 0.8115183)
+colors = PackedColorArray(1, 1, 1, 1, 0.9483871, 0.9483871, 0.9483871, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nvurs"]
+gradient = SubResource("Gradient_f2bh4")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.46581197)
+
+[node name="Character" type="Area2D" unique_id=1243292103]
+monitoring = false
+script = ExtResource("1_carah")
+
+[node name="HitBox" type="CollisionShape2D" parent="." unique_id=500828552]
+shape = SubResource("RectangleShape2D_bbvrw")
+
+[node name="Icon" type="Sprite2D" parent="." unique_id=351997469]
+scale = Vector2(0.15625, 0.15625)
+texture = ExtResource("1_qgp2w")
+
+[node name="TopDownCamera" parent="." unique_id=516610765 instance=ExtResource("3_3x6sv")]
+zoom = Vector2(2.725, 2.725)
+
+[node name="CursorPivot" type="Node2D" parent="." unique_id=1862386368 node_paths=PackedStringArray("character")]
+script = ExtResource("4_f2bh4")
+character = NodePath("..")
+
+[node name="Pivot" type="Node2D" parent="CursorPivot" unique_id=1853567228]
+unique_name_in_owner = true
+
+[node name="Cursor" type="Sprite2D" parent="CursorPivot/Pivot" unique_id=417693135]
+position = Vector2(32, 0)
+texture = ExtResource("4_3x6sv")
+
+[node name="CursorArea" type="Area2D" parent="CursorPivot/Pivot/Cursor" unique_id=1782668464]
+unique_name_in_owner = true
+monitorable = false
+metadata/_edit_group_ = true
+
+[node name="CursorHitBox" type="CollisionShape2D" parent="CursorPivot/Pivot/Cursor/CursorArea" unique_id=1354768777]
+shape = SubResource("RectangleShape2D_f2bh4")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2086776871]
+color = Color(0.60933006, 0.6093301, 0.60933006, 1)
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=829355235]
+scale = Vector2(2.40625, 2.40625)
+blend_mode = 2
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_nvurs")

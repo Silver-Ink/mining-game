@@ -1,0 +1,1 @@
+class_name TopDownCamera extends Camera2D

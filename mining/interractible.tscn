@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://bugfxmefr8le7"]
+
+[ext_resource type="Script" uid="uid://bwl8ay17hn5gn" path="res://mining/interractible.gd" id="1_ioepo"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bl27q"]
+resource_local_to_scene = true
+
+[node name="Interractible" type="Area2D" unique_id=1254601983]
+monitoring = false
+script = ExtResource("1_ioepo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1692465056]
+shape = SubResource("RectangleShape2D_bl27q")
