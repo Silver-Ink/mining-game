@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cy26gc16g8lwk"
-path="res://.godot/imported/wall_temple.png-3d2ad02cccea4a27dc3c5b1f7066ac72.ctex"
+uid="uid://diwa4wudtt3bn"
+path="res://.godot/imported/boomerang.png-aee69a625c64c3ef323d6e251b7b9e04.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tilesets/wall_temple.png"
-dest_files=["res://.godot/imported/wall_temple.png-3d2ad02cccea4a27dc3c5b1f7066ac72.ctex"]
+source_file="res://assets/element/boomerang.png"
+dest_files=["res://.godot/imported/boomerang.png-aee69a625c64c3ef323d6e251b7b9e04.ctex"]
 
 [params]
 
