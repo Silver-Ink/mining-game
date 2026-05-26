@@ -5,26 +5,13 @@
 [ext_resource type="PackedScene" uid="uid://bmyn78otm2kag" path="res://mining/top_down_camera.tscn" id="3_3x6sv"]
 [ext_resource type="Texture2D" uid="uid://dw1mrsiw64b80" path="res://assets/tools/hammer_preview.png" id="4_3x6sv"]
 [ext_resource type="Script" uid="uid://xo1abt53080k" path="res://mining/cursor_pivot.gd" id="4_f2bh4"]
+[ext_resource type="PackedScene" uid="uid://c3fu2owl1jmy2" path="res://mining/vfx/light.tscn" id="6_nvurs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bbvrw"]
 size = Vector2(8, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f2bh4"]
 size = Vector2(24, 23.999998)
-
-[sub_resource type="Gradient" id="Gradient_f2bh4"]
-interpolation_mode = 2
-interpolation_color_space = 2
-offsets = PackedFloat32Array(0, 0.42408377, 1)
-colors = PackedColorArray(1, 1, 1, 1, 0.9483871, 0.9483871, 0.9483871, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_nvurs"]
-gradient = SubResource("Gradient_f2bh4")
-width = 1024
-height = 1024
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(1, 0.46581197)
 
 [node name="Character" type="Area2D" unique_id=1243292103]
 monitoring = false
@@ -64,9 +51,4 @@ shape = SubResource("RectangleShape2D_f2bh4")
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2086776871]
 color = Color(0.15127608, 0.15127608, 0.15127605, 1)
 
-[node name="PointLight2D" type="PointLight2D" parent="." unique_id=829355235]
-blend_mode = 2
-shadow_enabled = true
-texture = SubResource("GradientTexture2D_nvurs")
-texture_scale = 0.05
-metadata/_edit_lock_ = true
+[node name="Lights" parent="." unique_id=2013318578 instance=ExtResource("6_nvurs")]
