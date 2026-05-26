@@ -61,6 +61,11 @@ texture_region_size = Vector2i(8, 8)
 0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_4owyo")
 0:0/0/terrains_peering_bit/right_side = 0
 0:0/0/terrains_peering_bit/bottom_side = 0
+0:0/0/metadata/_better_terrain = {
+0: [0],
+4: [0],
+&"type": 0
+}
 1:0/0 = 0
 1:0/0/terrain_set = 0
 1:0/0/terrain = 0
@@ -68,17 +73,32 @@ texture_region_size = Vector2i(8, 8)
 1:0/0/terrains_peering_bit/right_side = 0
 1:0/0/terrains_peering_bit/bottom_side = 0
 1:0/0/terrains_peering_bit/left_side = 0
+1:0/0/metadata/_better_terrain = {
+0: [0],
+4: [0],
+8: [0],
+&"type": 0
+}
 2:0/0 = 0
 2:0/0/terrain_set = 0
 2:0/0/terrain = 0
 2:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_i5bk8")
 2:0/0/terrains_peering_bit/bottom_side = 0
 2:0/0/terrains_peering_bit/left_side = 0
+2:0/0/metadata/_better_terrain = {
+4: [0],
+8: [0],
+&"type": 0
+}
 3:0/0 = 0
 3:0/0/terrain_set = 0
 3:0/0/terrain = 0
 3:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_tfsbv")
 3:0/0/terrains_peering_bit/bottom_side = 0
+3:0/0/metadata/_better_terrain = {
+4: [0],
+&"type": 0
+}
 0:1/0 = 0
 0:1/0/terrain_set = 0
 0:1/0/terrain = 0
@@ -86,6 +106,12 @@ texture_region_size = Vector2i(8, 8)
 0:1/0/terrains_peering_bit/right_side = 0
 0:1/0/terrains_peering_bit/bottom_side = 0
 0:1/0/terrains_peering_bit/top_side = 0
+0:1/0/metadata/_better_terrain = {
+0: [0],
+4: [0],
+12: [0],
+&"type": 0
+}
 1:1/0 = 0
 1:1/0/terrain_set = 0
 1:1/0/terrain = 0
@@ -94,6 +120,13 @@ texture_region_size = Vector2i(8, 8)
 1:1/0/terrains_peering_bit/bottom_side = 0
 1:1/0/terrains_peering_bit/left_side = 0
 1:1/0/terrains_peering_bit/top_side = 0
+1:1/0/metadata/_better_terrain = {
+0: [0],
+4: [0],
+8: [0],
+12: [0],
+&"type": 0
+}
 2:1/0 = 0
 2:1/0/terrain_set = 0
 2:1/0/terrain = 0
@@ -101,18 +134,34 @@ texture_region_size = Vector2i(8, 8)
 2:1/0/terrains_peering_bit/bottom_side = 0
 2:1/0/terrains_peering_bit/left_side = 0
 2:1/0/terrains_peering_bit/top_side = 0
+2:1/0/metadata/_better_terrain = {
+4: [0],
+8: [0],
+12: [0],
+&"type": 0
+}
 3:1/0 = 0
 3:1/0/terrain_set = 0
 3:1/0/terrain = 0
 3:1/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_e1ys8")
 3:1/0/terrains_peering_bit/bottom_side = 0
 3:1/0/terrains_peering_bit/top_side = 0
+3:1/0/metadata/_better_terrain = {
+4: [0],
+12: [0],
+&"type": 0
+}
 0:2/0 = 0
 0:2/0/terrain_set = 0
 0:2/0/terrain = 0
 0:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_nkfg4")
 0:2/0/terrains_peering_bit/right_side = 0
 0:2/0/terrains_peering_bit/top_side = 0
+0:2/0/metadata/_better_terrain = {
+0: [0],
+12: [0],
+&"type": 0
+}
 1:2/0 = 0
 1:2/0/terrain_set = 0
 1:2/0/terrain = 0
@@ -120,37 +169,68 @@ texture_region_size = Vector2i(8, 8)
 1:2/0/terrains_peering_bit/right_side = 0
 1:2/0/terrains_peering_bit/left_side = 0
 1:2/0/terrains_peering_bit/top_side = 0
+1:2/0/metadata/_better_terrain = {
+0: [0],
+8: [0],
+12: [0],
+&"type": 0
+}
 2:2/0 = 0
 2:2/0/terrain_set = 0
 2:2/0/terrain = 0
 2:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_v03do")
 2:2/0/terrains_peering_bit/left_side = 0
 2:2/0/terrains_peering_bit/top_side = 0
+2:2/0/metadata/_better_terrain = {
+8: [0],
+12: [0],
+&"type": 0
+}
 3:2/0 = 0
 3:2/0/terrain_set = 0
 3:2/0/terrain = 0
 3:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_n1c38")
 3:2/0/terrains_peering_bit/top_side = 0
+3:2/0/metadata/_better_terrain = {
+12: [0],
+&"type": 0
+}
 0:3/0 = 0
 0:3/0/terrain_set = 0
 0:3/0/terrain = 0
 0:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_yg5i6")
 0:3/0/terrains_peering_bit/right_side = 0
+0:3/0/metadata/_better_terrain = {
+0: [0],
+&"type": 0
+}
 1:3/0 = 0
 1:3/0/terrain_set = 0
 1:3/0/terrain = 0
 1:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ndfwx")
 1:3/0/terrains_peering_bit/right_side = 0
 1:3/0/terrains_peering_bit/left_side = 0
+1:3/0/metadata/_better_terrain = {
+0: [0],
+8: [0],
+&"type": 0
+}
 2:3/0 = 0
 2:3/0/terrain_set = 0
 2:3/0/terrain = 0
 2:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_2u8ll")
 2:3/0/terrains_peering_bit/left_side = 0
+2:3/0/metadata/_better_terrain = {
+8: [0],
+&"type": 0
+}
 3:3/0 = 0
 3:3/0/terrain_set = 0
 3:3/0/terrain = 0
 3:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_25lgm")
+3:3/0/metadata/_better_terrain = {
+&"type": 0
+}
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8fmwv"]
 polygon = PackedVector2Array(4, -3, 4, 4, -3, 4, -3, -3)
@@ -210,6 +290,11 @@ texture_region_size = Vector2i(8, 8)
 0:0/0/terrains_peering_bit/right_side = 1
 0:0/0/terrains_peering_bit/bottom_side = 1
 0:0/0/custom_data_0 = true
+0:0/0/metadata/_better_terrain = {
+0: [1],
+4: [1],
+&"type": 2
+}
 1:0/0 = 0
 1:0/0/terrain_set = 0
 1:0/0/terrain = 1
@@ -218,6 +303,12 @@ texture_region_size = Vector2i(8, 8)
 1:0/0/terrains_peering_bit/bottom_side = 1
 1:0/0/terrains_peering_bit/left_side = 1
 1:0/0/custom_data_0 = true
+1:0/0/metadata/_better_terrain = {
+0: [1],
+4: [1],
+8: [1],
+&"type": 2
+}
 2:0/0 = 0
 2:0/0/terrain_set = 0
 2:0/0/terrain = 1
@@ -225,12 +316,21 @@ texture_region_size = Vector2i(8, 8)
 2:0/0/terrains_peering_bit/bottom_side = 1
 2:0/0/terrains_peering_bit/left_side = 1
 2:0/0/custom_data_0 = true
+2:0/0/metadata/_better_terrain = {
+4: [1],
+8: [1],
+&"type": 2
+}
 3:0/0 = 0
 3:0/0/terrain_set = 0
 3:0/0/terrain = 1
 3:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_y1phb")
 3:0/0/terrains_peering_bit/bottom_side = 1
 3:0/0/custom_data_0 = true
+3:0/0/metadata/_better_terrain = {
+4: [1],
+&"type": 2
+}
 0:1/0 = 0
 0:1/0/terrain_set = 0
 0:1/0/terrain = 1
@@ -239,6 +339,12 @@ texture_region_size = Vector2i(8, 8)
 0:1/0/terrains_peering_bit/bottom_side = 1
 0:1/0/terrains_peering_bit/top_side = 1
 0:1/0/custom_data_0 = true
+0:1/0/metadata/_better_terrain = {
+0: [1],
+4: [1],
+12: [1],
+&"type": 2
+}
 1:1/0 = 0
 1:1/0/terrain_set = 0
 1:1/0/terrain = 1
@@ -248,6 +354,13 @@ texture_region_size = Vector2i(8, 8)
 1:1/0/terrains_peering_bit/left_side = 1
 1:1/0/terrains_peering_bit/top_side = 1
 1:1/0/custom_data_0 = true
+1:1/0/metadata/_better_terrain = {
+0: [1],
+4: [1],
+8: [1],
+12: [1],
+&"type": 2
+}
 2:1/0 = 0
 2:1/0/terrain_set = 0
 2:1/0/terrain = 1
@@ -256,6 +369,12 @@ texture_region_size = Vector2i(8, 8)
 2:1/0/terrains_peering_bit/left_side = 1
 2:1/0/terrains_peering_bit/top_side = 1
 2:1/0/custom_data_0 = true
+2:1/0/metadata/_better_terrain = {
+4: [1],
+8: [1],
+12: [1],
+&"type": 2
+}
 3:1/0 = 0
 3:1/0/terrain_set = 0
 3:1/0/terrain = 1
@@ -263,6 +382,11 @@ texture_region_size = Vector2i(8, 8)
 3:1/0/terrains_peering_bit/bottom_side = 1
 3:1/0/terrains_peering_bit/top_side = 1
 3:1/0/custom_data_0 = true
+3:1/0/metadata/_better_terrain = {
+4: [1],
+12: [1],
+&"type": 2
+}
 0:2/0 = 0
 0:2/0/terrain_set = 0
 0:2/0/terrain = 1
@@ -270,6 +394,11 @@ texture_region_size = Vector2i(8, 8)
 0:2/0/terrains_peering_bit/right_side = 1
 0:2/0/terrains_peering_bit/top_side = 1
 0:2/0/custom_data_0 = true
+0:2/0/metadata/_better_terrain = {
+0: [1],
+12: [1],
+&"type": 2
+}
 1:2/0 = 0
 1:2/0/terrain_set = 0
 1:2/0/terrain = 1
@@ -278,6 +407,12 @@ texture_region_size = Vector2i(8, 8)
 1:2/0/terrains_peering_bit/left_side = 1
 1:2/0/terrains_peering_bit/top_side = 1
 1:2/0/custom_data_0 = true
+1:2/0/metadata/_better_terrain = {
+0: [1],
+8: [1],
+12: [1],
+&"type": 2
+}
 2:2/0 = 0
 2:2/0/terrain_set = 0
 2:2/0/terrain = 1
@@ -285,18 +420,31 @@ texture_region_size = Vector2i(8, 8)
 2:2/0/terrains_peering_bit/left_side = 1
 2:2/0/terrains_peering_bit/top_side = 1
 2:2/0/custom_data_0 = true
+2:2/0/metadata/_better_terrain = {
+8: [1],
+12: [1],
+&"type": 2
+}
 3:2/0 = 0
 3:2/0/terrain_set = 0
 3:2/0/terrain = 1
 3:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_ddc7r")
 3:2/0/terrains_peering_bit/top_side = 1
 3:2/0/custom_data_0 = true
+3:2/0/metadata/_better_terrain = {
+12: [1],
+&"type": 2
+}
 0:3/0 = 0
 0:3/0/terrain_set = 0
 0:3/0/terrain = 1
 0:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_vry28")
 0:3/0/terrains_peering_bit/right_side = 1
 0:3/0/custom_data_0 = true
+0:3/0/metadata/_better_terrain = {
+0: [1],
+&"type": 2
+}
 1:3/0 = 0
 1:3/0/terrain_set = 0
 1:3/0/terrain = 1
@@ -304,17 +452,29 @@ texture_region_size = Vector2i(8, 8)
 1:3/0/terrains_peering_bit/right_side = 1
 1:3/0/terrains_peering_bit/left_side = 1
 1:3/0/custom_data_0 = true
+1:3/0/metadata/_better_terrain = {
+0: [1],
+8: [1],
+&"type": 2
+}
 2:3/0 = 0
 2:3/0/terrain_set = 0
 2:3/0/terrain = 1
 2:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_3gg8n")
 2:3/0/terrains_peering_bit/left_side = 1
 2:3/0/custom_data_0 = true
+2:3/0/metadata/_better_terrain = {
+8: [1],
+&"type": 2
+}
 3:3/0 = 0
 3:3/0/terrain_set = 0
 3:3/0/terrain = 1
 3:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_17826")
 3:3/0/custom_data_0 = true
+3:3/0/metadata/_better_terrain = {
+&"type": 2
+}
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xglj4"]
 polygon = PackedVector2Array(4, -3, 4, 4, -3, 4, -3, -3)
@@ -374,6 +534,11 @@ texture_region_size = Vector2i(8, 8)
 0:0/0/terrains_peering_bit/right_side = 2
 0:0/0/terrains_peering_bit/bottom_side = 2
 0:0/0/custom_data_0 = true
+0:0/0/metadata/_better_terrain = {
+0: [1],
+4: [1],
+&"type": 3
+}
 1:0/0 = 0
 1:0/0/terrain_set = 0
 1:0/0/terrain = 2
@@ -382,6 +547,12 @@ texture_region_size = Vector2i(8, 8)
 1:0/0/terrains_peering_bit/bottom_side = 2
 1:0/0/terrains_peering_bit/left_side = 2
 1:0/0/custom_data_0 = true
+1:0/0/metadata/_better_terrain = {
+0: [1],
+4: [1],
+8: [1],
+&"type": 3
+}
 2:0/0 = 0
 2:0/0/terrain_set = 0
 2:0/0/terrain = 2
@@ -389,12 +560,21 @@ texture_region_size = Vector2i(8, 8)
 2:0/0/terrains_peering_bit/bottom_side = 2
 2:0/0/terrains_peering_bit/left_side = 2
 2:0/0/custom_data_0 = true
+2:0/0/metadata/_better_terrain = {
+4: [1],
+8: [1],
+&"type": 3
+}
 3:0/0 = 0
 3:0/0/terrain_set = 0
 3:0/0/terrain = 2
 3:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_pieky")
 3:0/0/terrains_peering_bit/bottom_side = 2
 3:0/0/custom_data_0 = true
+3:0/0/metadata/_better_terrain = {
+4: [1],
+&"type": 3
+}
 0:1/0 = 0
 0:1/0/terrain_set = 0
 0:1/0/terrain = 2
@@ -403,6 +583,12 @@ texture_region_size = Vector2i(8, 8)
 0:1/0/terrains_peering_bit/bottom_side = 2
 0:1/0/terrains_peering_bit/top_side = 2
 0:1/0/custom_data_0 = true
+0:1/0/metadata/_better_terrain = {
+0: [1],
+4: [1],
+12: [1],
+&"type": 3
+}
 1:1/0 = 0
 1:1/0/terrain_set = 0
 1:1/0/terrain = 2
@@ -412,6 +598,13 @@ texture_region_size = Vector2i(8, 8)
 1:1/0/terrains_peering_bit/left_side = 2
 1:1/0/terrains_peering_bit/top_side = 2
 1:1/0/custom_data_0 = true
+1:1/0/metadata/_better_terrain = {
+0: [1],
+4: [1],
+8: [1],
+12: [1],
+&"type": 3
+}
 2:1/0 = 0
 2:1/0/terrain_set = 0
 2:1/0/terrain = 2
@@ -420,6 +613,12 @@ texture_region_size = Vector2i(8, 8)
 2:1/0/terrains_peering_bit/left_side = 2
 2:1/0/terrains_peering_bit/top_side = 2
 2:1/0/custom_data_0 = true
+2:1/0/metadata/_better_terrain = {
+4: [1],
+8: [1],
+12: [1],
+&"type": 3
+}
 3:1/0 = 0
 3:1/0/terrain_set = 0
 3:1/0/terrain = 2
@@ -427,6 +626,11 @@ texture_region_size = Vector2i(8, 8)
 3:1/0/terrains_peering_bit/bottom_side = 2
 3:1/0/terrains_peering_bit/top_side = 2
 3:1/0/custom_data_0 = true
+3:1/0/metadata/_better_terrain = {
+4: [1],
+12: [1],
+&"type": 3
+}
 0:2/0 = 0
 0:2/0/terrain_set = 0
 0:2/0/terrain = 2
@@ -434,6 +638,11 @@ texture_region_size = Vector2i(8, 8)
 0:2/0/terrains_peering_bit/right_side = 2
 0:2/0/terrains_peering_bit/top_side = 2
 0:2/0/custom_data_0 = true
+0:2/0/metadata/_better_terrain = {
+0: [1],
+12: [1],
+&"type": 3
+}
 1:2/0 = 0
 1:2/0/terrain_set = 0
 1:2/0/terrain = 2
@@ -442,6 +651,12 @@ texture_region_size = Vector2i(8, 8)
 1:2/0/terrains_peering_bit/left_side = 2
 1:2/0/terrains_peering_bit/top_side = 2
 1:2/0/custom_data_0 = true
+1:2/0/metadata/_better_terrain = {
+0: [1],
+8: [1],
+12: [1],
+&"type": 3
+}
 2:2/0 = 0
 2:2/0/terrain_set = 0
 2:2/0/terrain = 2
@@ -449,18 +664,31 @@ texture_region_size = Vector2i(8, 8)
 2:2/0/terrains_peering_bit/left_side = 2
 2:2/0/terrains_peering_bit/top_side = 2
 2:2/0/custom_data_0 = true
+2:2/0/metadata/_better_terrain = {
+8: [1],
+12: [1],
+&"type": 3
+}
 3:2/0 = 0
 3:2/0/terrain_set = 0
 3:2/0/terrain = 2
 3:2/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_4c4s5")
 3:2/0/terrains_peering_bit/top_side = 2
 3:2/0/custom_data_0 = true
+3:2/0/metadata/_better_terrain = {
+12: [1],
+&"type": 3
+}
 0:3/0 = 0
 0:3/0/terrain_set = 0
 0:3/0/terrain = 2
 0:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_wifmr")
 0:3/0/terrains_peering_bit/right_side = 2
 0:3/0/custom_data_0 = true
+0:3/0/metadata/_better_terrain = {
+0: [1],
+&"type": 3
+}
 1:3/0 = 0
 1:3/0/terrain_set = 0
 1:3/0/terrain = 2
@@ -468,17 +696,29 @@ texture_region_size = Vector2i(8, 8)
 1:3/0/terrains_peering_bit/right_side = 2
 1:3/0/terrains_peering_bit/left_side = 2
 1:3/0/custom_data_0 = true
+1:3/0/metadata/_better_terrain = {
+0: [1],
+8: [1],
+&"type": 3
+}
 2:3/0 = 0
 2:3/0/terrain_set = 0
 2:3/0/terrain = 2
 2:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_e1h01")
 2:3/0/terrains_peering_bit/left_side = 2
 2:3/0/custom_data_0 = true
+2:3/0/metadata/_better_terrain = {
+8: [1],
+&"type": 3
+}
 3:3/0 = 0
 3:3/0/terrain_set = 0
 3:3/0/terrain = 2
 3:3/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_2bp61")
 3:3/0/custom_data_0 = true
+3:3/0/metadata/_better_terrain = {
+&"type": 3
+}
 
 [resource]
 tile_size = Vector2i(8, 8)
@@ -496,3 +736,21 @@ custom_data_layer_0/type = 1
 sources/4 = SubResource("TileSetAtlasSource_yg5i6")
 sources/5 = SubResource("TileSetAtlasSource_5hcew")
 sources/6 = SubResource("TileSetAtlasSource_ukn16")
+metadata/_better_terrain = {
+&"decoration": ["Decoration", Color(0.4117647, 0.4117647, 0.4117647, 1), 3, [], {
+&"path": "res://addons/better-terrain/icons/Decoration.svg"
+}],
+&"terrains": [["Wall", Color(0.75845146, 0.40745544, 0.80859375, 1), 0, [], {
+&"coord": Vector2i(3, 3),
+&"source_id": 4
+}], ["Diggable", Color(0.26171875, 1, 0.2904297, 1), 2, [], {
+&"path": "res://assets/tools/pickaxe.png"
+}], ["Sand", Color(1, 0.9923706, 0.51171875, 1), 0, [1], {
+&"coord": Vector2i(3, 3),
+&"source_id": 5
+}], ["Rock", Color(0, 0.0390625, 1, 1), 0, [1], {
+&"coord": Vector2i(3, 3),
+&"source_id": 6
+}]],
+&"version": "0.2"
+}

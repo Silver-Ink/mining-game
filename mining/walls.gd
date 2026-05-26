@@ -13,7 +13,10 @@ func dig_at(global_pos : Vector2) -> void:
 	if (tile.has_custom_data("diggable")):
 		var diggable : bool = tile.get_custom_data("diggable")
 		if (diggable):
-			set_cells_terrain_connect([local_to_map(to_local(global_pos))], 0, -1, false)
+			#set_cells_terrain_connect([local_to_map(to_local(global_pos))], 0, -1, false)
+			var pos = local_to_map(to_local(global_pos))
+			BetterTerrain.set_cell(self, pos, -1)
+			BetterTerrain.update_terrain_cell(self, pos)
 			
 
 func _get_tile_data_at(global_pos : Vector2) -> TileData:
