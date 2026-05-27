@@ -18,7 +18,7 @@ var game : Game = null:
 		game = value
 
 func insert(tiled : Shape):
-	tiled.map = self
+	tiled.area = self
 
 	_list.append(tiled)
 
@@ -175,7 +175,8 @@ func _generate():
 	var bg = Shape.new();
 	bg.tile = Tiles.new().add_rect(Rect2i(0,0,layout.size.x,layout.size.y))
 	bg.sprite = Assets.sprite_rock_background
-	self.insert(bg)
+	bg.area = self;
+	#self.insert(bg)
 	
 	#var bg = BACKGROUND.instantiate()
 	#var shape = Shape.new();

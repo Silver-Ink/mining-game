@@ -1,4 +1,5 @@
-extends Resource
+#extends Resource
+extends Node
 class_name GameAsset
 
 var SPRITE_ROCK_BACKGROUND_TEXTURE = preload("uid://cn7250215l36p")
