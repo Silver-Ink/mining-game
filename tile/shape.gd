@@ -1,7 +1,8 @@
+@icon("res://icons/shape_icon.svg")
 extends Node2D
 class_name Shape
 
-var tile: Tiles = Tiles.new():
+@export var tile: Tiles = Tiles.new():
 	get:
 		return tile
 	set(value):
@@ -42,7 +43,7 @@ func bounding_box() -> Rect2i:
 	return tile.bounding_box()
 
 func move(delta: Vector2i):
-	self.map.move(self, delta)
+	self.map.move(self, delta) #?
 
 func on_tiles_changed():
 	self.sprite.update(self)

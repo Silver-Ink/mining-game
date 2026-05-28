@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://b2bj8hpuwu5ap"]
+
+[ext_resource type="Script" uid="uid://dcydy7cclqubq" path="res://tile/shape.gd" id="1_l6tjx"]
+[ext_resource type="Script" uid="uid://6j7cyu7n7nir" path="res://tile/tiles.gd" id="2_vtcjq"]
+
+[sub_resource type="Resource" id="Resource_vtcjq"]
+script = ExtResource("2_vtcjq")
+
+[node name="Shape" type="Node2D" unique_id=669711841]
+script = ExtResource("1_l6tjx")
+tile = SubResource("Resource_vtcjq")
+metadata/_custom_type_script = "uid://dcydy7cclqubq"

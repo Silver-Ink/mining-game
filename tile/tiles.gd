@@ -1,4 +1,5 @@
 class_name Tiles # TileSet est déjà utilsé...
+extends Resource
 
 var _tiles: Dictionary[Vector2i,bool]
 var _bounding_box: Rect2i = Rect2i();
