@@ -174,7 +174,7 @@ func _generate():
 	
 	var bg = Shape.new();
 	bg.tile = Tiles.new().add_rect(Rect2i(0,0,layout.size.x,layout.size.y))
-	bg.sprite = Assets.sprite_rock_background
+	bg.sprite = ShapeSprite.wall()
 	bg.area = self;
 	#self.insert(bg)
 	

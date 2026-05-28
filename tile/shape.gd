@@ -51,4 +51,8 @@ func _ready() -> void:
 	add_child(self.sprite)
 
 
-static func 
+static func item_bat_talisman() -> Shape:
+	var s = new()
+	s.tile.add_rect(Rect2i(0,0,3,1));
+	s.sprite.global_sprite = Assets
+	return s
