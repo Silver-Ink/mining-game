@@ -49,3 +49,6 @@ func on_tiles_changed():
 	
 func _ready() -> void:
 	add_child(self.sprite)
+
+
+static func 
