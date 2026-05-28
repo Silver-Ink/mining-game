@@ -2,11 +2,13 @@
 
 [ext_resource type="Script" uid="uid://dcydy7cclqubq" path="res://tile/shape.gd" id="1_l6tjx"]
 [ext_resource type="Script" uid="uid://6j7cyu7n7nir" path="res://tile/tiles.gd" id="2_vtcjq"]
+[ext_resource type="PackedScene" uid="uid://b76advjwm8jrp" path="res://tile/sprite/RubySprite.tscn" id="3_6w5q4"]
 
-[sub_resource type="Resource" id="Resource_vtcjq"]
+[sub_resource type="Resource" id="Resource_gkqqx"]
 script = ExtResource("2_vtcjq")
 
-[node name="Shape" type="Node2D" unique_id=669711841]
+[node name="Ruby" type="Node2D" unique_id=669711841]
 script = ExtResource("1_l6tjx")
-tile = SubResource("Resource_vtcjq")
+tile = SubResource("Resource_gkqqx")
+sprite_scene = ExtResource("3_6w5q4")
 metadata/_custom_type_script = "uid://dcydy7cclqubq"

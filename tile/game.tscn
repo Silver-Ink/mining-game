@@ -1,16 +1,8 @@
 [gd_scene format=3 uid="uid://6be6wpwdvekm"]
 
 [ext_resource type="Script" uid="uid://byeal2tb066q7" path="res://tile/game.gd" id="1_vu7ft"]
-[ext_resource type="PackedScene" uid="uid://b2bj8hpuwu5ap" path="res://tile/ruby.tscn" id="2_oxkmn"]
-[ext_resource type="Script" uid="uid://6j7cyu7n7nir" path="res://tile/tiles.gd" id="3_8hxny"]
-
-[sub_resource type="Resource" id="Resource_8hxny"]
-script = ExtResource("3_8hxny")
 
 [node name="Game" type="Node2D" unique_id=1802790867]
 script = ExtResource("1_vu7ft")
 
 [node name="camera" type="Camera2D" parent="." unique_id=1074128323]
-
-[node name="Shape" parent="." unique_id=669711841 instance=ExtResource("2_oxkmn")]
-tile = SubResource("Resource_8hxny")

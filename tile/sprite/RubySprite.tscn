@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://b76advjwm8jrp"]
+
+[ext_resource type="Script" uid="uid://dnqfcxe3o5f5i" path="res://tile/shape_sprite.gd" id="1_q428j"]
+[ext_resource type="Texture2D" uid="uid://dmxdnxi71yy5c" path="res://assets/tools/treasures.png" id="2_a0wcf"]
+
+[node name="RubySprite" type="Node2D" unique_id=1842101345]
+script = ExtResource("1_q428j")
+metadata/_custom_type_script = "uid://dnqfcxe3o5f5i"
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2092907886]
+texture = ExtResource("2_a0wcf")
+region_enabled = true
+region_rect = Rect2(16, 0, 16, 16)

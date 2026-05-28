@@ -12,6 +12,10 @@ class_name Shape
 		if area:
 			area.insert(self)
 
+@export var sprite_scene: PackedScene
+
+var sprite : ShapeSprite
+
 # Z level
 var height : int = 0:
 	get:
@@ -34,7 +38,9 @@ var area: GameArea = null:
 		if value != null:
 			value.insert(self)
 			
-var sprite: ShapeSprite = ShapeSprite.new()
+func _ready() -> void:
+	sprite = sprite_scene.instantiate()
+	add_child(sprite)
 
 func tiles() -> Array[Vector2i]:
 	return tile.tiles()
@@ -48,5 +54,3 @@ func move(delta: Vector2i):
 func on_tiles_changed():
 	self.sprite.update(self)
 	
-func _ready() -> void:
-	add_child(self.sprite)

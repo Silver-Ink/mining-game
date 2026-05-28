@@ -1,8 +1,8 @@
 extends Node2D
 class_name ShapeSprite
 
-@export var tiled_sprite : Sprite2D = Sprite2D.new()
-@export var global_sprite : Sprite2D = Sprite2D.new()
+@export var tiled_sprite : Sprite2D = Sprite2D.new() #? demander juste la texture ?
+@export var global_sprite : Sprite2D = Sprite2D.new() #? enlever et laisser juste les enfants ?
 const TILE_SIZE : int = 8
 
 func update(shape: Shape):
