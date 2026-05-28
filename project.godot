@@ -25,7 +25,7 @@ Assets="*uid://g10fuqh71i6q"
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/tiledshapedefiner/plugin.cfg")
 
 [input]
 

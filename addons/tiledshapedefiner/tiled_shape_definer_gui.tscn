@@ -1,0 +1,91 @@
+[gd_scene format=3 uid="uid://dgmlu78ciu27x"]
+
+[ext_resource type="Script" uid="uid://c4c2fkibc6od5" path="res://addons/tiledshapedefiner/tiled_shape_definer_gui.gd" id="1_p5vtd"]
+
+[node name="TiledShapeDefinerGui" type="VBoxContainer" unique_id=823397974]
+anchors_preset = -1
+anchor_right = 0.22700001
+offset_right = 0.49597168
+grow_horizontal = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+script = ExtResource("1_p5vtd")
+metadata/_edit_use_anchors_ = true
+
+[node name="TopPart" type="HBoxContainer" parent="." unique_id=866173190]
+layout_mode = 2
+alignment = 1
+
+[node name="LabelX" type="Label" parent="TopPart" unique_id=1535690297]
+layout_mode = 2
+text = "x :"
+
+[node name="SpinBoxX" type="SpinBox" parent="TopPart" unique_id=456946510]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+min_value = 1.0
+value = 2.0
+
+[node name="VSeparator" type="VSeparator" parent="TopPart" unique_id=224306766]
+layout_mode = 2
+theme_override_constants/separation = 13
+
+[node name="LabelY" type="Label" parent="TopPart" unique_id=2133447343]
+layout_mode = 2
+text = "y :"
+
+[node name="SpinBoxY" type="SpinBox" parent="TopPart" unique_id=419178400]
+unique_name_in_owner = true
+layout_mode = 2
+min_value = 1.0
+value = 2.0
+
+[node name="HSeparator" type="HSeparator" parent="." unique_id=1884431894]
+layout_mode = 2
+theme_override_constants/separation = 1
+
+[node name="BottomPart" type="HBoxContainer" parent="." unique_id=64022561]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="BottomPart" unique_id=175997305]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/h_separation = -3
+theme_override_constants/v_separation = 0
+columns = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BottomPart" unique_id=1358716365]
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="BottomPart/VBoxContainer" unique_id=699793869]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 0
+
+[node name="AllButton" type="Button" parent="BottomPart/VBoxContainer/MarginContainer" unique_id=1745595082]
+layout_mode = 2
+text = "All
+"
+
+[node name="MarginContainer2" type="MarginContainer" parent="BottomPart/VBoxContainer" unique_id=2104659345]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="NoneButton" type="Button" parent="BottomPart/VBoxContainer/MarginContainer2" unique_id=1083123941]
+layout_mode = 2
+text = "None"
+
+[connection signal="value_changed" from="TopPart/SpinBoxX" to="." method="_on_spin_box_x_value_changed"]
+[connection signal="value_changed" from="TopPart/SpinBoxY" to="." method="_on_spin_box_y_value_changed"]
+[connection signal="button_down" from="BottomPart/VBoxContainer/MarginContainer/AllButton" to="." method="_on_all_button_button_down"]
+[connection signal="button_down" from="BottomPart/VBoxContainer/MarginContainer2/NoneButton" to="." method="_on_none_button_button_down"]
