@@ -229,17 +229,22 @@ func dig(pos) -> bool:
 func _generate():
 	self.clear()
 	
+	var bg : Shape = Shape.new();
+	bg.add_rect(Rect2i(0,0,layout.size.x,layout.size.y))
+	bg.preset_tileset_background()
+	bg.area = self;
+	
 	var rock : Shape = Shape.new();
 	rock.add_rect(Rect2i(0,0,layout.size.x,layout.size.y))
 	rock.preset_tileset_rock()
-	rock.height = 0;
 	rock.area = self;
 	
 	var bone = Shape.new();
 	bone.add_rect(Rect2i(layout.size.x / 2 - 1,layout.size.y / 2 - 1,3,3))
 	bone.preset_tileset_bone()
-	bone.height = -1;
 	bone.area = self;
+	
+	Shape.new().preset_tileset_bracelet().with_area(self)
 	
 	#self.insert(bg)
 	

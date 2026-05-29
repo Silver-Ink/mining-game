@@ -108,6 +108,10 @@ var area: GameArea = null:
 		if value != null:
 			value.insert(self)
 
+func with_area(area: GameArea) -> Shape:
+	self.area = area
+	return self
+
 var render_node: Node2D = Node2D.new()
 	
 var sprite: ShapeSprite = ShapeSprite.new():
@@ -135,15 +139,51 @@ func on_tile_changed():
 func _ready() -> void:
 	add_child(self.render_node)
 
-	
+
 func preset_tileset_rock() -> Shape:
 	self.sprite = ShapeSprite.ROCK
 	self.is_destructible = true
-	return self
+	return self.preset_layer_foreground()
+	
+func preset_tileset_background() -> Shape:
+	self.sprite = ShapeSprite.WALL
+	self.is_destructible = false
+	return self.preset_layer_background()
 	
 func preset_tileset_bone() -> Shape:
 	self.sprite = ShapeSprite.BONE
 	self.is_destructible = true
 	self.is_fragile = true
-	return self
+	return self.preset_layer_treasure()
 	
+func preset_tileset_bracelet() -> Shape:
+	self.sprite = ShapeSprite.BRACELET
+	self.add_all(
+		[
+			# Un petit côté Alain D.
+			Vector2i(0,0), Vector2i(1,0), Vector2i(2,0),
+			Vector2i(0,1)               , Vector2i(2,1),
+			Vector2i(0,2), Vector2i(1,2), Vector2i(2,2),
+		])
+	return self.preset_layer_treasure()
+	
+enum Layer 
+{
+	BACKGROUND = -100,
+	TREASURE = 100,
+	#FOREGROUND = 200,
+	FOREGROUND = 50,
+}
+
+func preset_layer(layer: Layer, offset = 0) -> Shape:
+	self.height = layer + offset
+	return self
+
+func preset_layer_background(offset = 0) -> Shape:
+	return self.preset_layer(Layer.BACKGROUND, offset)
+	
+func preset_layer_treasure(offset = 0) -> Shape:
+	return self.preset_layer(Layer.TREASURE, offset)
+
+func preset_layer_foreground(offset = 0) -> Shape:
+	return self.preset_layer(Layer.FOREGROUND, offset)

@@ -1,0 +1,5 @@
+- Add a shape visibility: nb_tile / max_tile and some event fn.
+- Add some fn to notify edge shape when a tile is deleted/added
+- Add an event manager/timer manager to be able to create forced action, ex: in 2s dig this block.
+- Generate random level
+- Polish stuff like particles
