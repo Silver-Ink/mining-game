@@ -27,7 +27,8 @@ func insert(tiled : Shape):
 	for t in tiled.tiles():
 		var array = _lookup.get_or_add(t, [])
 		array.append(tiled)
-		
+	
+	tiled.z_index = tiled.height
 	add_child(tiled)
 	tiled.on_tile_changed()
 
@@ -73,12 +74,13 @@ func _recompute_bounding_box() -> void:
 
 func get_at(pos: Vector2i) -> Array[Shape]:
 	var result: Array = _lookup.get(pos, [])
+	
 
 	var typed_result: Array[Shape] = []	
 	typed_result.assign(result)
 
-	typed_result.sort_custom(func(a, b): return a.level < b.level)
-	return typed_result.duplicate()
+	typed_result.sort_custom(func(a: Shape, b: Shape): return a.height > b.height)
+	return typed_result
 
 func get_all() -> Array[Shape]:
 	return _list.duplicate()
@@ -227,10 +229,18 @@ func dig(pos) -> bool:
 func _generate():
 	self.clear()
 	
-	var bg = Shape.new();
-	bg.add_rect(Rect2i(0,0,layout.size.x,layout.size.y))
-	bg.preset_rock()
-	bg.area = self;
+	var rock : Shape = Shape.new();
+	rock.add_rect(Rect2i(0,0,layout.size.x,layout.size.y))
+	rock.preset_tileset_rock()
+	rock.height = 0;
+	rock.area = self;
+	
+	var bone = Shape.new();
+	bone.add_rect(Rect2i(layout.size.x / 2 - 1,layout.size.y / 2 - 1,3,3))
+	bone.preset_tileset_bone()
+	bone.height = -1;
+	bone.area = self;
+	
 	#self.insert(bg)
 	
 	#var bg = BACKGROUND.instantiate()

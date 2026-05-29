@@ -32,16 +32,21 @@ func merge(other: Tiles) -> Tiles:
 	add_all(other.tiles())
 	return self
 
-func remove(element):
-	_remove(element)
-	_update_bounding_box()
+func remove(element: Vector2i) -> bool:
+	var removed = _remove(element)
+	if removed:
+		_update_bounding_box()
+	return removed
 
-func remove_all(elements):
+func remove_all(elements: Array[Vector2i]) -> Array[Vector2i]:
+	var removed = []
 	for element in elements:
-		_remove(element)
+		if _remove(element):
+			removed.append(element)
 	_update_bounding_box()
+	return removed
 
-func contains(element) -> bool:
+func contains(element: Vector2i) -> bool:
 	return _tiles.has(element)
 
 func tiles() -> Array[Vector2i]:
@@ -107,5 +112,8 @@ func _init():
 func _add(element: Vector2i):
 	_tiles[element] = VALUE
 	
-func _remove(element):
-	_tiles.erase(element)
+func _remove(element: Vector2) -> bool:
+	if _tiles.get(element):
+		_tiles.erase(element)
+		return true
+	return false
