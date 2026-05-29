@@ -1,73 +1,61 @@
-extends Node2D
+extends Resource
 class_name ShapeSprite
 
-#@export var tiled_node : Node2D = Node2D.new()
-#@export var tileset : TileSet = null
-@export var tileset_sprite : Texture2D = null
-@export var tiled_sprite : Sprite2D  = null
-@export var global_sprite : Sprite2D = null
-const TILE_SIZE : int = 8
-const TILE_SCALE : Vector2 = Vector2(1./ TILE_SIZE, 1./ TILE_SIZE)
+var tileset : Texture2D = null
+var per_tile : Sprite2D  = null
+var global : Sprite2D = null
 
-func update(shape: Shape):
-	for child in get_children():
+const SIZE : int = 8
+const SCALE : Vector2 = Vector2(1./ SIZE, 1./ SIZE)
+const HALF_SCALE : Vector2 = SCALE / 2.;
+
+func generate(shape: Shape) -> Node2D:
+	var node = Node2D.new()
+	return self.append(shape, node)
+
+func clear(node: Node2D) -> Node2D:
+	for child in node.get_children():
 		child.queue_free()
-
+	return node
 	
-	if tiled_sprite:
+func update(shape: Shape, node: Node2D) -> Node2D:
+	return append(shape, clear(node))
+
+# Append the subnode/drawing instruction into the node
+func append(shape: Shape, node: Node2D) -> Node2D:
+	if per_tile:
 		for tile in shape.tiles():
-			var new_sprite = tiled_sprite.duplicate()
-			new_sprite.position = Vector2(tile.x * TILE_SIZE, tile.y * TILE_SIZE)
-			add_child(new_sprite)
-		# TODO: fix the pos
-		#var new_tiled_node = tiled_node.duplicate()
-		#new_tiled_node.position = Vector2(tile.x * TILE_SIZE, tile.y * TILE_SIZE)
-		#add_child(new_tiled_node)
+			var new_sprite = per_tile.duplicate()
+			new_sprite.position = Vector2(tile.x * SIZE, tile.y * SIZE)
+			node.add_child(new_sprite)
 		
-	if tileset_sprite:
+	if tileset:
 		for tile in shape.tiles():
-			var idx_x = 3 - ((shape.tile.contains(tile + Vector2i(-1,0)) as int) + (shape.tile.contains(tile + Vector2i(+1,0)) as int * 2))
-			var idx_y = 3 - ((shape.tile.contains(tile + Vector2i(0,-1)) as int) + (shape.tile.contains(tile + Vector2i(0,+1)) as int * 2))
+			const REMAP = [3, 2, 0, 1]
+			var idx_x = REMAP[(shape.contains(tile + Vector2i(-1,0)) as int) + (shape.contains(tile + Vector2i(+1,0)) as int * 2)]
+			var idx_y = REMAP[(shape.contains(tile + Vector2i(0,-1)) as int) + (shape.contains(tile + Vector2i(0,+1)) as int * 2)]
 			
-			var new_sprite = Sprite2D.new() # tileset_sprite.duplicate()
-			new_sprite.texture = tileset_sprite
-			new_sprite.centered = false
+			var new_sprite = Sprite2D.new()
+			new_sprite.texture = tileset
+			new_sprite.centered = true
 			new_sprite.region_enabled = true
-			new_sprite.region_rect = Rect2i(idx_x * TILE_SIZE, idx_y * TILE_SIZE, TILE_SIZE, TILE_SIZE)
-			#print(new_sprite.region_rect)
-			#print(tile)
-			new_sprite.scale = 4 * TILE_SCALE;
-			new_sprite.position = Vector2(tile.x * TILE_SIZE, tile.y * TILE_SIZE)
-			add_child(new_sprite)
+			new_sprite.region_rect = Rect2i(idx_x * SIZE, idx_y * SIZE, SIZE, SIZE)
+			new_sprite.scale = Vector2.ONE;
+			new_sprite.position = Vector2(tile.x * SIZE, tile.y * SIZE) - HALF_SCALE;
+			node.add_child(new_sprite)
 	
-	if global_sprite:
-		var new_global = global_sprite.duplicate()
-		add_child(new_global)
+	if global:
+		node.add_child(global.duplicate())
 	
+	return node
 
 
-static func tileset(uid : String) -> ShapeSprite:
+static func from_tileset(uid : String) -> ShapeSprite:
 	var s = new()
-	s.tileset_sprite = load(uid) # pretty sure it is not opti / will be duplicated
-	#s.tileset_sprite.scale = 4 * TILE_SCALE;
+	s.tileset = load(uid)
 	return s
-
-
-static func bone() -> ShapeSprite:
-	return tileset("uid://bmb7m3xfcik21")
-
-static func rock() -> ShapeSprite:
-	return tileset("uid://dh8ficnqa4uqq")
 	
-static func sand() -> ShapeSprite:
-	return tileset("uid://ig4wnf2j7ufe")
-	
-static func wall() -> ShapeSprite:
-	return tileset("uid://e37kapqjwwh2")
-	
-static func test() -> ShapeSprite:
-	var s = new()
-	s.tiled_sprite = Sprite2D.new()
-	s.tiled_sprite.texture = load("uid://2g21uorfwa3a") # pretty sure it is not opti / will be duplicated
-	s.tiled_sprite.scale = TILE_SCALE;
-	return s
+static var BONE : ShapeSprite = ShapeSprite.from_tileset("uid://bmb7m3xfcik21")
+static var ROCK : ShapeSprite = ShapeSprite.from_tileset("uid://dh8ficnqa4uqq")
+static var SAND : ShapeSprite = ShapeSprite.from_tileset("uid://ig4wnf2j7ufe")
+static var WALL : ShapeSprite = ShapeSprite.from_tileset("uid://e37kapqjwwh2")

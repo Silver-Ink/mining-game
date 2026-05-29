@@ -4,8 +4,10 @@ class_name GameArea
 var _bounding_box : Rect2i = Rect2i();
 var _list : Array[Shape] = [];
 
-# Dictionary[Vector2i, Array[Shape]]
+# Of type Dictionary[Vector2i, Array[Shape]]
 var _lookup: Dictionary[Vector2i, Array] = {}
+
+# Dictionary[Vector2i, Array[Shape]]
 
 var layout : GameAreaLayout = null
 
@@ -18,8 +20,8 @@ var game : Game = null:
 		game = value
 
 func insert(tiled : Shape):
+	assert(tiled)
 	tiled.area = self
-
 	_list.append(tiled)
 
 	for t in tiled.tiles():
@@ -27,7 +29,7 @@ func insert(tiled : Shape):
 		array.append(tiled)
 		
 	add_child(tiled)
-	tiled.on_tiles_changed()
+	tiled.on_tile_changed()
 
 	_update_bounding_box(tiled)
 
@@ -69,11 +71,14 @@ func _recompute_bounding_box() -> void:
 		_bounding_box = Rect2i(new_min, new_max - new_min)
 
 
-
 func get_at(pos: Vector2i) -> Array[Shape]:
-	var result: Array[Shape] = _lookup.get(pos, [])
-	result.sort_custom(func(a, b): return a.level < b.level)
-	return result.duplicate()
+	var result: Array = _lookup.get(pos, [])
+
+	var typed_result: Array[Shape] = []	
+	typed_result.assign(result)
+
+	typed_result.sort_custom(func(a, b): return a.level < b.level)
+	return typed_result.duplicate()
 
 func get_all() -> Array[Shape]:
 	return _list.duplicate()
@@ -145,36 +150,86 @@ func _init(layout : GameAreaLayout) -> void:
 func _ready() -> void:
 	_generate()
 
+func bounding_box_px() -> Rect2:
+	var game_bounding_box = Rect2(self.bounding_box())
+	game_bounding_box.position *= ShapeSprite.SIZE
+	game_bounding_box.size *= ShapeSprite.SIZE
+	game_bounding_box.position -= Vector2(ShapeSprite.SIZE / 2., ShapeSprite.SIZE / 2.)
+	return game_bounding_box
+
 func update_camera(camera: Camera2D, viewport: Viewport):
 	assert(viewport)
-	var game_bounding_box = Rect2(self.bounding_box())
-	
-	game_bounding_box.position *= ShapeSprite.TILE_SIZE
-	game_bounding_box.position -= Vector2(ShapeSprite.TILE_SIZE / 2., ShapeSprite.TILE_SIZE / 2.)
-	game_bounding_box.size *= ShapeSprite.TILE_SIZE
+
+	var bounding_box = bounding_box_px()
 	
 	# Calculate required zoom to fit bounding box
 	var viewport_size = viewport.get_visible_rect().size
-	var zoom = viewport_size / game_bounding_box.size
+	var zoom = viewport_size / bounding_box.size
 	var min_zoom = min(zoom.x, zoom.y) * 0.9
 	zoom = Vector2(min_zoom,min_zoom)
-	
 	camera.zoom = zoom
-	camera.position = game_bounding_box.get_center()
+	camera.position = bounding_box.get_center()
 	
+func mouse_tile_pos() -> Vector2i:
+	var viewport = get_viewport()
+	var camera = viewport.get_camera_2d()
+	if not camera:
+		assert(false) # Invalid position
+		return Vector2i.ZERO  
+	
+	# Get the game bounding box in world coordinates (same as update_camera)
+	var bounding_box = bounding_box_px()
+	
+	# Get mouse position in screen coordinates
+	var mouse_screen_pos = viewport.get_mouse_position()
+	var viewport_size = viewport.get_visible_rect().size
+	
+	# Convert to world coordinates using camera position and zoom
+	var mouse_world_pos = camera.position + (mouse_screen_pos - viewport_size / 2) / camera.zoom
+	
+	# Clamp to game bounding box (optional)
+	mouse_world_pos = mouse_world_pos.clamp(bounding_box.position, bounding_box.position + bounding_box.size)
+	
+	# Convert to tile coordinates
+	var tile_pos = Vector2i(
+		floor((mouse_world_pos.x + ShapeSprite.SIZE * 0.5) / ShapeSprite.SIZE),
+		floor((mouse_world_pos.y + ShapeSprite.SIZE * 0.5) / ShapeSprite.SIZE)
+	)
+	
+	return tile_pos
 
 func enter():
 	pass
 	
 func leave():
 	pass
+	
+var was_left_mouse_pressed = false
+	
+func _process(delta: float) -> void:
+	var pos : Vector2i = mouse_tile_pos()
+	
+	var is_left_mouse_pressed = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+	if  is_left_mouse_pressed and not was_left_mouse_pressed:
+		self.use_tool(pos)
+	was_left_mouse_pressed = is_left_mouse_pressed
+
+func use_tool(pos):
+	dig(pos)
+	
+func dig(pos) -> bool:
+	for shape: Shape in self.get_at(pos):
+		if shape.is_destructible:
+			shape.remove(pos)
+			return true
+	return false
 
 func _generate():
 	self.clear()
 	
 	var bg = Shape.new();
-	bg.tile = Tiles.new().add_rect(Rect2i(0,0,layout.size.x,layout.size.y))
-	bg.sprite = ShapeSprite.wall()
+	bg.add_rect(Rect2i(0,0,layout.size.x,layout.size.y))
+	bg.preset_rock()
 	bg.area = self;
 	#self.insert(bg)
 	

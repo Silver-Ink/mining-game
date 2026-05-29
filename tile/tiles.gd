@@ -1,5 +1,5 @@
 class_name Tiles # TileSet est déjà utilsé...
-extends Resource
+#extends Resource
 
 var _tiles: Dictionary[Vector2i,bool]
 var _bounding_box: Rect2i = Rect2i();
@@ -8,11 +8,7 @@ const VALUE = 1
 
 # Inspired by https://www.reddit.com/r/godot/comments/1esljuk/elevate_your_godot_code_with_a_set_type/
 
-func _init():
-	_tiles = {}
-
-func _add(element: Vector2i):
-	_tiles[element] = VALUE
+# Begin of the Tile Trait / Interface, thank godot for supporting them
 
 func add(element: Vector2i) -> Tiles:
 	_add(element)
@@ -32,11 +28,9 @@ func add_all(elements: Array[Vector2i]) -> Tiles:
 	_update_bounding_box()
 	return self
 
-func merge(other: Tiles):
+func merge(other: Tiles) -> Tiles:
 	add_all(other.tiles())
-
-func _remove(element):
-	_tiles.erase(element)
+	return self
 
 func remove(element):
 	_remove(element)
@@ -60,12 +54,23 @@ func clear():
 func is_empty():
 	return _tiles.is_empty()
 
-
 func size():
 	return _tiles.size()
 
 func bounding_box() -> Rect2i:
 	return _bounding_box
+	
+func move_all(delta: Vector2i):
+	if delta == Vector2i.ZERO:
+		return
+	
+	var old_tiles = _tiles.duplicate()
+	_tiles.clear()
+	
+	for pos in old_tiles.keys():
+		_tiles[pos + delta] = VALUE
+	
+	_bounding_box.position += delta
 
 func _update_bounding_box() -> void:
 	if _tiles.is_empty():
@@ -92,16 +97,15 @@ func _update_bounding_box() -> void:
 			max_y = max(max_y, pos.y)
 	
 	_bounding_box = Rect2i(Vector2i(min_x, min_y), Vector2i(max_x - min_x + 1, max_y - min_y + 1))
+	
+	
+# End of the Tiled Trait
+	
+func _init():
+	_tiles = {}
 
-
-func move_all(delta: Vector2i) -> void:
-	if delta == Vector2i.ZERO:
-		return
+func _add(element: Vector2i):
+	_tiles[element] = VALUE
 	
-	var old_tiles = _tiles.duplicate()
-	_tiles.clear()
-	
-	for pos in old_tiles.keys():
-		_tiles[pos + delta] = VALUE
-	
-	_bounding_box.position += delta
+func _remove(element):
+	_tiles.erase(element)

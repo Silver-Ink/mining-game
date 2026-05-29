@@ -21,7 +21,7 @@ CustomCursor="*uid://b4kqni15kcqb5"
 ToolManager="*uid://d110db83owyoi"
 LevelManager="*uid://deo0ym35qufun"
 BetterTerrain="*uid://0pp76f38ncdl"
-Assets="*uid://g10fuqh71i6q"
+Assets="uid://g10fuqh71i6q"
 
 [editor_plugins]
 
