@@ -12,3 +12,4 @@ script = ExtResource("1_ioepo")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1692465056]
 shape = SubResource("RectangleShape2D_bl27q")
+debug_color = Color(0.8418751, 0.0011064297, 0.92020845, 0.41960785)
