@@ -64,14 +64,19 @@ func bounding_box() -> Rect2i:
 	
 func move_all(delta: Vector2i):
 	_tile.move_all(delta)
-	self.render_node.move_local_x(delta.x)
-	self.render_node.move_local_y(delta.y)
+	self.render_node.position += Vector2(delta) * ShapeSprite.ZOOM;
+	#self.render_node.move_local_x(delta.x)
+	#self.render_node.move_local_y(delta.y)
 #endregion End of the Tiled Trait
 
 #region Shape properties
+## Is concerned by the action of digging
+var absorb_dig: bool = true
+
 ## Per Shape for the moment. Can be moved per _tile if needed YAGNI :)
-var is_destructible: bool = false
-## destorying 1 tile = destorying all tiles
+var is_destructible: bool = true
+
+## destroying 1 tile = destroying all tiles
 var is_fragile: bool = false
 #endregion
 
@@ -145,17 +150,20 @@ func _ready() -> void:
 func preset_tileset_rock() -> Shape:
 	self.sprite = ShapeSprite.ROCK
 	self.is_destructible = true
+	self.absorb_dig = true
 	return self.preset_layer_foreground()
 	
 func preset_tileset_background() -> Shape:
 	self.sprite = ShapeSprite.WALL
 	self.is_destructible = false
+	self.absorb_dig = false
 	return self.preset_layer_background()
 	
 func preset_tileset_bone() -> Shape:
 	self.sprite = ShapeSprite.BONE
 	self.is_destructible = true
 	self.is_fragile = true
+	self.absorb_dig = true
 	return self.preset_layer_treasure()
 	
 func preset_tileset_bracelet() -> Shape:
@@ -163,19 +171,26 @@ func preset_tileset_bracelet() -> Shape:
 	self.add_all(
 		[
 			# Un petit côté Alain D.
-			Vector2i(0,0), Vector2i(1,0), Vector2i(2,0),
-			Vector2i(0,1)               , Vector2i(2,1),
-			Vector2i(0,2), Vector2i(1,2), Vector2i(2,2),
+			Vector2i(-1,-1), Vector2i(0,-1), Vector2i(1,-1),
+			Vector2i(-1, 0)                , Vector2i(1, 0),
+			Vector2i(-1, 1), Vector2i(0,1) , Vector2i(1, 1),
 		])
-	return self.preset_layer_treasure()
+	return self.preset_treasure()
 	
 enum Layer 
 {
 	BACKGROUND = -100,
 	TREASURE = 100,
 	#FOREGROUND = 200,
-	FOREGROUND = 50,
+	FOREGROUND = 50, # For debugging
 }
+
+func preset_treasure(offset = 0) -> Shape:
+	self.preset_layer_treasure(offset)
+	self.is_destructible = false
+	self.absorb_dig = true
+	self.is_fragile = false
+	return self
 
 func preset_layer(layer: Layer, offset = 0) -> Shape:
 	self.height = layer + offset

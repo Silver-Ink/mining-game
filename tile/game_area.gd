@@ -92,8 +92,8 @@ func is_empty() -> bool:
 	return _list.is_empty()
 
 func clear() -> void:
-	for tiled in _list:
-		tiled.map = null
+	for shape in _list:
+		shape.map = null
 		_list.clear()
 		_lookup.clear()
 		_bounding_box = Rect2i()
@@ -221,8 +221,9 @@ func use_tool(pos):
 	
 func dig(pos) -> bool:
 	for shape: Shape in self.get_at(pos):
-		if shape.is_destructible:
-			shape.remove(pos)
+		if shape.absorb_dig:
+			if shape.is_destructible:
+				shape.remove(pos)
 			return true
 	return false
 
@@ -244,7 +245,9 @@ func _generate():
 	bone.preset_tileset_bone()
 	bone.area = self;
 	
-	Shape.new().preset_tileset_bracelet().with_area(self)
+	var bracelet = Shape.new().preset_tileset_bracelet()
+	bracelet.move_all(Vector2(6,3))
+	bracelet.with_area(self)
 	
 	#self.insert(bg)
 	

@@ -6,6 +6,8 @@ var per_tile : Sprite2D  = null
 var global : Sprite2D = null
 
 const SIZE : int = 8
+
+const ZOOM : Vector2 = Vector2(SIZE, SIZE)
 const SCALE : Vector2 = Vector2(1./ SIZE, 1./ SIZE)
 const HALF_SCALE : Vector2 = SCALE / 2.;
 
