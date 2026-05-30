@@ -9,58 +9,27 @@ const VALUE = 1
 # Inspired by https://www.reddit.com/r/godot/comments/1esljuk/elevate_your_godot_code_with_a_set_type/
 
 #region Trait Tiled. Thank godot for not supporting them...
-func add(element: Vector2i) -> Tiles:
-	_add(element)
+func on_tile_added():
 	_update_bounding_box()
-	return self
+
+func on_tile_removed():
+	_update_bounding_box()
+
+func _add(element: Vector2i):
+	_tiles[element] = VALUE
 	
-func add_rect(rect: Rect2i) -> Tiles:
-	for x in range(rect.position.x, rect.end.x):
-		for y in range(rect.position.y, rect.end.y):
-			_add(Vector2i(x, y))
-	_update_bounding_box()
-	return self
-
-func add_all(elements: Array[Vector2i]) -> Tiles:
-	for element in elements:
-		_add(element)
-	_update_bounding_box()
-	return self
-
-func merge(other: Tiles) -> Tiles:
-	add_all(other.tiles())
-	return self
-
-func remove(element: Vector2i) -> bool:
-	var removed = _remove(element)
-	if removed:
-		_update_bounding_box()
-	return removed
-
-func remove_all(elements: Array[Vector2i]) -> Array[Vector2i]:
-	var removed = []
-	for element in elements:
-		if _remove(element):
-			removed.append(element)
-	_update_bounding_box()
-	return removed
-
+func _remove(element: Vector2) -> bool:
+	if _tiles.get(element):
+		_tiles.erase(element)
+		return true
+	return false
+	
 func contains(element: Vector2i) -> bool:
 	return _tiles.has(element)
 
 func tiles() -> Array[Vector2i]:
 	return _tiles.keys().duplicate()
-
-func clear():
-	_tiles.clear()
-	_bounding_box = Rect2i()
-
-func is_empty():
-	return _tiles.is_empty()
-
-func size():
-	return _tiles.size()
-
+	
 func bounding_box() -> Rect2i:
 	return _bounding_box
 	
@@ -75,6 +44,58 @@ func move_all(delta: Vector2i):
 		_tiles[pos + delta] = VALUE
 	
 	_bounding_box.position += delta
+
+#region Default impl
+func add(element: Vector2i) -> Tiles:
+	_add(element)
+	on_tile_added()
+	return self
+	
+func add_rect(rect: Rect2i) -> Tiles:
+	for x in range(rect.position.x, rect.end.x):
+		for y in range(rect.position.y, rect.end.y):
+			_add(Vector2i(x, y))
+	on_tile_added()
+	return self
+
+func add_all(elements: Array[Vector2i]) -> Tiles:
+	for element in elements:
+		_add(element)
+	on_tile_added()
+	return self
+
+func merge(other: Tiles) -> Tiles:
+	add_all(other.tiles())
+	return self
+
+func remove(element: Vector2i) -> bool:
+	var removed = _remove(element)
+	if removed:
+		on_tile_removed()
+	return removed
+
+func remove_all(elements: Array[Vector2i]) -> Array[Vector2i]:
+	var removed = []
+	for element in elements:
+		if _remove(element):
+			removed.append(element)
+	on_tile_removed()
+	return removed
+
+
+func nb_tile() -> int:
+	return tiles().size() # Not opti because we don't need cloning the tiles
+
+func clear():
+	for t in tiles():
+		self._remove(t)
+	on_tile_removed()
+
+func is_empty():
+	return nb_tile() <= 0
+#endregion
+#endregion
+
 
 func _update_bounding_box() -> void:
 	if _tiles.is_empty():
@@ -102,18 +123,8 @@ func _update_bounding_box() -> void:
 	
 	_bounding_box = Rect2i(Vector2i(min_x, min_y), Vector2i(max_x - min_x + 1, max_y - min_y + 1))
 	
-	
-#endregion End of the Tiled Trait
+
 
 	
 func _init():
 	_tiles = {}
-
-func _add(element: Vector2i):
-	_tiles[element] = VALUE
-	
-func _remove(element: Vector2) -> bool:
-	if _tiles.get(element):
-		_tiles.erase(element)
-		return true
-	return false

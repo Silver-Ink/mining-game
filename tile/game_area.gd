@@ -19,20 +19,38 @@ var game : Game = null:
 		assert(value != null)
 		game = value
 
-func insert(tiled : Shape):
-	assert(tiled)
-	tiled.area = self
-	_list.append(tiled)
+## Sort the list of shape at a given position using their height and return the array
+func _sort_at(pos: Vector2i) -> Array[Shape]:
+	var typed_result: Array[Shape] = []
+	typed_result.assign(self._lookup.get_or_add(pos, []))
+	typed_result.sort_custom(func(a: Shape, b: Shape): return a.height > b.height)
+	self._lookup[pos] = typed_result
+	return typed_result
 
-	for t in tiled.tiles():
-		var array = _lookup.get_or_add(t, [])
-		array.append(tiled)
+func insert(shape : Shape):
+	assert(shape)
+	shape.area = self
+	_list.append(shape)
 	
-	tiled.z_index = tiled.height
-	add_child(tiled)
-	tiled.on_tile_changed()
+	shape.nb_tile_visible = 0
 
-	_update_bounding_box(tiled)
+	for pos in shape.tiles():
+		var typed_result: Array[Shape] = []
+		typed_result.assign(self._lookup.get_or_add(pos, []))
+		typed_result.append(shape)
+		self._lookup[pos] = typed_result
+		typed_result = _sort_at(pos);
+		
+		if typed_result[0] == shape:
+			shape.nb_tile_visible = shape.nb_tile_visible + 1
+			if typed_result.size() >= 2:
+				typed_result[1].nb_tile_visible -= 1
+	
+	shape.z_index = shape.height
+	add_child(shape)
+	shape.on_tile_changed()
+
+	_update_bounding_box(shape)
 
 func remove(tiled : Shape):
 	if tiled.map != self:
@@ -73,13 +91,8 @@ func _recompute_bounding_box() -> void:
 
 
 func get_at(pos: Vector2i) -> Array[Shape]:
-	var result: Array = _lookup.get(pos, [])
-	
-
 	var typed_result: Array[Shape] = []	
-	typed_result.assign(result)
-
-	typed_result.sort_custom(func(a: Shape, b: Shape): return a.height > b.height)
+	typed_result.assign(_lookup.get(pos, []))
 	return typed_result
 
 func get_all() -> Array[Shape]:
@@ -90,6 +103,38 @@ func bounding_box() -> Rect2i:
 
 func is_empty() -> bool:
 	return _list.is_empty()
+
+
+func _shape_add_tile(shape: Shape, pos: Vector2i):
+	assert(shape.area == self)
+	
+	var typed_result: Array[Shape] = []	
+	typed_result.assign(self._lookup.get_or_add(pos, []))
+	
+	if not typed_result.find(shape):
+		typed_result.append(shape)
+		
+		var sorted = _sort_at(pos)
+		if sorted[0] == shape:
+			shape.nb_tile_visible += 1
+			if sorted.size() >= 2:
+				sorted[1].nb_tile_visible -= 1
+	self._lookup[pos] = typed_result
+
+
+func _shape_remove_tile(shape: Shape, pos: Vector2i):
+	assert(shape.area == self)
+
+	var typed_result: Array[Shape] = []	
+	typed_result.assign(self._lookup.get_or_add(pos, []))
+	
+	if typed_result[0] == shape:
+		shape.nb_tile_visible -= 1
+		if typed_result.size() >= 2:
+			typed_result[1].nb_tile_visible += 1
+	typed_result.erase(shape)
+	self._lookup[pos] = typed_result
+	
 
 func clear() -> void:
 	for shape in _list:
@@ -245,8 +290,8 @@ func _generate():
 	bone.preset_tileset_bone()
 	bone.area = self;
 	
-	var bracelet = Shape.new().preset_tileset_bracelet()
-	bracelet.move_all(Vector2(6,3))
+	var bracelet = Shape.new().preset_treasure_bracelet()
+	bracelet.move_all(Vector2(2,3))
 	bracelet.with_area(self)
 	
 	#self.insert(bg)

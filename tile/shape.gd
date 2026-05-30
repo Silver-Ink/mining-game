@@ -3,62 +3,33 @@ extends Node2D
 class_name Shape
 
 #region Trait Tiled. Thank godot for not supporting them...
-func add(element: Vector2i) -> Shape:
-	self._tile.add(element);
-	on_tile_added()
+func on_tile_added():
+	on_tile_changed()
+	
+func on_tile_removed():
+	on_tile_changed()
+	if is_fragile && !is_empty():
+		clear()
+		
+func _add(element: Vector2i) -> Shape:
+	self._tile.add(element)
+	if area:
+		area._shape_add_tile(self, element)
 	return self
 
-func add_rect(rect: Rect2i) -> Shape:
-	self._tile.add_rect(rect);
-	on_tile_added()
-	return self
-
-func add_all(elements: Array[Vector2i]) -> Shape:
-	self._tile.add_all(elements);
-	on_tile_added()
-	return self
-
-func merge(other: Tiles) -> Shape:
-	self._tile.merge(other)
-	on_tile_added()
-	return self
-
-func remove(element: Vector2i) -> bool:
+func _remove(element: Vector2i) -> bool:
 	if self._tile.remove(element):
 		if area:
-			area._lookup[element].erase(self)
-		on_tile_removed()
+			area._shape_remove_tile(self, element)
 		return true
 	return false
-
-func remove_all(elements: Array[Vector2i]):
-	var removed = self._tile.remove_all(elements)
-	if removed.size() >= 1:
-		if area:
-			for element in removed:
-				area._lookup[element].erase(self)
-		on_tile_removed()
-	return removed
 
 func contains(element: Vector2i) -> bool:
 	return self._tile.contains(element)
 
 func tiles() -> Array[Vector2i]:
 	return self._tile.tiles()
-
-func clear():
-	if not is_empty():
-		for element in self.tiles():
-			self.remove(element)
-		#self._tile.clear()
-		on_tile_removed()
-
-func is_empty():
-	return _tile.is_empty()
-
-func size():
-	return _tile.size()
-
+	
 func bounding_box() -> Rect2i:
 	return _tile.bounding_box()
 	
@@ -67,6 +38,56 @@ func move_all(delta: Vector2i):
 	self.render_node.position += Vector2(delta) * ShapeSprite.ZOOM;
 	#self.render_node.move_local_x(delta.x)
 	#self.render_node.move_local_y(delta.y)
+
+#region Default impl
+func add(element: Vector2i) -> Shape:
+	_add(element)
+	on_tile_added()
+	return self
+	
+func add_rect(rect: Rect2i) -> Shape:
+	for x in range(rect.position.x, rect.end.x):
+		for y in range(rect.position.y, rect.end.y):
+			_add(Vector2i(x, y))
+	on_tile_added()
+	return self
+
+func add_all(elements: Array[Vector2i]) -> Shape:
+	for element in elements:
+		_add(element)
+	on_tile_added()
+	return self
+
+func merge(other: Tiles) -> Shape:
+	add_all(other.tiles())
+	return self
+
+func remove(element: Vector2i) -> bool:
+	var removed = _remove(element)
+	if removed:
+		on_tile_removed()
+	return removed
+
+func remove_all(elements: Array[Vector2i]) -> Array[Vector2i]:
+	var removed = []
+	for element in elements:
+		if _remove(element):
+			removed.append(element)
+	on_tile_removed()
+	return removed
+
+
+func nb_tile() -> int:
+	return tiles().size() # Not opti because we don't need cloning the tiles
+
+func clear():
+	for t in tiles():
+		self._remove(t)
+	on_tile_removed()
+
+func is_empty():
+	return nb_tile() <= 0
+#endregion
 #endregion End of the Tiled Trait
 
 #region Shape properties
@@ -78,7 +99,28 @@ var is_destructible: bool = true
 
 ## destroying 1 tile = destroying all tiles
 var is_fragile: bool = false
+
+var nb_tile_visible : int = 0:
+	get:
+		return nb_tile_visible
+	set(value):
+		if nb_tile_visible == value:
+			return
+		nb_tile_visible = value
+		
+		#print()
+		#print()
+		#print()
+		#print("tile visible: " + str(nb_tile_visible) + " / " + str(nb_tile()) + " = " + str(coef_tile_visible() * 100.) + " %")
+		
 #endregion
+
+
+func coef_tile_visible() -> float:
+	var nb_tile = nb_tile()
+	if nb_tile != 0:
+		return nb_tile_visible as float / nb_tile() as float
+	return 0.
 
 #@export var _tile: Tiles = Tiles.new():
 var _tile: Tiles = Tiles.new():
@@ -130,13 +172,7 @@ var sprite: ShapeSprite = ShapeSprite.new():
 		sprite.update(self, render_node)
 
 
-func on_tile_added():
-	on_tile_changed()
-	
-func on_tile_removed():
-	on_tile_changed()
-	if is_fragile:
-		clear()
+
 	
 func on_tile_changed():
 	self.sprite.update(self, render_node)
@@ -165,8 +201,9 @@ func preset_tileset_bone() -> Shape:
 	self.is_fragile = true
 	self.absorb_dig = true
 	return self.preset_layer_treasure()
-	
-func preset_tileset_bracelet() -> Shape:
+
+
+func preset_treasure_bracelet() -> Shape:
 	self.sprite = ShapeSprite.BRACELET
 	self.add_all(
 		[
