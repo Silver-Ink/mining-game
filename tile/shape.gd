@@ -2,8 +2,7 @@
 extends Node2D
 class_name Shape
 
-# Begin of the Tile Trait / Interface, thank godot for supporting them
-
+#region Trait Tiled. Thank godot for not supporting them...
 func add(element: Vector2i) -> Shape:
 	self._tile.add(element);
 	on_tile_added()
@@ -67,8 +66,14 @@ func move_all(delta: Vector2i):
 	_tile.move_all(delta)
 	self.render_node.move_local_x(delta.x)
 	self.render_node.move_local_y(delta.y)
-	
-# End of the Tiled Trait
+#endregion End of the Tiled Trait
+
+#region Shape properties
+## Per Shape for the moment. Can be moved per _tile if needed YAGNI :)
+var is_destructible: bool = false
+## destorying 1 tile = destorying all tiles
+var is_fragile: bool = false
+#endregion
 
 #@export var _tile: Tiles = Tiles.new():
 var _tile: Tiles = Tiles.new():
@@ -81,10 +86,6 @@ var _tile: Tiles = Tiles.new():
 		if area:
 			area.insert(self)
 
-# Per Shape for the moment. Can be moved per _tile if needed YAGNI :)
-var is_destructible: bool = false
-# destorying 1 tile = destorying all tiles
-var is_fragile: bool = false
 
 # Z level
 var height : int = 0:
@@ -107,12 +108,13 @@ var area: GameArea = null:
 		area = value
 		if value != null:
 			value.insert(self)
+var render_node: Node2D = Node2D.new()
+
 
 func with_area(area: GameArea) -> Shape:
 	self.area = area
 	return self
 
-var render_node: Node2D = Node2D.new()
 	
 var sprite: ShapeSprite = ShapeSprite.new():
 	get:

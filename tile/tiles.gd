@@ -8,8 +8,7 @@ const VALUE = 1
 
 # Inspired by https://www.reddit.com/r/godot/comments/1esljuk/elevate_your_godot_code_with_a_set_type/
 
-# Begin of the Tile Trait / Interface, thank godot for supporting them
-
+#region Trait Tiled. Thank godot for not supporting them...
 func add(element: Vector2i) -> Tiles:
 	_add(element)
 	_update_bounding_box()
@@ -104,7 +103,8 @@ func _update_bounding_box() -> void:
 	_bounding_box = Rect2i(Vector2i(min_x, min_y), Vector2i(max_x - min_x + 1, max_y - min_y + 1))
 	
 	
-# End of the Tiled Trait
+#endregion End of the Tiled Trait
+
 	
 func _init():
 	_tiles = {}
