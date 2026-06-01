@@ -4,10 +4,13 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bl27q"]
 resource_local_to_scene = true
+size = Vector2(8, 8)
 
 [node name="Interractible" type="Area2D" unique_id=1254601983]
 monitoring = false
 script = ExtResource("1_ioepo")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1692465056]
+[node name="CollisionShape" type="CollisionShape2D" parent="." unique_id=1692465056]
+unique_name_in_owner = true
 shape = SubResource("RectangleShape2D_bl27q")
+debug_color = Color(0.8418751, 0.0011064297, 0.92020845, 0.41960785)

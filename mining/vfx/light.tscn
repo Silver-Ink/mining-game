@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://c3fu2owl1jmy2"]
+
+[ext_resource type="Script" uid="uid://b6cedwoatfiuf" path="res://mining/vfx/light.gd" id="1_2jlpw"]
+[ext_resource type="Texture2D" uid="uid://dkno4dwx5vd6l" path="res://resources/character_light_texture.tres" id="2_j163h"]
+
+[node name="Lights" type="Node2D" unique_id=2013318578]
+script = ExtResource("1_2jlpw")
+
+[node name="FloorLight" type="PointLight2D" parent="." unique_id=650069873]
+unique_name_in_owner = true
+scale = Vector2(0.1, 0.1)
+blend_mode = 2
+shadow_enabled = true
+texture = ExtResource("2_j163h")
+texture_scale = 0.9
+
+[node name="WallLight" type="PointLight2D" parent="." unique_id=623808105]
+unique_name_in_owner = true
+scale = Vector2(0.1, 0.1)
+blend_mode = 2
+texture = ExtResource("2_j163h")
+texture_scale = 0.4

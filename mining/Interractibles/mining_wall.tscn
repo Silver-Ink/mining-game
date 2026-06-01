@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://x5flj77m2buw"]
+
+[ext_resource type="PackedScene" uid="uid://bugfxmefr8le7" path="res://mining/interractible.tscn" id="1_58el3"]
+[ext_resource type="Script" uid="uid://ckprw6ud1jp" path="res://mining/Interractibles/mining_wall.gd" id="2_4c5c7"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uysok"]
+resource_local_to_scene = true
+size = Vector2(8, 8)
+
+[node name="MiningWall" unique_id=1254601983 instance=ExtResource("1_58el3")]
+light_mask = 2
+script = ExtResource("2_4c5c7")
+variant = 0
+facing = 2
+
+[node name="CollisionShape" parent="." index="0" unique_id=1692465056]
+position = Vector2(0, -4)
+shape = SubResource("RectangleShape2D_uysok")
+
+[node name="Sprite" type="Sprite2D" parent="." index="1" unique_id=740558088]
+unique_name_in_owner = true
