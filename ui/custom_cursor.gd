@@ -7,5 +7,9 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	custom_cursor.global_position = custom_cursor.get_global_mouse_position()
 	
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		custom_cursor.global_position = event.global_position
+
 func set_icon(icon : Texture2D)-> void:
 	custom_cursor.texture = icon

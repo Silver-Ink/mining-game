@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b2bj8hpuwu5ap"]
+
+[ext_resource type="Script" uid="uid://dcydy7cclqubq" path="res://tile/shape.gd" id="1_l6tjx"]
+
+[node name="Shape" type="Node2D" unique_id=669711841]
+script = ExtResource("1_l6tjx")
+metadata/_custom_type_script = "uid://dcydy7cclqubq"
