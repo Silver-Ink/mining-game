@@ -17,106 +17,123 @@ position = Vector2(-46, -24)
 
 [node name="MiningWall2" parent="." unique_id=2076120981 instance=ExtResource("1_rhlvl")]
 position = Vector2(-30, -24)
-variant = 3
+variant = 4
 
 [node name="MiningWall3" parent="." unique_id=1741682704 instance=ExtResource("1_rhlvl")]
 position = Vector2(-38, -16)
-variant = 6
+rotation = 3.1415927
+variant = 5
 facing = 0
 
 [node name="MiningWall4" parent="." unique_id=1726699220 instance=ExtResource("1_rhlvl")]
 position = Vector2(-46, 0)
+rotation = 3.1415927
 variant = 6
+facing = 0
 
 [node name="MiningWall5" parent="." unique_id=1346898855 instance=ExtResource("1_rhlvl")]
 position = Vector2(-30, 0)
-variant = 6
-
-[node name="MiningWall7" parent="." unique_id=1652361760 instance=ExtResource("1_rhlvl")]
-position = Vector2(-30, 8)
-variant = 6
+rotation = 3.1415927
+variant = 3
+facing = 0
 
 [node name="MiningWall8" parent="." unique_id=1469336400 instance=ExtResource("1_rhlvl")]
+visible = false
 position = Vector2(-46, 8)
 variant = 6
 
 [node name="MiningWall9" parent="." unique_id=1070843998 instance=ExtResource("1_rhlvl")]
 position = Vector2(-38, 16)
-variant = 6
+rotation = 3.1415927
+variant = 2
+facing = 0
 
 [node name="MiningWall10" parent="." unique_id=1095907132 instance=ExtResource("1_rhlvl")]
 position = Vector2(-46, 24)
-variant = 6
+variant = 1
 
 [node name="MiningWall11" parent="." unique_id=2056026541 instance=ExtResource("1_rhlvl")]
 position = Vector2(-30, 24)
-variant = 6
+variant = 2
 
 [node name="MiningWall12" parent="." unique_id=768034401 instance=ExtResource("1_rhlvl")]
 position = Vector2(-8, 14)
+rotation = 1.5707964
 variant = 4
 facing = 3
 
 [node name="MiningWall13" parent="." unique_id=238742429 instance=ExtResource("1_rhlvl")]
 position = Vector2(-8, -7)
+rotation = 1.5707964
 variant = 3
 facing = 3
 
 [node name="MiningWall14" parent="." unique_id=1586918165 instance=ExtResource("1_rhlvl")]
 position = Vector2(0, -7)
-variant = 6
+rotation = 4.712389
+variant = 3
 facing = 1
 
 [node name="MiningWall15" parent="." unique_id=1579590539 instance=ExtResource("1_rhlvl")]
 position = Vector2(0, 14)
-variant = 6
+rotation = 4.712389
+variant = 4
 facing = 1
 
 [node name="MiningWall16" parent="." unique_id=547686875 instance=ExtResource("1_rhlvl")]
 position = Vector2(8, 14)
+rotation = 1.5707964
 variant = 5
 facing = 3
 
 [node name="MiningWall17" parent="." unique_id=990583409 instance=ExtResource("1_rhlvl")]
 position = Vector2(16, -2)
-variant = 6
+rotation = 4.712389
+variant = 1
 facing = 1
 
 [node name="MiningWall18" parent="." unique_id=1228663173 instance=ExtResource("1_rhlvl")]
 position = Vector2(8, -7)
+rotation = 1.5707964
 variant = 2
 facing = 3
 
 [node name="MiningWall19" parent="." unique_id=1179835266 instance=ExtResource("1_rhlvl")]
 position = Vector2(24, 6)
+rotation = 1.5707964
 variant = 6
 facing = 3
 
 [node name="MiningWall20" parent="." unique_id=965404349 instance=ExtResource("1_rhlvl")]
 position = Vector2(32, -10)
-variant = 6
+rotation = 4.712389
+monitoring = true
+variant = 2
 facing = 1
 
 [node name="MiningWall21" parent="." unique_id=1764349126 instance=ExtResource("1_rhlvl")]
 position = Vector2(32, 14)
-variant = 6
+rotation = 4.712389
+variant = 5
 facing = 1
 
 [node name="MiningWall22" parent="." unique_id=1844060340 instance=ExtResource("1_rhlvl")]
 position = Vector2(48, 6)
+rotation = 4.712389
 variant = 6
 facing = 1
 
 [node name="MiningWall23" parent="." unique_id=744148030 instance=ExtResource("1_rhlvl")]
 position = Vector2(40, -10)
-variant = 6
+rotation = 1.5707964
+variant = 1
 facing = 3
 
 [node name="MiningWall24" parent="." unique_id=286780938 instance=ExtResource("1_rhlvl")]
 position = Vector2(40, 14)
-variant = 6
+rotation = 1.5707964
 facing = 3
 
 [node name="MiningWall6" parent="." unique_id=604767017 instance=ExtResource("1_rhlvl")]
 position = Vector2(-38, -8)
-variant = 6
+variant = 5

@@ -1,3 +1,4 @@
+@tool
 class_name MiningWall
 extends Interractible
 
@@ -21,6 +22,7 @@ const BASE_SHAPE_EDGE_SIZE := 8
 		match value:
 			GE.Direction.North:
 				rotation = PI
+				print(rotation)
 			GE.Direction.East:
 				rotation = 3.* PI / 2.
 			GE.Direction.South:
