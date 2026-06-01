@@ -10,6 +10,10 @@ size = Vector2(8, 8)
 [node name="MiningWall" unique_id=1254601983 instance=ExtResource("1_58el3")]
 script = ExtResource("2_4c5c7")
 variant = 0
+facing = 0
 
 [node name="CollisionShape2D" parent="." index="0" unique_id=1692465056]
 shape = SubResource("RectangleShape2D_58el3")
+
+[node name="Sprite" type="Sprite2D" parent="." index="1" unique_id=740558088]
+unique_name_in_owner = true
