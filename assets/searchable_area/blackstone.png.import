@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cfdlmjfnj1vn0"
-path="res://.godot/imported/backstone.png-49b2a9f892adec25ab672fee69fe4a70.ctex"
+uid="uid://whqjqfy4ajbc"
+path="res://.godot/imported/blackstone.png-8a13d4b5742b97bbe5ebcccfa95a92f7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/searchable_area/backstone.png"
-dest_files=["res://.godot/imported/backstone.png-49b2a9f892adec25ab672fee69fe4a70.ctex"]
+source_file="res://assets/searchable_area/blackstone.png"
+dest_files=["res://.godot/imported/blackstone.png-8a13d4b5742b97bbe5ebcccfa95a92f7.ctex"]
 
 [params]
 
