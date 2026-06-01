@@ -108,9 +108,6 @@ var nb_tile_visible : int = 0:
 			return
 		nb_tile_visible = value
 		
-		#print()
-		#print()
-		#print()
 		#print("tile visible: " + str(nb_tile_visible) + " / " + str(nb_tile()) + " = " + str(coef_tile_visible() * 100.) + " %")
 		
 #endregion
