@@ -11,7 +11,7 @@ var _lookup: Dictionary[Vector2i, Array] = {}
 
 var layout : GameAreaLayout = null
 
-var game : Game = null:
+var game : ExcavatingGame = null:
 	get:
 		return game
 	set(value):
