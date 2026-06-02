@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://e4o5c0c82o5s"]
 
 [ext_resource type="TileSet" uid="uid://c50wvgvfyx2fk" path="res://resources/mining_tileset.tres" id="1_5ak2o"]
-[ext_resource type="PackedScene" uid="uid://x5flj77m2buw" path="res://mining/Interractibles/mining_wall.tscn" id="1_rhlvl"]
+[ext_resource type="PackedScene" uid="uid://x5flj77m2buw" path="res://mining/interractibles/mining_wall.tscn" id="1_rhlvl"]
 [ext_resource type="PackedScene" uid="uid://bmyn78otm2kag" path="res://mining/top_down_camera.tscn" id="2_5ak2o"]
 
 [node name="Node2D" type="Node2D" unique_id=34122483]

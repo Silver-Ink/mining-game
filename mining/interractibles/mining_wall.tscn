@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://x5flj77m2buw"]
 
 [ext_resource type="PackedScene" uid="uid://bugfxmefr8le7" path="res://mining/interractible.tscn" id="1_58el3"]
-[ext_resource type="Script" uid="uid://ckprw6ud1jp" path="res://mining/Interractibles/mining_wall.gd" id="2_4c5c7"]
+[ext_resource type="Script" uid="uid://ckprw6ud1jp" path="res://mining/interractibles/mining_wall.gd" id="2_4c5c7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uysok"]
 resource_local_to_scene = true

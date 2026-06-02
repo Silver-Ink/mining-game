@@ -1,10 +1,10 @@
 [gd_scene format=4 uid="uid://cvy4u4ns1muck"]
 
 [ext_resource type="PackedScene" uid="uid://ceipsfqcffaj5" path="res://mining/mining_area.tscn" id="1_knm5k"]
-[ext_resource type="Script" uid="uid://d0a65fl31lidn" path="res://mining/Levels/hub.gd" id="2_fceh8"]
+[ext_resource type="Script" uid="uid://d0a65fl31lidn" path="res://mining/levels/hub.gd" id="2_fceh8"]
 [ext_resource type="PackedScene" uid="uid://bjuuo33cwu301" path="res://mining/warp_zone.tscn" id="3_i32yw"]
 [ext_resource type="PackedScene" uid="uid://c3fu2owl1jmy2" path="res://mining/vfx/light.tscn" id="5_d3ild"]
-[ext_resource type="PackedScene" uid="uid://x5flj77m2buw" path="res://mining/Interractibles/mining_wall.tscn" id="5_k175a"]
+[ext_resource type="PackedScene" uid="uid://x5flj77m2buw" path="res://mining/interractibles/mining_wall.tscn" id="5_k175a"]
 
 [node name="Hub" unique_id=1928987283 instance=ExtResource("1_knm5k")]
 script = ExtResource("2_fceh8")

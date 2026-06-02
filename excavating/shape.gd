@@ -1,4 +1,4 @@
-@icon("res://icons/shape_icon.svg")
+@icon("res://assets/icons/shape_icon.svg")
 extends Node2D
 class_name Shape
 

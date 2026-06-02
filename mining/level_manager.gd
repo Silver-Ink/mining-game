@@ -7,8 +7,8 @@ enum LevelID {
 const CHARACTER = preload("uid://dyfcv20bbelti")
 
 const LEVEL_SCENES : Dictionary[LevelID, String] = {
-	LevelID.Test : "res://mining/Levels/test.tscn",
-	LevelID.Hub : "res://mining/Levels/hub.tscn"
+	LevelID.Test : "res://mining/levels/test.tscn",
+	LevelID.Hub : "res://mining/levels/hub.tscn"
 }	
 
 var character_instance : Character
