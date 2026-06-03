@@ -1,4 +1,4 @@
-extends Node2D
+extends Scene
 class_name MiningArea
 
 @onready var walls: WallTileMapLayer = $Walls
@@ -24,6 +24,16 @@ func _indexate_warp_zone() -> void:
 			
 		else:
 			printerr("Warp Zones Container contains an unwanted node : ", warp.name)
+
+func do_keep_alive() -> bool: #override
+	return true
+
+func pause() -> void: #override
+	pass
+
+func resume(context : Dictionary) -> void: #override
+	set_as_current_level(context.character, 0)
+
 
 func set_as_current_level(character : Character, warp_id : int) -> void:
 	character_ref = character

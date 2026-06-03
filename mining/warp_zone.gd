@@ -2,7 +2,7 @@
 extends Area2D
 class_name WarpZone
 
-@export var dest_level : LevelManager.LevelID
+@export var dest_level : SceneManager.SceneId
 @export var dest_warp_id : int
 @export var self_id : int
 
@@ -35,7 +35,7 @@ func _on_area_exited(area : Area2D):
 		contains_character = false
 		
 func _on_character_steped_in(character : Character):
-	LevelManager.change_level(dest_level, dest_warp_id)
+	SceneManager.switch_scene(dest_level)
 	character.step_completed.disconnect(_on_character_steped_in)
 	
 

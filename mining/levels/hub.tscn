@@ -20,7 +20,7 @@ position = Vector2(-36, -28)
 
 [node name="WarpZone" parent="WarpZones" parent_id_path=PackedInt32Array(1178886216) index="0" unique_id=310336776 instance=ExtResource("3_i32yw")]
 position = Vector2(-36, -12)
-dest_warp_id = 1
+dest_level = 1
 
 [node name="Lights" parent="." index="4" unique_id=2013318578 instance=ExtResource("5_d3ild")]
 position = Vector2(-20, 28)

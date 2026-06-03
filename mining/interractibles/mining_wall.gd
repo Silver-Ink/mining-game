@@ -22,7 +22,6 @@ const BASE_SHAPE_EDGE_SIZE := 8
 		match value:
 			GE.Direction.North:
 				rotation = PI
-				print(rotation)
 			GE.Direction.East:
 				rotation = 3.* PI / 2.
 			GE.Direction.South:
@@ -65,4 +64,4 @@ enum MiningWallVariant{
 @onready var collision_shape: CollisionShape2D = %CollisionShape
 
 func interract(caller : Character):
-	print("hello")
+	SceneManager.push_scene(SceneManager.SceneId.Excavate)

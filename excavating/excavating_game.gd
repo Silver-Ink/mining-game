@@ -1,4 +1,4 @@
-extends Node2D
+extends Scene
 class_name ExcavatingGame
 
 var areas : Array[GameArea] = []
@@ -39,6 +39,8 @@ func update_camera():
 		area_active.update_camera(self.camera, get_viewport())
 
 
-func _process(delta: float) -> void:
-	pass
-	
+# TEMP : way to exit the scene
+func _unhandled_input(event: InputEvent) -> void:
+	if (event.is_action("ui_cancel")):
+		SceneManager.pop_scene()
+		
