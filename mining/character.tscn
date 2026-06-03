@@ -11,7 +11,7 @@
 size = Vector2(8, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f2bh4"]
-size = Vector2(24, 23.999998)
+size = Vector2(12, 12)
 
 [node name="Character" type="Area2D" unique_id=1243292103]
 monitoring = false
@@ -45,7 +45,6 @@ monitorable = false
 metadata/_edit_group_ = true
 
 [node name="CursorHitBox" type="CollisionShape2D" parent="CursorPivot/Pivot/Cursor/CursorArea" unique_id=1354768777]
-scale = Vector2(0.99999994, 0.99999994)
 shape = SubResource("RectangleShape2D_f2bh4")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2086776871]
