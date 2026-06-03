@@ -50,8 +50,7 @@ func push_scene(scene_id : SceneId, settings : SceneSettings) -> void:
 func pop_scene() -> void:
 	var removed_scene : Scene = _scene_stack.pop_back()
 	_remove_from_tree(removed_scene)
-	
-	
+		
 	var unshelved_scene = current_scene()
 	if (unshelved_scene && !unshelved_scene.is_inside_tree()):
 		_add_to_tree(unshelved_scene)

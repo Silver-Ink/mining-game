@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://cvy4u4ns1muck"]
 
-[ext_resource type="PackedScene" uid="uid://ceipsfqcffaj5" path="res://mining/mining_area.tscn" id="1_knm5k"]
+[ext_resource type="PackedScene" uid="uid://ceipsfqcffaj5" path="res://mining/mining_level.tscn" id="1_knm5k"]
 [ext_resource type="Script" uid="uid://d0a65fl31lidn" path="res://mining/levels/hub.gd" id="2_fceh8"]
 [ext_resource type="PackedScene" uid="uid://bjuuo33cwu301" path="res://mining/warp_zone.tscn" id="3_i32yw"]
 [ext_resource type="PackedScene" uid="uid://c3fu2owl1jmy2" path="res://mining/vfx/light.tscn" id="5_d3ild"]
@@ -21,6 +21,9 @@ position = Vector2(-36, -28)
 [node name="WarpZone" parent="WarpZones" parent_id_path=PackedInt32Array(1178886216) index="0" unique_id=310336776 instance=ExtResource("3_i32yw")]
 position = Vector2(-36, -12)
 dest_level = 1
+dest_warp_id = null
+self_id = null
+variant = null
 
 [node name="Lights" parent="." index="4" unique_id=2013318578 instance=ExtResource("5_d3ild")]
 position = Vector2(-20, 28)

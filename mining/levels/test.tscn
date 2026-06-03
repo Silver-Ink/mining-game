@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://foflltovwb8j"]
 
-[ext_resource type="PackedScene" uid="uid://ceipsfqcffaj5" path="res://mining/mining_area.tscn" id="1_15hte"]
+[ext_resource type="PackedScene" uid="uid://ceipsfqcffaj5" path="res://mining/mining_level.tscn" id="1_15hte"]
 [ext_resource type="PackedScene" uid="uid://bjuuo33cwu301" path="res://mining/warp_zone.tscn" id="2_ia8kp"]
 
 [node name="Test" unique_id=1928987283 instance=ExtResource("1_15hte")]
 
 [node name="WarpZone" parent="WarpZones" parent_id_path=PackedInt32Array(1178886216) index="0" unique_id=310336776 instance=ExtResource("2_ia8kp")]
 position = Vector2(-112, -112)
+dest_level = null
+dest_warp_id = null
+self_id = null
+variant = null

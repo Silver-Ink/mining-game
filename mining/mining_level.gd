@@ -1,5 +1,5 @@
 extends Scene
-class_name MiningArea
+class_name MiningLevel
 
 @onready var walls: WallTileMapLayer = $Walls
 
@@ -9,6 +9,25 @@ var warp_zones : Dictionary[int, WarpZone] = {}
 func _ready() -> void:
 	_indexate_warp_zone()
 	
+func do_keep_alive() -> bool: #override
+	return true
+
+func pause() -> void: #override
+	pass
+	
+class MiningLevelSceneSettings extends SceneSettings:
+	var warp_zone_id : int
+	func _init(warp_id : int) -> void:
+		warp_zone_id = warp_id
+
+func resume(context : SceneContext, settings : SceneSettings) -> void: #override
+	if (settings is MiningLevelSceneSettings):
+		_set_as_current_level(context.character, settings.warp_zone_id)
+	else: 
+		push_error(SceneManager.push_scene.get_method(), " was called with an incorrect SceneSettings type, expected : MiningLevelSceneSettings \n",\
+			Engine.capture_script_backtraces())
+
+
 func _indexate_warp_zone() -> void:
 	var container = $WarpZones
 	for warp in container.get_children():
@@ -25,26 +44,7 @@ func _indexate_warp_zone() -> void:
 		else:
 			printerr("Warp Zones Container contains an unwanted node : ", warp.name)
 
-func do_keep_alive() -> bool: #override
-	return true
-
-func pause() -> void: #override
-	pass
-	
-class MiningAreaSceneSettings extends SceneSettings:
-	var warp_zone_id : int
-	func _init(warp_id : int) -> void:
-		warp_zone_id = warp_id
-
-func resume(context : SceneContext, settings : SceneSettings) -> void: #override
-	if (settings is MiningAreaSceneSettings):
-		set_as_current_level(context.character, settings.warp_zone_id)
-	else: 
-		push_error(SceneManager.push_scene.get_method(), " was called with an incorrect SceneSettings type, expected : MiningAreaSceneSettings \n",\
-			Engine.capture_script_backtraces())
-
-
-func set_as_current_level(character : Character, warp_id : int) -> void:
+func _set_as_current_level(character : Character, warp_id : int) -> void:
 	character_ref = character
 	if (character.get_parent() != null):
 		character.reparent(self, false)
@@ -63,6 +63,3 @@ func _set_character_to_warp(warp_id : int) -> void:
 	
 func _bind_references() -> void:
 	character_ref.walls = walls
-	
-class MiningAreaContext extends SceneContext :
-	pass
