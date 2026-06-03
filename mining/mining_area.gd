@@ -30,9 +30,18 @@ func do_keep_alive() -> bool: #override
 
 func pause() -> void: #override
 	pass
+	
+class MiningAreaSceneSettings extends SceneSettings:
+	var warp_zone_id : int
+	func _init(warp_id : int) -> void:
+		warp_zone_id = warp_id
 
-func resume(context : Dictionary) -> void: #override
-	set_as_current_level(context.character, 0)
+func resume(context : SceneContext, settings : SceneSettings) -> void: #override
+	if (settings is MiningAreaSceneSettings):
+		set_as_current_level(context.character, settings.warp_zone_id)
+	else: 
+		push_error(SceneManager.push_scene.get_method(), " was called with an incorrect SceneSettings type, expected : MiningAreaSceneSettings \n",\
+			Engine.capture_script_backtraces())
 
 
 func set_as_current_level(character : Character, warp_id : int) -> void:
@@ -54,3 +63,6 @@ func _set_character_to_warp(warp_id : int) -> void:
 	
 func _bind_references() -> void:
 	character_ref.walls = walls
+	
+class MiningAreaContext extends SceneContext :
+	pass

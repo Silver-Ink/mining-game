@@ -63,5 +63,5 @@ enum MiningWallVariant{
 @onready var sprite: Sprite2D = %Sprite
 @onready var collision_shape: CollisionShape2D = %CollisionShape
 
-func interract(caller : Character):
-	SceneManager.push_scene(SceneManager.SceneId.Excavate)
+func interract(_caller : Character):
+	SceneManager.push_scene(SceneManager.SceneId.Excavate, ExcavatingGame.ExcavatingGameSceneSettings.new("Hello World !!"))

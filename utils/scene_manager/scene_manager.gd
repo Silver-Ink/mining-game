@@ -7,8 +7,6 @@ enum SceneId{
 	#Pause,
 }
 
-const CHARACTER = preload("uid://dyfcv20bbelti")
-
 const SCENE_PACKED_SCENES : Dictionary[SceneId, String] = {
 	SceneId.LevelA : "res://mining/levels/hub.tscn",
 	SceneId.LevelB : "res://mining/levels/test.tscn",
@@ -16,15 +14,15 @@ const SCENE_PACKED_SCENES : Dictionary[SceneId, String] = {
 	SceneId.Excavate : "res://excavating/excavating_game.tscn"
 }
 
-var context : Dictionary = {}
+var context : SceneContext
 
 var _scenes_instances : Dictionary[SceneId, Scene]
 var _scene_stack : Array[Scene]
 
 func _ready() -> void:
-	context["character"] = CHARACTER.instantiate()
+	context = SceneContext.new()
 
-func push_scene(scene_id : SceneId) -> void:
+func push_scene(scene_id : SceneId, settings : SceneSettings) -> void:
 	var new_scene : Scene
 	if (!_scenes_instances.keys().has(scene_id)):
 		var packed_scene : PackedScene = load(SCENE_PACKED_SCENES[scene_id])
@@ -38,8 +36,6 @@ func push_scene(scene_id : SceneId) -> void:
 	if (previous_scene):
 		if (new_scene.do_untree_previous_scene()):
 			_remove_from_tree(previous_scene)
-			#if (!previous_scene.do_keep_alive()):
-				#previous_scene.queue_free()
 		
 		previous_scene.pause()
 		
@@ -48,7 +44,7 @@ func push_scene(scene_id : SceneId) -> void:
 	
 	if (!new_scene.is_node_ready()):
 		await new_scene.ready
-	new_scene.resume(context)
+	new_scene.resume(context, settings)
 		
 	
 func pop_scene() -> void:
@@ -60,9 +56,9 @@ func pop_scene() -> void:
 	if (unshelved_scene && !unshelved_scene.is_inside_tree()):
 		_add_to_tree(unshelved_scene)
 		
-func switch_scene(scene_id : SceneId) -> void:
+func switch_scene(scene_id : SceneId, settings : SceneSettings) -> void:
 	pop_scene()
-	push_scene(scene_id)
+	push_scene(scene_id, settings)
 	
 func current_scene() -> Scene:
 	if (_scene_stack.size() < 1):

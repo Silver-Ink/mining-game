@@ -35,7 +35,7 @@ func _on_area_exited(area : Area2D):
 		contains_character = false
 		
 func _on_character_steped_in(character : Character):
-	SceneManager.switch_scene(dest_level)
+	SceneManager.switch_scene(dest_level, MiningArea.MiningAreaSceneSettings.new(dest_warp_id))
 	character.step_completed.disconnect(_on_character_steped_in)
 	
 

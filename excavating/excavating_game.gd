@@ -34,6 +34,18 @@ func _ready() -> void:
 	update_camera()
 	get_tree().root.connect("size_changed", update_camera)
 	
+class ExcavatingGameSceneSettings extends SceneSettings:
+	var test : String
+	func _init(t : String):
+		test = t
+
+func resume(context : SceneContext, settings : SceneSettings) -> void:
+	if (settings is ExcavatingGameSceneSettings):
+		print(settings.test)
+	else: 
+		push_error(SceneManager.push_scene.get_method(), " was called with an incorrect SceneSettings type, expected : ExcavatingGameSceneSettings \n",\
+					Engine.capture_script_backtraces())
+
 func update_camera():
 	if area_active != null:
 		area_active.update_camera(self.camera, get_viewport())
