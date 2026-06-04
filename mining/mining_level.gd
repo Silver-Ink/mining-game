@@ -12,7 +12,7 @@ func _ready() -> void:
 func do_keep_alive() -> bool: #override
 	return true
 
-func pause() -> void: #override
+func on_popped() -> void: #override
 	pass
 	
 class MiningLevelSceneSettings extends SceneSettings:
@@ -20,7 +20,7 @@ class MiningLevelSceneSettings extends SceneSettings:
 	func _init(warp_id : int) -> void:
 		warp_zone_id = warp_id
 
-func resume(context : SceneContext, settings : SceneSettings) -> void: #override
+func on_pushed(context : SceneContext, settings : SceneSettings) -> void: #override
 	if (settings is MiningLevelSceneSettings):
 		_set_as_current_level(context.character, settings.warp_zone_id)
 	else: 

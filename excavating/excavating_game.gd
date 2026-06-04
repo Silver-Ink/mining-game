@@ -39,7 +39,7 @@ class ExcavatingGameSceneSettings extends SceneSettings:
 	func _init(t : String):
 		test = t
 
-func resume(context : SceneContext, settings : SceneSettings) -> void:
+func on_pushed(context : SceneContext, settings : SceneSettings) -> void:
 	if (settings is ExcavatingGameSceneSettings):
 		print(settings.test)
 	else: 
