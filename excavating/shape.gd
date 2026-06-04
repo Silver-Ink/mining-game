@@ -73,7 +73,8 @@ func remove_all(elements: Array[Vector2i]) -> Array[Vector2i]:
 	for element in elements:
 		if _remove(element):
 			removed.append(element)
-	on_tile_removed()
+	if !removed.is_empty():
+		on_tile_removed()
 	return removed
 
 
@@ -92,13 +93,13 @@ func is_empty():
 
 #region Shape properties
 ## Is concerned by the action of digging
-var absorb_dig: bool = true
+@export var absorb_dig: bool = true
 
 ## Per Shape for the moment. Can be moved per _tile if needed YAGNI :)
-var is_destructible: bool = true
+@export var is_destructible: bool = true
 
 ## destroying 1 tile = destroying all tiles
-var is_fragile: bool = false
+@export var is_fragile: bool = false
 
 var nb_tile_visible : int = 0:
 	get:
@@ -120,6 +121,7 @@ func coef_tile_visible() -> float:
 	return 0.
 
 #@export var _tile: Tiles = Tiles.new():
+
 var _tile: Tiles = Tiles.new():
 	get:
 		return _tile
@@ -132,7 +134,7 @@ var _tile: Tiles = Tiles.new():
 
 
 # Z level
-var height : int = 0:
+@export var height : int = 0:
 	get:
 		return height
 	set(value):
@@ -210,7 +212,7 @@ func preset_treasure_bracelet() -> Shape:
 			Vector2i(-1, 1), Vector2i(0,1) , Vector2i(1, 1),
 		])
 	return self.preset_treasure()
-	
+
 enum Layer 
 {
 	BACKGROUND = -100,
@@ -225,6 +227,8 @@ func preset_treasure(offset = 0) -> Shape:
 	self.absorb_dig = true
 	self.is_fragile = false
 	return self
+	
+
 
 func preset_layer(layer: Layer, offset = 0) -> Shape:
 	self.height = layer + offset
