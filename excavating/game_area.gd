@@ -251,15 +251,10 @@ func enter():
 func leave():
 	pass
 	
-var was_left_mouse_pressed = false
-	
-func _process(delta: float) -> void:
-	var pos : Vector2i = mouse_tile_pos()
-	
-	var is_left_mouse_pressed = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
-	if  is_left_mouse_pressed and not was_left_mouse_pressed:
+func _unhandled_input(event: InputEvent) -> void:
+	if (event.is_action_pressed("use_tool")):
+		var pos : Vector2i = mouse_tile_pos()		
 		self.use_tool(pos)
-	was_left_mouse_pressed = is_left_mouse_pressed
 
 func use_tool(pos):
 	dig(pos)
