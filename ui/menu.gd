@@ -1,10 +1,9 @@
 extends Control
 
 func _ready() -> void:
-	_on_button_button_down()
+	_on_button_button_down() #TEMP skip the menu on start
 	
 func _on_button_button_down() -> void:
-	LevelManager.start_game(_destructor)
-	
-func _destructor() -> void:
+	SceneManager.push_scene(SceneManager.SceneId.LevelA, MiningLevel.MiningLevelSceneSettings.new(-1))
 	self.queue_free()
+	

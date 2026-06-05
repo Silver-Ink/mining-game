@@ -21,6 +21,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if (event.is_action_pressed("interract")):
 		if (!cursor_pivot.interract()):
 			_dig()
+			get_viewport().set_input_as_handled()
 
 func _process(_delta: float) -> void:
 	_step()

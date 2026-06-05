@@ -18,9 +18,8 @@ config/icon="res://icon.svg"
 [autoload]
 
 CustomCursor="*uid://b4kqni15kcqb5"
-ToolManager="*uid://d110db83owyoi"
-LevelManager="*uid://deo0ym35qufun"
 BetterTerrain="*uid://0pp76f38ncdl"
+SceneManager="*uid://cx7ivsoitf4t1"
 
 [editor_plugins]
 

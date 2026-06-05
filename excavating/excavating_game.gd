@@ -1,4 +1,4 @@
-extends Node2D
+extends Scene
 class_name ExcavatingGame
 
 var areas : Array[GameArea] = []
@@ -34,11 +34,25 @@ func _ready() -> void:
 	update_camera()
 	get_tree().root.connect("size_changed", update_camera)
 	
+class ExcavatingGameSceneSettings extends SceneSettings:
+	var test : String
+	func _init(t : String):
+		test = t
+
+func on_pushed(context : SceneContext, settings : SceneSettings) -> void:
+	if (settings is ExcavatingGameSceneSettings):
+		print(settings.test)
+	else: 
+		push_error(SceneManager.push_scene.get_method(), " was called with an incorrect SceneSettings type, expected : ExcavatingGameSceneSettings \n",\
+					Engine.capture_script_backtraces())
+
 func update_camera():
 	if area_active != null:
 		area_active.update_camera(self.camera, get_viewport())
 
 
-func _process(delta: float) -> void:
-	pass
-	
+# TEMP : way to exit the scene
+func _unhandled_input(event: InputEvent) -> void:
+	if (event.is_action("ui_cancel")):
+		SceneManager.pop_scene()
+		
