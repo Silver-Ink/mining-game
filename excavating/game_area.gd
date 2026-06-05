@@ -250,11 +250,6 @@ func enter():
 	
 func leave():
 	pass
-	
-func _unhandled_input(event: InputEvent) -> void:
-	if (event.is_action_pressed("use_tool")):
-		var pos : Vector2i = mouse_tile_pos()		
-		self.use_tool(pos)
 
 func use_tool(pos):
 	dig(pos)

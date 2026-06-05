@@ -50,4 +50,6 @@ func update_camera():
 func _unhandled_input(event: InputEvent) -> void:
 	if (event.is_action("ui_cancel")):
 		SceneManager.pop_scene()
-		
+	if (event.is_action_pressed("use_tool") && area_active):
+		var pos : Vector2i = area_active.mouse_tile_pos()
+		area_active.use_tool(pos)
