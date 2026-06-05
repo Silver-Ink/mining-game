@@ -1,15 +1,10 @@
 extends Scene
 class_name ExcavatingGame
 
-var areas : Array[GameArea] = []
-
 var area_active : GameArea = null:
 	get:
 		return area_active
-	set(value):
-		if not value in areas and value != null:
-			areas.append(value)
-		
+	set(value):		
 		if area_active != null:
 			area_active.leave()
 			remove_child(area_active)
