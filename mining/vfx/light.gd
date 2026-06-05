@@ -7,7 +7,7 @@ var floor_light_base_scale : float
 var wall_light_base_scale : float
 
 var flicker_duration := .1
-var flicker_range := .015
+var flicker_range := .03
 
 func _ready() -> void:
 	floor_light_base_scale = floor_light.texture_scale

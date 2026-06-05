@@ -48,6 +48,7 @@ metadata/_edit_group_ = true
 shape = SubResource("RectangleShape2D_f2bh4")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="." unique_id=2086776871]
-color = Color(0.15127608, 0.15127608, 0.15127605, 1)
+color = Color(0.038397163, 0.038397174, 0.038397145, 1)
 
 [node name="Lights" parent="." unique_id=2013318578 instance=ExtResource("6_nvurs")]
+scale = Vector2(0.82, 0.82)

@@ -1,0 +1,14 @@
+[gd_resource type="TileSet" format=3 uid="uid://buayt5w1jb281"]
+
+[ext_resource type="Texture2D" uid="uid://dyl73dkxd0r8i" path="res://assets/tiles/crack.png" id="1_s8wrl"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dd4no"]
+texture = ExtResource("1_s8wrl")
+texture_region_size = Vector2i(8, 8)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+
+[resource]
+tile_size = Vector2i(8, 8)
+sources/1 = SubResource("TileSetAtlasSource_dd4no")

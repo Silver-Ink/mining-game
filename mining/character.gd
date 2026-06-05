@@ -75,5 +75,5 @@ func _on_step_timer_end():
 
 func _dig():
 	var target := cursor_pivot.get_targeted_position()
-	walls.dig_at(target)
+	walls.dig_at(target, .3)
 	

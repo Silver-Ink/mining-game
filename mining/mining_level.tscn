@@ -1,9 +1,8 @@
-[gd_scene format=4 uid="uid://ceipsfqcffaj5"]
+[gd_scene format=3 uid="uid://ceipsfqcffaj5"]
 
-[ext_resource type="TileSet" uid="uid://c50wvgvfyx2fk" path="res://resources/mining_tileset.tres" id="1_4xfmi"]
 [ext_resource type="Script" uid="uid://cjo4gqxb4jc4q" path="res://mining/mining_level.gd" id="1_8u7ja"]
 [ext_resource type="TileSet" uid="uid://cve3yc0ay8snj" path="res://resources/floor_mining_tileset.tres" id="2_56skq"]
-[ext_resource type="Script" uid="uid://c7284cvmso85f" path="res://mining/walls.gd" id="3_56skq"]
+[ext_resource type="PackedScene" uid="uid://c42obhrieadpr" path="res://mining/wall_tile_map_layer.tscn" id="3_snphd"]
 
 [node name="MiningArea" type="Node2D" unique_id=1928987283]
 script = ExtResource("1_8u7ja")
@@ -11,11 +10,9 @@ metadata/_edit_lock_ = true
 
 [node name="Floor" type="TileMapLayer" parent="." unique_id=2126815474]
 tile_set = ExtResource("2_56skq")
+metadata/_edit_lock_ = true
 
-[node name="Walls" type="TileMapLayer" parent="." unique_id=99872177]
-tile_map_data = PackedByteArray("AAD//wAAAAADAAIAAAD/////AAADAAEAAAD///7/AAAEAAAAAAAAAP7/AAABAAMAAAABAP7/AAAHAAAAAAABAP//AAADAAEAAAABAAAAAAADAAEAAAABAAEAAAADAAEAAAABAAIAAAADAAIAAAD//wIAAAAHAAAAAAD+/wIAAAABAAMAAAD9/wIAAAAAAAMAAAD9/wAAAAADAAIAAAD9////AAAHAAAAAAD8////AAABAAMAAAD8//3/AAABAAMAAAD9//3/AAAHAAMAAAD//wMAAAADAAEAAAD//wQAAAAIAAMAAAAAAAQAAAABAAMAAAABAAQAAAABAAMAAAACAAQAAAABAAMAAAADAAQAAAABAAMAAAAEAAQAAAABAAMAAAAFAAQAAAAHAAMAAAADAAIAAAADAAIAAAADAAEAAAADAAEAAAADAAAAAAAEAAQAAAAEAAAAAAABAAMAAAAFAAAAAAAHAAQAAAAFAAEAAAADAAEAAAAFAAIAAAADAAEAAAAFAAMAAAADAAEAAAADAP//AAADAAEAAAADAP7/AAADAAEAAAADAP3/AAADAAEAAAADAPz/AAADAAAAAAABAPz/AAAHAAMAAAABAPv/AAADAAEAAAABAPr/AAAIAAAAAAACAPr/AAABAAMAAAADAPr/AAABAAMAAAAEAPr/AAABAAMAAAAFAPr/AAAHAAAAAAAFAPv/AAADAAEAAAAFAPz/AAADAAEAAAAFAP3/AAADAAEAAAAFAP7/AAADAAEAAAAFAP//AAADAAEAAAAAAPz/AAABAAMAAAD///z/AAABAAMAAAD+//z/AAABAAMAAAD9//z/AAAEAAAAAAAAAPr/AAABAAMAAAD///r/AAABAAMAAAD+//r/AAABAAMAAAD9//r/AAABAAMAAAD8//r/AAABAAMAAAD7//r/AAABAAMAAAD7//z/AAADAAAAAAD7//3/AAAEAAMAAAD6//r/AAABAAMAAAD5//r/AAAEAAAAAAD5//v/AAADAAEAAAD5//z/AAADAAEAAAD5//3/AAADAAEAAAD5//7/AAADAAEAAAD5////AAADAAEAAAD7////AAAAAAMAAAD5/wAAAAADAAEAAAD5/wEAAAADAAEAAAD5/wIAAAADAAEAAAD5/wMAAAADAAEAAAD5/wQAAAAEAAMAAAD6/wQAAAABAAMAAAD7/wQAAAAIAAMAAAD8/wQAAAABAAMAAAD9/wQAAAABAAMAAAD+/wQAAAABAAMAAAD7/wMAAAADAAEAAAD7/wIAAAADAAEAAAD7/wEAAAADAAAAAAA=")
-tile_set = ExtResource("1_4xfmi")
-script = ExtResource("3_56skq")
+[node name="Walls" parent="." unique_id=432372874 instance=ExtResource("3_snphd")]
 
 [node name="WarpZones" type="Node2D" parent="." unique_id=1178886216]
 metadata/_edit_lock_ = true
