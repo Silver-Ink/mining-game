@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cjo4gqxb4jc4q" path="res://mining/mining_level.gd" id="1_8u7ja"]
 [ext_resource type="TileSet" uid="uid://cve3yc0ay8snj" path="res://resources/floor_mining_tileset.tres" id="2_56skq"]
 [ext_resource type="PackedScene" uid="uid://c42obhrieadpr" path="res://mining/wall_tile_map_layer.tscn" id="3_snphd"]
+[ext_resource type="Script" uid="uid://7cujx8h2byi1" path="res://mining/interractibles/mining_walls.gd" id="4_a11ud"]
 
 [node name="MiningArea" type="Node2D" unique_id=1928987283]
 script = ExtResource("1_8u7ja")
@@ -13,6 +14,12 @@ tile_set = ExtResource("2_56skq")
 metadata/_edit_lock_ = true
 
 [node name="Walls" parent="." unique_id=432372874 instance=ExtResource("3_snphd")]
+metadata/_edit_lock_ = true
 
 [node name="WarpZones" type="Node2D" parent="." unique_id=1178886216]
+metadata/_edit_lock_ = true
+
+[node name="MiningWalls" type="Node2D" parent="." unique_id=657449517 node_paths=PackedStringArray("walls_tile_map")]
+script = ExtResource("4_a11ud")
+walls_tile_map = NodePath("../Walls")
 metadata/_edit_lock_ = true
