@@ -45,6 +45,10 @@ func update_camera():
 	if area_active != null:
 		area_active.update_camera(self.camera, get_viewport())
 
+enum Tools {
+	Pickaxe,
+	Hammer,
+}
 
 # TEMP : way to exit the scene
 func _unhandled_input(event: InputEvent) -> void:
@@ -52,4 +56,4 @@ func _unhandled_input(event: InputEvent) -> void:
 		SceneManager.pop_scene()
 	if (event.is_action_pressed("use_tool") && area_active):
 		var pos : Vector2i = area_active.mouse_tile_pos()
-		area_active.use_tool(pos)
+		area_active.use_tool(Tools.Pickaxe, pos)

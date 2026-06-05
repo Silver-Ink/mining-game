@@ -251,10 +251,42 @@ func enter():
 func leave():
 	pass
 
-func use_tool(pos):
-	dig(pos)
+
+
+func use_tool(tool: ExcavatingGame.Tools, pos: Vector2i):
+	match tool:
+		ExcavatingGame.Tools.Pickaxe:
+# .1.
+# 121
+# .1.
+			dig(pos, 2)
+			dig(pos + Vector2i.RIGHT, 1)
+			dig(pos + Vector2i.LEFT, 1)
+			dig(pos + Vector2i.UP, 1)
+			dig(pos + Vector2i.DOWN, 1)
+			pass
+		ExcavatingGame.Tools.Hammer:
+# 121
+# 222
+# 121
+			dig(pos, 2)
+			dig(pos + Vector2i.RIGHT, 2)
+			dig(pos + Vector2i.LEFT, 2)
+			dig(pos + Vector2i.UP, 2)
+			dig(pos + Vector2i.DOWN, 2)
+			
+			dig(pos + Vector2i.RIGHT + Vector2i.UP, 1)
+			dig(pos + Vector2i.LEFT + Vector2i.UP, 1)
+			dig(pos + Vector2i.RIGHT + Vector2i.DOWN, 1)
+			dig(pos + Vector2i.LEFT + Vector2i.DOWN, 1)
+			pass
+		_:
+			assert(false, "Le todo du pauvre, à implémenter")
 	
-func dig(pos) -> bool:
+	
+
+	
+func dig(pos: Vector2i, force: int) -> bool:
 	for shape: Shape in self.get_at(pos):
 		if shape.absorb_dig:
 			if shape.is_destructible:
