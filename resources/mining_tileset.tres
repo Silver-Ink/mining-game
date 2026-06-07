@@ -1,8 +1,8 @@
 [gd_resource type="TileSet" format=3 uid="uid://c50wvgvfyx2fk"]
 
-[ext_resource type="Texture2D" uid="uid://cwwys7ffxaml7" path="res://assets/tools/tileset/wall.png" id="1_4owyo"]
-[ext_resource type="Texture2D" uid="uid://cxmvu2xtnig8y" path="res://assets/tools/tileset/sand.png" id="2_kqyg2"]
-[ext_resource type="Texture2D" uid="uid://b1vm2y85iijin" path="res://assets/tools/tileset/rock.png" id="3_nkfg4"]
+[ext_resource type="Texture2D" uid="uid://e37kapqjwwh2" path="res://assets/tileset/wall.png" id="1_4owyo"]
+[ext_resource type="Texture2D" uid="uid://ig4wnf2j7ufe" path="res://assets/tileset/sand.png" id="2_kqyg2"]
+[ext_resource type="Texture2D" uid="uid://dh8ficnqa4uqq" path="res://assets/tileset/rock.png" id="3_nkfg4"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4owyo"]
 polygon = PackedVector2Array(4, -3, 4, 4, -3, 4, -3, -3)

@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://ckprw6ud1jp" path="res://mining/interractibles/mining_wall.gd" id="2_4c5c7"]
 [ext_resource type="Texture2D" uid="uid://m1uq6joqgu48" path="res://assets/searchable_area/sparkle.png" id="3_euemy"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h6488"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_euemy"]
 resource_local_to_scene = true
 size = Vector2(4, 4)
 
@@ -14,7 +14,7 @@ script = ExtResource("2_4c5c7")
 variant = 0
 
 [node name="CollisionShape" parent="." index="0" unique_id=1692465056]
-shape = SubResource("RectangleShape2D_h6488")
+shape = SubResource("RectangleShape2D_euemy")
 
 [node name="Sprite" type="Sprite2D" parent="." index="1" unique_id=740558088]
 unique_name_in_owner = true

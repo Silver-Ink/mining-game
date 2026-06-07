@@ -1,16 +1,16 @@
 extends Node
 
 enum SceneId{
-	LevelA, LevelB,
-	#Shop,
+	Hub,
+	ShopLevel,
+	Shop,
 	Excavate,
 	#Pause,
 }
 
 const SCENE_PACKED_SCENES : Dictionary[SceneId, String] = {
-	SceneId.LevelA : "res://mining/levels/hub.tscn",
-	SceneId.LevelB : "res://mining/levels/test.tscn",
-	
+	SceneId.Hub : "res://mining/levels/hub.tscn",
+	SceneId.ShopLevel : "res://mining/levels/shop.tscn",
 	SceneId.Excavate : "res://excavating/excavating_game.tscn"
 }
 
