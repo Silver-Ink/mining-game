@@ -34,8 +34,8 @@ func append(shape: Shape, node: Node2D) -> Node2D:
 	if tileset:
 		for tile in shape.tiles():
 			const REMAP = [3, 2, 0, 1]
-			var idx_x = REMAP[(shape.contains(tile + Vector2i(-1,0)) as int) + (shape.contains(tile + Vector2i(+1,0)) as int * 2)]
-			var idx_y = REMAP[(shape.contains(tile + Vector2i(0,-1)) as int) + (shape.contains(tile + Vector2i(0,+1)) as int * 2)]
+			var idx_x = REMAP[(shape.contains_tile(tile + Vector2i(-1,0)) as int) + (shape.contains_tile(tile + Vector2i(+1,0)) as int * 2)]
+			var idx_y = REMAP[(shape.contains_tile(tile + Vector2i(0,-1)) as int) + (shape.contains_tile(tile + Vector2i(0,+1)) as int * 2)]
 			
 			var new_sprite = Sprite2D.new()
 			new_sprite.texture = tileset

@@ -16,6 +16,15 @@ var area_active : GameArea = null:
 		update_camera()
 
 
+var max_dig = 8
+var nb_dig = 0
+
+func finish_digging() -> bool:
+	return self.nb_dig >= self.max_dig
+
+func collected_treasure() -> Array[Shape]:
+	return self.area_active.collected_treasure()
+
 @onready var camera: Camera2D = $camera
 var asset : GameAsset = GameAsset.new()
 
@@ -50,5 +59,7 @@ func _unhandled_input(event: InputEvent) -> void:
 	if (event.is_action("ui_cancel")):
 		SceneManager.pop_scene()
 	if (event.is_action_pressed("use_tool") && area_active):
-		var pos : Vector2i = area_active.mouse_tile_pos()
-		area_active.use_tool(GE.Tools.Pickaxe, pos)
+		if self.nb_dig < self.max_dig:
+			var pos : Vector2i = area_active.mouse_tile_pos()
+			area_active.use_tool(GE.Tools.Pickaxe, pos)
+			self.nb_dig += 1

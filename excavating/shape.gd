@@ -2,21 +2,7 @@
 extends Node2D
 class_name Shape
 
-class Tile:
-	var hp: int
-	var hp_max: int
-	
-	func with_hp(hp: int) -> Tile:
-		self.hp = clamp(hp, 0, self.hp_max)
-		return self
-
-	func with_hp_max(hp_max: int) -> Tile:
-		self.hp_max = hp_max;
-		self.hp = clamp(self.hp, 0, self.hp_max)
-		return self
-
-
-var _tiles: Dictionary[Vector2i,Tile]
+var _tiles: Dictionary[Vector2i,Tile] = {}
 var _bounding_box: Rect2i = Rect2i();
 
 #region Trait Tiled. Thank godot for not supporting them...
@@ -49,10 +35,10 @@ func get_tile(pos: Vector2i) -> Object:
 	return self._tiles.get(pos, null)
 	
 func contains_tile(pos: Vector2i) -> bool:
-	return self._tile.has(pos)
+	return self._tiles.has(pos)
 
 func tiles() -> Array[Vector2i]:
-	return self._tile.keys().duplicate()
+	return self._tiles.keys().duplicate()
 	
 func bounding_box() -> Rect2i:
 	return self._bounding_box
@@ -65,7 +51,7 @@ func move_all_tile(delta: Vector2i):
 		self._remove_tile(pos)
 		
 	var old_tiles = _tiles
-	_tiles = Dictionary()
+	_tiles = {}
 	
 	for pos in old_tiles:
 		self._add_tile(pos + delta, old_tiles[pos])
@@ -219,9 +205,16 @@ var sprite: ShapeSprite = ShapeSprite.new():
 		sprite = value
 		assert(render_node != null)
 		sprite.update(self, render_node)
+		
+var shape_name: GE.ShapeName = GE.ShapeName.Unknow;
 #endregion
 
+func is_treasure() -> bool:
+	return shape_name != GE.ShapeName.Unknow
 
+func is_collected() -> bool:
+	return self.nb_tile_visible == self.nb_tile() && self.is_treasure()
+	
 func coef_tile_visible() -> float:
 	var nb_tile = nb_tile()
 	if nb_tile != 0:
@@ -274,7 +267,8 @@ func preset_treasure_bracelet() -> Shape:
 			Vector2i(-1,-1), Vector2i(0,-1), Vector2i(1,-1),
 			Vector2i(-1, 0)                , Vector2i(1, 0),
 			Vector2i(-1, 1), Vector2i(0,1) , Vector2i(1, 1),
-		])
+		], Tile.new())
+	self.shape_name = GE.ShapeName.Bracelet
 	return self.preset_treasure()
 
 func preset_treasure(offset = 0) -> Shape:
@@ -286,15 +280,15 @@ func preset_treasure(offset = 0) -> Shape:
 	
 
 
-func preset_layer(layer: Layer, offset = 0) -> Shape:
+func preset_layer(layer: GE.Layer, offset = 0) -> Shape:
 	self.height = layer + offset
 	return self
 
 func preset_layer_background(offset = 0) -> Shape:
-	return self.preset_layer(Layer.BACKGROUND, offset)
+	return self.preset_layer(GE.Layer.BACKGROUND, offset)
 	
 func preset_layer_treasure(offset = 0) -> Shape:
-	return self.preset_layer(Layer.TREASURE, offset)
+	return self.preset_layer(GE.Layer.TREASURE, offset)
 
 func preset_layer_foreground(offset = 0) -> Shape:
-	return self.preset_layer(Layer.FOREGROUND, offset)
+	return self.preset_layer(GE.Layer.FOREGROUND, offset)

@@ -2,10 +2,33 @@ extends Node2D
 class_name GameArea 
 
 var _bounding_box : Rect2i = Rect2i();
-var _list : Array[Shape] = [];
+var _shapes : Array[Shape] = [];
 
 # Of type Dictionary[Vector2i, Array[Shape]]
 var _lookup: Dictionary[Vector2i, Array] = {}
+#var _collected_treasure : Dictionary[Shape,bool] = {}
+
+
+var is_generating : bool = true:
+	get:
+		return is_generating
+	set(value):
+		if is_generating == value:
+			return
+		is_generating = value
+		#if !is_generating:
+			#_collected_treasure.clear()
+			#for shape in _shapes:
+			#	shape.nb_tile_visible = shape.nb_tile_visible
+			
+	
+
+func collected_treasure() -> Array[Shape]:
+	var shapes : Array[Shape] = []
+	for shape in _shapes:
+		if shape.is_collected():
+			shapes.append(shape)
+	return shapes
 
 # Dictionary[Vector2i, Array[Shape]]
 
@@ -30,7 +53,7 @@ func _sort_at(pos: Vector2i) -> Array[Shape]:
 func insert(shape : Shape):
 	assert(shape)
 	shape.area = self
-	_list.append(shape)
+	_shapes.append(shape)
 	
 	shape.nb_tile_visible = 0
 
@@ -57,7 +80,7 @@ func remove(tiled : Shape):
 		return
 
 	tiled.map = null
-	_list.erase(tiled)
+	_shapes.erase(tiled)
 
 	for pos in tiled.tiles():
 		var array = _lookup.get(pos)
@@ -72,13 +95,13 @@ func remove(tiled : Shape):
 	_recompute_bounding_box()
 
 func _recompute_bounding_box() -> void:
-	if _list.is_empty():
+	if _shapes.is_empty():
 		_bounding_box = Rect2i()
 		return
 
-	_bounding_box = _list[0].bounding_box()
-	for i in range(1, _list.size()):
-		var rect = _list[i].bounding_box()
+	_bounding_box = _shapes[0].bounding_box()
+	for i in range(1, _shapes.size()):
+		var rect = _shapes[i].bounding_box()
 		var new_min = Vector2i(
 			min(_bounding_box.position.x, rect.position.x),
 			min(_bounding_box.position.y, rect.position.y)
@@ -96,13 +119,13 @@ func get_at(pos: Vector2i) -> Array[Shape]:
 	return typed_result
 
 func get_all() -> Array[Shape]:
-	return _list.duplicate()
+	return _shapes.duplicate()
 
 func bounding_box() -> Rect2i:
 	return _bounding_box
 
 func is_empty() -> bool:
-	return _list.is_empty()
+	return _shapes.is_empty()
 
 
 func _shape_add_tile(shape: Shape, pos: Vector2i):
@@ -137,9 +160,9 @@ func _shape_remove_tile(shape: Shape, pos: Vector2i):
 	
 
 func clear() -> void:
-	for shape in _list:
+	for shape in _shapes:
 		shape.map = null
-		_list.clear()
+		_shapes.clear()
 		_lookup.clear()
 		_bounding_box = Rect2i()
 
@@ -147,7 +170,7 @@ func contains(tiled : Shape) -> bool:
 	return tiled.map == self
 
 func _update_bounding_box(tiled: Shape) -> void:
-	if _list.size() == 1:
+	if _shapes.size() == 1:
 		_bounding_box = tiled.bounding_box()
 		return
 
@@ -282,15 +305,14 @@ func use_tool(tool: GE.Tools, pos: Vector2i):
 			pass
 		_:
 			assert(false, "Le todo du pauvre, à implémenter")
-	
-	
 
-	
+
+
 func dig(pos: Vector2i, force: int) -> bool:
 	for shape: Shape in self.get_at(pos):
 		if shape.absorb_dig:
 			if shape.is_destructible:
-				shape.remove(pos)
+				shape.remove_tile(pos)
 			return true
 	return false
 
@@ -298,22 +320,22 @@ func _generate():
 	self.clear()
 	
 	var bg : Shape = Shape.new();
-	bg.add_rect(Rect2i(0,0,layout.size.x,layout.size.y))
+	bg.add_tile_rect(Rect2i(0,0,layout.size.x,layout.size.y), Tile.new())
 	bg.preset_tileset_background()
 	bg.area = self;
 	
 	var rock : Shape = Shape.new();
-	rock.add_rect(Rect2i(0,0,layout.size.x,layout.size.y))
+	rock.add_tile_rect(Rect2i(0,0,layout.size.x,layout.size.y), Tile.new())
 	rock.preset_tileset_rock()
 	rock.area = self;
 	
 	var bone = Shape.new();
-	bone.add_rect(Rect2i(layout.size.x / 2 - 1,layout.size.y / 2 - 1,3,3))
+	bone.add_tile_rect(Rect2i(layout.size.x / 2 - 1,layout.size.y / 2 - 1,3,3), Tile.new())
 	bone.preset_tileset_bone()
 	bone.area = self;
 	
 	var bracelet = Shape.new().preset_treasure_bracelet()
-	bracelet.move_all(Vector2(2,3))
+	bracelet.move_all_tile(Vector2(2,3))
 	bracelet.with_area(self)
 	
 	#self.insert(bg)

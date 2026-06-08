@@ -15,7 +15,14 @@ enum Layer
 	FOREGROUND = 50, # For debugging
 }
 
-enum Tools {
+enum Tools 
+{
 	Pickaxe,
 	Hammer,
+}
+
+enum ShapeName 
+{
+	Unknow = 0,
+	Bracelet,
 }
