@@ -7,13 +7,13 @@
 [ext_resource type="PackedScene" uid="uid://c42obhrieadpr" path="res://mining/wall_tile_map_layer.tscn" id="3_snphd"]
 [ext_resource type="Texture2D" uid="uid://cadev026vd1ot" path="res://assets/tileset/water_2.png" id="4_0rxan"]
 [ext_resource type="Script" uid="uid://7cujx8h2byi1" path="res://mining/interractibles/mining_walls.gd" id="4_a11ud"]
-[ext_resource type="Texture2D" uid="uid://cf2o3hu6oa8qn" path="res://assets/tileset/water_3.png" id="5_cwdbe"]
+[ext_resource type="Texture2D" uid="uid://benhb7juvi00j" path="res://assets/cat-watermelon.png" id="5_0rxan"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hlcy2"]
 shader = ExtResource("2_0ivtj")
 shader_parameter/water_1 = ExtResource("3_hlcy2")
 shader_parameter/water_2 = ExtResource("4_0rxan")
-shader_parameter/water_3 = ExtResource("5_cwdbe")
+shader_parameter/water_3 = ExtResource("5_0rxan")
 shader_parameter/scale = 3.125
 
 [node name="MiningArea" type="Node2D" unique_id=1928987283]
