@@ -164,6 +164,9 @@ var nb_tile_visible : int = 0:
 		if not is_treasure():
 			return
 			
+		if area:
+			area.sfx.play("hum")
+			
 		for node in render_node.get_children():
 			if node is Sprite2D:
 				if is_collected():

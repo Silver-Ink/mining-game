@@ -8,7 +8,6 @@ var _shapes : Array[Shape] = [];
 var _lookup: Dictionary[Vector2i, Array] = {}
 #var _collected_treasure : Dictionary[Shape,bool] = {}
 
-
 var is_generating : bool = true:
 	get:
 		return is_generating
@@ -41,6 +40,22 @@ var game : ExcavatingGame = null:
 		assert(game == null)
 		assert(value != null)
 		game = value
+
+var _sounds: Dictionary = {
+	"hum":"678493__adamcreeper__hmmmm.ogg",
+	"find_treasure":"817813__el_boss__treasure-collected-coin-tinkle-game-sound-effect.ogg",
+	
+	"pickaxe":"728759__techspiredminds__metallic-pickaxe-44.ogg",
+	"cant_dig":"654499__bigal13__pickaxe-striking-hard-rock.ogg",
+	
+	"hammer": "420878__inspectorj__digging-ice-hammer-a.ogg",
+	
+	"sand":"651292__f3bbbo__digging-in-wet-course-sand-1.ogg",
+}
+
+var sfx : Audio = Audio.new()
+
+	
 
 ## Sort the list of shape at a given position using their height and return the array
 func _sort_at(pos: Vector2i) -> Array[Shape]:
@@ -218,6 +233,12 @@ func _init(layout : GameAreaLayout) -> void:
 	self.layout = layout
 
 func _ready() -> void:
+	
+	
+	for key in _sounds:
+		sfx.add_key(key, "res://assets/sfx/" + _sounds[key])
+	add_child(sfx)
+
 	_generate()
 
 func bounding_box_px() -> Rect2:
@@ -315,8 +336,10 @@ func dig(pos: Vector2i, force: int) -> bool:
 				shape.remove_tile(pos)
 			return true
 	return false
+	
 
 func _generate():
+	self.is_generating = true
 	self.clear()
 	
 	var bg : Shape = Shape.new();
@@ -337,6 +360,9 @@ func _generate():
 	var bracelet = Shape.new().preset_treasure_bracelet()
 	bracelet.move_all_tile(Vector2(2,3))
 	bracelet.with_area(self)
+	
+	self.is_generating = false
+	
 	
 	#self.insert(bg)
 	
