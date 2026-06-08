@@ -11,6 +11,7 @@ enum SceneId{
 const SCENE_PACKED_SCENES : Dictionary[SceneId, String] = {
 	SceneId.Hub : "res://mining/levels/hub.tscn",
 	SceneId.ShopLevel : "res://mining/levels/shop.tscn",
+	SceneId.Shop : "res://ui/shop.tscn",
 	SceneId.Excavate : "res://excavating/excavating_game.tscn"
 }
 
