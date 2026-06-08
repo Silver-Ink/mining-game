@@ -340,42 +340,4 @@ func dig(pos: Vector2i, force: int) -> bool:
 	
 
 func _generate():
-	self.is_generating = true
-	self.clear()
-	
-	var bg : Shape = Shape.new();
-	bg.add_tile_rect(Rect2i(0,0,layout.size.x,layout.size.y), Tile.new())
-	bg.preset_tileset_background()
-	bg.area = self;
-	
-	var rock : Shape = Shape.new();
-	rock.add_tile_rect(Rect2i(0,0,layout.size.x,layout.size.y), Tile.new())
-	rock.preset_tileset_rock()
-	rock.area = self;
-	
-	var bone = Shape.new();
-	bone.add_tile_rect(Rect2i(layout.size.x / 2 - 1,layout.size.y / 2 - 1,3,3), Tile.new())
-	bone.preset_tileset_bone()
-	bone.area = self;
-	
-	var bracelet = Shape.new().preset_treasure_bracelet()
-	bracelet.move_all_tile(Vector2(2,3))
-	bracelet.with_area(self)
-	
-	self.is_generating = false
-	
-	
-	#self.insert(bg)
-	
-	#var bg = BACKGROUND.instantiate()
-	#var shape = Shape.new();
-	#shape.tile = Tiles.new().add_rect(Rect2i(0,0,size.x,size.y));
-	#shape.sprite = SPRITE_BACKGROUND.instantiate()
-	#shapes.insert(shape)
-	
-	#var shape2 = Shape.new();
-	#shape2.tile = Tiles.new().add_rect(Rect2i(0,0,size.x / 2,size.y / 2));
-	#shape2.sprite = SPRITE_ROCK.instantiate()
-	#shape2.level = 5
-	#shapes.insert(shape2)
-	#shape.move(Vector2i(3,5))
+	layout.generate_in(self)
