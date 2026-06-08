@@ -1,10 +1,8 @@
 class_name Tiles # TileSet est déjà utilsé...
 extends Resource
 
-var _tiles: Dictionary[Vector2i,bool]
+var _tiles: Dictionary[Vector2i,Object]
 var _bounding_box: Rect2i = Rect2i();
-
-const VALUE = 1
 
 # Inspired by https://www.reddit.com/r/godot/comments/1esljuk/elevate_your_godot_code_with_a_set_type/
 
@@ -15,25 +13,30 @@ func on_tile_added():
 func on_tile_removed():
 	_update_bounding_box()
 
-func _add(element: Vector2i):
-	_tiles[element] = VALUE
+func _add_tile(element: Vector2i, data: Object):
+	_tiles[element] = data
 	
-func _remove(element: Vector2) -> bool:
+func _remove_tile(element: Vector2) -> Object:
 	if _tiles.get(element):
+		var value = _tiles.get(element)
 		_tiles.erase(element)
-		return true
-	return false
+		return value
+	return null
+
+# F, func get() already exist in the parent...
+func get_tile(element: Vector2i) -> Object:
+	return _tiles.get(element, null)
 	
-func contains(element: Vector2i) -> bool:
+func contains_tile(element: Vector2i) -> bool:
 	return _tiles.has(element)
 
-func tiles() -> Array[Vector2i]:
+func tiles_tile() -> Array[Vector2i]:
 	return _tiles.keys().duplicate()
 	
 func bounding_box() -> Rect2i:
 	return _bounding_box
 	
-func move_all(delta: Vector2i):
+func move_all_tile(delta: Vector2i):
 	if delta == Vector2i.ZERO:
 		return
 	
@@ -46,35 +49,35 @@ func move_all(delta: Vector2i):
 	_bounding_box.position += delta
 
 #region Default impl
-func add(element: Vector2i) -> Tiles:
-	_add(element)
+func add_tile(element: Vector2i, data: Object) -> Tiles:
+	_add_tile(element, data)
 	on_tile_added()
 	return self
 	
-func add_rect(rect: Rect2i) -> Tiles:
+func add_rect_tile(rect: Rect2i, data: Object) -> Tiles:
 	for x in range(rect.position.x, rect.end.x):
 		for y in range(rect.position.y, rect.end.y):
-			_add(Vector2i(x, y))
+			_add_tile(Vector2i(x, y), data.duplicate())
 	on_tile_added()
 	return self
 
-func add_all(elements: Array[Vector2i]) -> Tiles:
+func add_all_tile(elements: Array[Vector2i], data: Object) -> Tiles:
 	for element in elements:
-		_add(element)
+		_add_tile(element, data.duplicate())
 	on_tile_added()
 	return self
 
-func merge(other: Tiles) -> Tiles:
-	add_all(other.tiles())
+func merge_tile(other: Tiles) -> Tiles:
+	add_all_tile(other.tiles())
 	return self
 
-func remove(element: Vector2i) -> bool:
+func remove_tile(element: Vector2i) -> bool:
 	var removed = _remove(element)
 	if removed:
 		on_tile_removed()
 	return removed
 
-func remove_all(elements: Array[Vector2i]) -> Array[Vector2i]:
+func remove_all_tile(elements: Array[Vector2i]) -> Array[Vector2i]:
 	var removed = []
 	for element in elements:
 		if _remove(element):
@@ -86,12 +89,12 @@ func remove_all(elements: Array[Vector2i]) -> Array[Vector2i]:
 func nb_tile() -> int:
 	return tiles().size() # Not opti because we don't need cloning the tiles
 
-func clear():
+func clear_tile():
 	for t in tiles():
 		self._remove(t)
 	on_tile_removed()
 
-func is_empty():
+func is_tile_empty():
 	return nb_tile() <= 0
 #endregion
 #endregion
