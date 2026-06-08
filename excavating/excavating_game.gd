@@ -16,7 +16,7 @@ var area_active : GameArea = null:
 		update_camera()
 
 
-var max_dig = 8
+var max_dig = 16
 var nb_dig = 0
 
 func finish_digging() -> bool:
