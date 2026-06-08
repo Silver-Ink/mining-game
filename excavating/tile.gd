@@ -14,6 +14,9 @@ func with_hp_max(hp_max: int) -> Tile:
 	self.hp_max = hp_max;
 	self.hp = clamp(self.hp, 0, self.hp_max)
 	return self
+
+func hp_coef() -> float:
+	return self.hp / self.hp_max
 	
 func duplicate() -> Tile:
 	var new_tile = Tile.new()

@@ -1,7 +1,7 @@
 extends Resource
 class_name ShapeSprite
 
-var tileset : Texture2D = null
+var tileset : Array[Texture2D] = []
 var per_tile : Sprite2D  = null
 var global : Sprite2D = null
 
@@ -31,14 +31,16 @@ func append_render(shape: Shape, node: Node2D) -> Node2D:
 			new_sprite.position = Vector2(tile.x * SIZE, tile.y * SIZE)
 			node.add_child(new_sprite)
 		
-	if tileset:
+	if tileset && tileset.size() >= 1:
 		for tile in shape.tiles():
 			const REMAP = [3, 2, 0, 1]
 			var idx_x = REMAP[(shape.contains_tile(tile + Vector2i(-1,0)) as int) + (shape.contains_tile(tile + Vector2i(+1,0)) as int * 2)]
 			var idx_y = REMAP[(shape.contains_tile(tile + Vector2i(0,-1)) as int) + (shape.contains_tile(tile + Vector2i(0,+1)) as int * 2)]
 			
+			var destruction_idx : int = (shape.get_tile(tile).hp_coef() * (self.tileset.size() - 1)) as int
+			
 			var new_sprite = Sprite2D.new()
-			new_sprite.texture = tileset
+			new_sprite.texture = tileset[destruction_idx]
 			new_sprite.centered = true
 			new_sprite.region_enabled = true
 			new_sprite.region_rect = Rect2i(idx_x * SIZE, idx_y * SIZE, SIZE, SIZE)
@@ -52,26 +54,24 @@ func append_render(shape: Shape, node: Node2D) -> Node2D:
 	return node
 
 
-static func from_tileset(texture_uid : String) -> ShapeSprite:
-	var s = new()
-	s.tileset = load(texture_uid)
-	return s
+func add_tileset(texture_uid : String) -> ShapeSprite:
+	self.tileset.append(load(texture_uid))
+	return self
 	
-static func from_tile_sprite(texture_uid : String) -> ShapeSprite:
-	var s = new()
-	s.per_tile = Sprite2D.new()
-	s.per_tile.texture = load(texture_uid)
-	return s
-	
-static func from_global_sprite(texture_uid : String) -> ShapeSprite:
-	var s = new()
-	s.global = Sprite2D.new()
-	s.global.texture = load(texture_uid)
-	return s
-	
-static var BONE : ShapeSprite = ShapeSprite.from_tileset("uid://bmb7m3xfcik21")
-static var ROCK : ShapeSprite = ShapeSprite.from_tileset("uid://dh8ficnqa4uqq")
-static var SAND : ShapeSprite = ShapeSprite.from_tileset("uid://ig4wnf2j7ufe")
-static var WALL : ShapeSprite = ShapeSprite.from_tileset("uid://e37kapqjwwh2")
+func set_tile_sprite(texture_uid : String) -> ShapeSprite:
+	self.per_tile = Sprite2D.new()
+	self.per_tile.texture = load(texture_uid)
+	return self
 
-static var BRACELET : ShapeSprite = ShapeSprite.from_global_sprite("uid://bgau2khqls2d7")
+
+func add_global_sprite(texture_uid : String) -> ShapeSprite:
+	self.global = Sprite2D.new()
+	self.global.texture = load(texture_uid)
+	return self
+	
+static var BONE : ShapeSprite = ShapeSprite.new().add_tileset("uid://bmb7m3xfcik21")
+static var ROCK : ShapeSprite = ShapeSprite.new().add_tileset("uid://dh8ficnqa4uqq")
+static var SAND : ShapeSprite = ShapeSprite.new().add_tileset("uid://ig4wnf2j7ufe")
+static var WALL : ShapeSprite = ShapeSprite.new().add_tileset("uid://e37kapqjwwh2")
+
+static var BRACELET : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://bgau2khqls2d7")
