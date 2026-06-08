@@ -71,20 +71,22 @@ func tiles() -> Array[Vector2i]:
 func bounding_box() -> Rect2i:
 	return self._bounding_box
 	
-func move_all_tile(delta: Vector2i):
+func move_all_tile(delta: Vector2i) -> Shape:
 	if delta == Vector2i.ZERO:
-		return
+		return self
 	
-	for pos in self._tiles:
+	var old_tiles = _tiles.duplicate()
+	
+	for pos in old_tiles:
 		self._remove_tile(pos)
-		
-	var old_tiles = _tiles
-	_tiles = {}
+	
+	_tiles.clear()
 	
 	for pos in old_tiles:
 		self._add_tile(pos + delta, old_tiles[pos])
 	
 	self.render_node.position += Vector2(delta) * ShapeSprite.ZOOM;
+	return self
 
 #region Default impl
 func add_tile(pos: Vector2i, tile: Tile) -> Shape:
@@ -103,7 +105,6 @@ func add_all_tile(elements: Array[Vector2i], tile: Tile) -> Shape:
 	for pos in elements:
 		print(pos)
 		self._add_tile(pos, tile.duplicate())
-	print(_tiles)
 	self.on_tile_added()
 	return self
 
@@ -183,6 +184,9 @@ func _update_bounding_box() -> void:
 ## destroying 1 tile = destroying all tiles
 @export var is_fragile: bool = false
 
+# I can't imagine having a pile of dirt that is a treasure
+@export var is_treasure : bool = false
+
 var nb_tile_visible : int = 0:
 	get:
 		return nb_tile_visible
@@ -201,7 +205,7 @@ var nb_tile_visible : int = 0:
 			else:
 				area.sfx.play(self.sfx_visibility_lose)
 		
-		if self.is_treasure():
+		if self.is_treasure:
 			for node in render_node.get_children():
 				if node is Sprite2D:
 					if is_collected():
@@ -260,11 +264,8 @@ var sprite: ShapeSprite = ShapeSprite.new():
 var shape_name: GE.ShapeName = GE.ShapeName.Unknow;
 #endregion
 
-func is_treasure() -> bool:
-	return shape_name != GE.ShapeName.Unknow
-
 func is_collected() -> bool:
-	return self.nb_tile_visible == self.nb_tile() && self.is_treasure()
+	return self.nb_tile_visible == self.nb_tile() && self.is_treasure
 	
 func coef_tile_visible() -> float:
 	var nb_tile = nb_tile()
@@ -312,6 +313,15 @@ func preset_tileset_leaf() -> Shape:
 	self.absorb_dig = true
 	return self.preset_layer_foreground()
 	
+func preset_tileset_sand() -> Shape:
+	preset_set_tile_max_hp(1)
+	self.sfx_dig = &"sand_dig"
+	self.sfx_damage = &"sand_damage"
+	self.sprite = ShapeSprite.SAND
+	self.is_destructible = true
+	self.absorb_dig = true
+	return self.preset_layer_foreground()
+	
 func preset_tileset_background() -> Shape:
 	self.sprite = ShapeSprite.WALL
 	self.is_destructible = false
@@ -328,6 +338,7 @@ func preset_tileset_bone() -> Shape:
 
 func preset_treasure_bracelet() -> Shape:
 	self.sprite = ShapeSprite.BRACELET
+	self.shape_name =  GE.ShapeName.Bracelet
 	self.add_all_tile(
 		[
 			# Un petit côté Alain D.
@@ -335,14 +346,36 @@ func preset_treasure_bracelet() -> Shape:
 			Vector2i(-1, 0)                , Vector2i(1, 0),
 			Vector2i(-1, 1), Vector2i(0, 1), Vector2i(1, 1),
 		], Tile.new())
-	return self.preset_treasure(GE.ShapeName.Bracelet)
+	return self.preset_treasure()
+	
+func preset_treasure_bat_talisman() -> Shape:
+	self.sprite = ShapeSprite.BAT_TALISMAN
+	self.shape_name =  GE.ShapeName.BatTalisman
+	self.add_all_tile(
+		[
+			Vector2i(-1,-1), Vector2i(0,-1), Vector2i(1,-1),
+		], Tile.new())
+	return self.preset_treasure()
+	
+func preset_treasure_boomerang() -> Shape:
+	self.sprite = ShapeSprite.BOOMERANG
+	self.shape_name =  GE.ShapeName.Boomerang
+	self.add_all_tile(
+		[
+			Vector2i(-1,-1), Vector2i(-1,0), Vector2i(0,0),
+		], Tile.new())
+	return self.preset_treasure()
 
-func preset_treasure(name : GE.ShapeName, offset = 0) -> Shape:
+
+
+
+func preset_treasure(offset = 0) -> Shape:
 	self.preset_layer_treasure(offset)
+	self.is_treasure = true
 	self.is_destructible = false
 	self.absorb_dig = true
 	self.is_fragile = false
-	self.shape_name = name
+	#self.shape_name = name
 	self.sfx_visibility_gain_partial = "treasure_reveal_partial"
 	self.sfx_visibility_gain_total = "treasure_reveal_total"
 	self.sfx_visibility_lose = "treasure_unreveal"

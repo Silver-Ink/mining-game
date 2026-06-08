@@ -1,6 +1,7 @@
 extends Node2D
 class_name GameArea 
 
+# Todo: should be null and lazyly computed on demand to avoid O(n) and have O(1) complexity
 var _bounding_box : Rect2i = Rect2i();
 var _shapes : Array[Shape] = [];
 
@@ -80,22 +81,12 @@ func insert(shape : Shape):
 	shape.nb_tile_visible = 0
 
 	for pos in shape.tiles():
-		var typed_result: Array[Shape] = []
-		typed_result.assign(self._lookup.get_or_add(pos, []))
-		typed_result.append(shape)
-		self._lookup[pos] = typed_result
-		typed_result = _sort_at(pos);
-		
-		if typed_result[0] == shape:
-			shape.nb_tile_visible = shape.nb_tile_visible + 1
-			if typed_result.size() >= 2:
-				typed_result[1].nb_tile_visible -= 1
+		self._shape_add_tile(shape, pos)
 	
 	shape.z_index = shape.height
 	add_child(shape)
 	shape.on_tile_changed()
-
-	_update_bounding_box(shape)
+	_update_bounding_box()
 
 func remove(tiled : Shape):
 	if tiled.map != self:
@@ -155,17 +146,19 @@ func _shape_add_tile(shape: Shape, pos: Vector2i):
 	
 	var typed_result: Array[Shape] = []	
 	typed_result.assign(self._lookup.get_or_add(pos, []))
-	
-	if not typed_result.find(shape):
-		typed_result.append(shape)
-		
-		var sorted = _sort_at(pos)
-		if sorted[0] == shape:
-			shape.nb_tile_visible += 1
-			if sorted.size() >= 2:
-				sorted[1].nb_tile_visible -= 1
-	self._lookup[pos] = typed_result
 
+	if typed_result.find(shape) == -1:
+		typed_result.append(shape)
+		self._lookup[pos] = typed_result
+		
+		typed_result = _sort_at(pos)
+		if typed_result[0] == shape:
+			shape.nb_tile_visible += 1
+			if typed_result.size() >= 2:
+				typed_result[1].nb_tile_visible -= 1
+	
+	self._lookup[pos] = typed_result
+	self._update_bounding_box()
 
 func _shape_remove_tile(shape: Shape, pos: Vector2i):
 	assert(shape.area == self)
@@ -178,7 +171,10 @@ func _shape_remove_tile(shape: Shape, pos: Vector2i):
 		if typed_result.size() >= 2:
 			typed_result[1].nb_tile_visible += 1
 	typed_result.erase(shape)
+	
 	self._lookup[pos] = typed_result
+	self._update_bounding_box()
+	
 	
 
 func clear() -> void:
@@ -191,21 +187,17 @@ func clear() -> void:
 func contains(tiled : Shape) -> bool:
 	return tiled.map == self
 
-func _update_bounding_box(tiled: Shape) -> void:
-	if _shapes.size() == 1:
-		_bounding_box = tiled.bounding_box()
-		return
-
-	var new_rect = tiled.bounding_box()
-	var new_min = Vector2i(
-	min(_bounding_box.position.x, new_rect.position.x),
-	min(_bounding_box.position.y, new_rect.position.y)
-	)
-	var new_max = Vector2i(
-		max(_bounding_box.end.x, new_rect.end.x),
-		max(_bounding_box.end.y, new_rect.end.y)
-	)
-	_bounding_box = Rect2i(new_min, new_max - new_min)
+func _update_bounding_box() -> void:
+	var first: bool = true
+	
+	for s in self._shapes:
+		var bb: Rect2i = s.bounding_box()
+		
+		if first:
+			_bounding_box = bb
+			first = false
+		else:
+			_bounding_box = _bounding_box.merge(bb)
 
 func move(tiled: Shape, delta: Vector2i):
 	assert(contains(tiled))
@@ -359,3 +351,74 @@ func dig(pos: Vector2i, force: int):
 
 func _generate():
 	generator.generate_in(self)
+
+
+func spawn_shape(kind: GE.ShapeName) -> Shape:
+	var shape = _spawn_shape(kind)
+	if shape:
+		shape.with_area(self)
+	return shape
+
+func _spawn_shape(kind: GE.ShapeName) -> Shape:
+	match kind:
+		GE.ShapeName.Bracelet:
+			return Shape.new().preset_treasure_bracelet()
+		GE.ShapeName.BatTalisman:
+			return Shape.new().preset_treasure_bat_talisman()
+		GE.ShapeName.Boomerang:
+			return Shape.new().preset_treasure_boomerang()
+		GE.ShapeName.Diamound:
+			# Spawn diamond treasure
+			pass
+		GE.ShapeName.Snake:
+			# Spawn snake treasure
+			pass
+		GE.ShapeName.GluedStone:
+			# Spawn glued stone treasure
+			pass
+		GE.ShapeName.HorshoeCrab:
+			# Spawn horseshoe crab treasure
+			pass
+		GE.ShapeName.PeruKnife:
+			# Spawn Peru knife treasure
+			pass
+		GE.ShapeName.RedGem:
+			# Spawn red gem treasure
+			pass
+		GE.ShapeName.RomanRuler:
+			# Spawn Roman ruler treasure
+			pass
+		GE.ShapeName.Ruby:
+			# Spawn ruby treasure
+			pass
+		GE.ShapeName.Shell:
+			# Spawn shell treasure
+			pass
+		GE.ShapeName.SkaraBrae:
+			# Spawn Skara Brae treasure
+			pass
+		GE.ShapeName.SkullSaber:
+			# Spawn skull saber treasure
+			pass
+		GE.ShapeName.TenonHead:
+			# Spawn tenon head treasure
+			pass
+		GE.ShapeName.Trex:
+			# Spawn T-Rex treasure
+			pass
+
+		GE.ShapeName.Bg:
+			return Shape.new().preset_tileset_background()
+		GE.ShapeName.Rock:
+			return Shape.new().preset_tileset_rock()
+		GE.ShapeName.Leaf:
+			return Shape.new().preset_tileset_leaf()
+		GE.ShapeName.Sand:
+			return Shape.new().preset_tileset_sand()
+		GE.ShapeName.Bone:
+			return Shape.new().preset_tileset_bone()
+		_:
+			return null
+	return null
+	
+	

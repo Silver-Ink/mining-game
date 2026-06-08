@@ -2,6 +2,11 @@ class_name GameAreaGenerator
 
 var size : Vector2i = Vector2i(16,9);
 
+var min_treasure : int = 0
+var max_treasure : int = 0
+
+var wished_treasure : Array[GE.ShapeName];
+
 static func default() -> GameAreaGenerator:
 	var default_generator = GameAreaGenerator.new() #?
 	return default_generator
@@ -35,10 +40,9 @@ func _generate(l: GameArea):
 	bone.preset_tileset_bone()
 	bone.area = l;
 	
-	var bracelet = Shape.new().preset_treasure_bracelet()
-	print(bracelet.tiles())
-	bracelet.move_all_tile(Vector2(2,3))
-	print(bracelet.tiles())
-	bracelet.area = l;
+	l.spawn_shape(GE.ShapeName.Bracelet).move_all_tile(Vector2(2,3))
+	#var bracelet = Shape.new().preset_treasure_bracelet()
+	#bracelet.move_all_tile(Vector2(2,3))
+	#bracelet.area = l;
 	
 	
