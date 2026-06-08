@@ -266,9 +266,10 @@ func with_area(area: GameArea) -> Shape:
 
 	
 func on_tile_changed():
-	self.sprite.update_render(self, render_node)
+	self.update_render()
 	
-
+func update_render():
+	self.sprite.update_render(self, render_node)
 
 func _ready() -> void:
 	add_child(self.render_node)

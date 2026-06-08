@@ -32,12 +32,14 @@ func append_render(shape: Shape, node: Node2D) -> Node2D:
 			node.add_child(new_sprite)
 		
 	if tileset && tileset.size() >= 1:
+		var tileset_max_idx = self.tileset.size() - 1
 		for tile in shape.tiles():
 			const REMAP = [3, 2, 0, 1]
 			var idx_x = REMAP[(shape.contains_tile(tile + Vector2i(-1,0)) as int) + (shape.contains_tile(tile + Vector2i(+1,0)) as int * 2)]
 			var idx_y = REMAP[(shape.contains_tile(tile + Vector2i(0,-1)) as int) + (shape.contains_tile(tile + Vector2i(0,+1)) as int * 2)]
 			
-			var destruction_idx : int = (shape.get_tile(tile).hp_coef() * (self.tileset.size() - 1)) as int
+			var coef = shape.get_tile(tile).hp_coef()
+			var destruction_idx : int = tileset_max_idx - ((coef * tileset_max_idx) as int)
 			
 			var new_sprite = Sprite2D.new()
 			new_sprite.texture = tileset[destruction_idx]
@@ -70,7 +72,10 @@ func add_global_sprite(texture_uid : String) -> ShapeSprite:
 	return self
 	
 static var BONE : ShapeSprite = ShapeSprite.new().add_tileset("uid://bmb7m3xfcik21")
-static var ROCK : ShapeSprite = ShapeSprite.new().add_tileset("uid://dh8ficnqa4uqq")
+static var ROCK : ShapeSprite = ShapeSprite.new() \
+	.add_tileset("uid://dh8ficnqa4uqq") \
+	.add_tileset("uid://dsgc5okwn6ty4") \
+	.add_tileset("uid://cncc3s8j1385c")
 static var SAND : ShapeSprite = ShapeSprite.new().add_tileset("uid://ig4wnf2j7ufe")
 static var WALL : ShapeSprite = ShapeSprite.new().add_tileset("uid://e37kapqjwwh2")
 

@@ -339,9 +339,14 @@ func dig(pos: Vector2i, force: int):
 			if shape.is_destructible:
 				var tile : Tile = shape.get_tile(pos)
 				tile.hp -= force
+				# FIXME: Will be called multiple time because tools digs multiple tile at once,
+				# can use some kind of dirty flag + HashSet of shape to regenerate the render 
 				if tile.hp <= 0:
 					force = abs(tile.hp)
 					shape.remove_tile(pos)
+				else:
+					force = 0
+					shape.update_render() 
 				
 				if force <= 0:
 					return
