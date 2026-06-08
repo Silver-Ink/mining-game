@@ -9,6 +9,7 @@ var walls : WallTileMapLayer
 @onready var cursor_pivot: CursorPivot = $CursorPivot
 
 var tile_edge : int
+var pickaxe_level := 0
 
 var _can_step := true
 var _last_direction : Vector2i
@@ -75,5 +76,5 @@ func _on_step_timer_end():
 
 func _dig():
 	var target := cursor_pivot.get_targeted_position()
-	walls.dig_at(target, .3)
+	walls.dig_at(target, .3, pickaxe_level)
 	

@@ -6,7 +6,8 @@ class_name CursorPivot
 
 @export var character : Character
 
-var _contained_interractible : Interractible
+var _contained_interractibles : Array[Interractible]
+
 func _ready() -> void:
 	cursor_area.area_entered.connect(_on_area_entered)
 	cursor_area.area_exited.connect(_on_area_exited)
@@ -17,8 +18,9 @@ func _process(_delta: float) -> void:
 	pivot.rotation = _get_quadran(atan2(mouse_dir.y, mouse_dir.x))
 	
 func interract() -> bool:
-	if (_contained_interractible != null):
-		_contained_interractible.interract(character)
+	if (!_contained_interractibles.is_empty()):
+		for i in _contained_interractibles:
+			i.interract(character)
 		return true
 	return false
 	
@@ -38,9 +40,9 @@ func _get_quadran(fine_angle : float) -> float:
 	
 func _on_area_entered(area : Area2D):
 	if (area is Interractible):
-		_contained_interractible = area
+		_contained_interractibles.append(area)
 		
 func _on_area_exited(area : Area2D):
-	if (area == _contained_interractible):
-		_contained_interractible = null
+	if (area is Interractible):
+		_contained_interractibles.erase(area)
 		

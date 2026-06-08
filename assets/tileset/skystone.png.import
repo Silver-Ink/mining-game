@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dmxdnxi71yy5c"
-path="res://.godot/imported/treasures.png-aa0065a29f4caf88c155f8ec3b8fd2a7.ctex"
+uid="uid://c6pa63ahgvwii"
+path="res://.godot/imported/skystone.png-c3471bb97c48aac8d6efda8f2b9e3a69.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tools/treasures.png"
-dest_files=["res://.godot/imported/treasures.png-aa0065a29f4caf88c155f8ec3b8fd2a7.ctex"]
+source_file="res://assets/tileset/skystone.png"
+dest_files=["res://.godot/imported/skystone.png-c3471bb97c48aac8d6efda8f2b9e3a69.ctex"]
 
 [params]
 

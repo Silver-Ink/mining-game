@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b3yi2qtptv8cm"
-path="res://.godot/imported/bone.png-538c53c7b2ff2bfa92aaf65f5a760e6f.ctex"
+uid="uid://c3yrxh4v3vwy6"
+path="res://.godot/imported/ruin_stand.png-d9cc50724cd34089c29d37862c128d42.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/tools/tileset/bone.png"
-dest_files=["res://.godot/imported/bone.png-538c53c7b2ff2bfa92aaf65f5a760e6f.ctex"]
+source_file="res://assets/tileset/ruin_stand.png"
+dest_files=["res://.godot/imported/ruin_stand.png-d9cc50724cd34089c29d37862c128d42.ctex"]
 
 [params]
 

@@ -1,4 +1,4 @@
-#@tool
+@tool
 extends Area2D
 class_name WarpZone
 
@@ -9,15 +9,19 @@ class_name WarpZone
 @export var variant : WarpVariant:
 	set(value):
 		variant = value
-		match value:
-			WarpVariant.Ladder:
-				pass
-			WarpVariant.Hole:
-				pass
-	
+		if (not is_node_ready()):
+			await ready
+		sprite.texture = _variant_sprites[value]
+				
+@onready var sprite: Sprite2D = %Sprite
+
+static var _variant_sprites : Dictionary[WarpVariant, Texture2D] = {
+	WarpVariant.LadderUp:		load("uid://cf17simlckrfa"),
+	WarpVariant.LadderDown:		load("uid://c8k5royrfs14d"),
+}
 enum WarpVariant{
-	Ladder,
-	Hole
+	LadderUp,
+	LadderDown
 }
 
 var _contains_character := false

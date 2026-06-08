@@ -4,17 +4,23 @@ class_name WallTileMapLayer
 var _cell_data : Dictionary[Vector2i, CellData]
 @onready var wall_cracks: TileMapLayer = %WallCracks
 
-const DIGGABLE_STRING = "diggable"
+const DIGGABLE_STRING = "dig_level"
 
 class CellData:
 	var breaking : float = 1.
+	var connected_mining_walls : Array[MiningWall] = []
+	
+func register_mining_wall(mining_wall : MiningWall):
+	var pos := local_to_map(mining_wall.get_central_gposition())
+	var data : CellData = _cell_data.get_or_add(pos, CellData.new())
+	data.connected_mining_walls.append(mining_wall)
 
 func test_wall_at(global_pos : Vector2) -> bool:
 	var tile := _get_tile_data_at(global_pos)
 	# null if no tile at position
 	return tile != null
 
-func dig_at(global_pos : Vector2, damage : float) -> void:
+func dig_at(global_pos : Vector2, damage : float, pickaxe_level : int) -> void:
 	assert(damage > 0)
 	var tile := _get_tile_data_at(global_pos)
 	if (tile == null):
@@ -22,8 +28,8 @@ func dig_at(global_pos : Vector2, damage : float) -> void:
 	if (!tile.has_custom_data(DIGGABLE_STRING)):
 		return
 		
-	var diggable : bool = tile.get_custom_data(DIGGABLE_STRING)
-	if (!diggable):
+	var dig_level : int = tile.get_custom_data(DIGGABLE_STRING)
+	if (dig_level < 0 || dig_level > pickaxe_level):
 		return 
 
 	var pos = local_to_map(to_local(global_pos))
@@ -33,6 +39,9 @@ func dig_at(global_pos : Vector2, damage : float) -> void:
 	if (data.breaking <= 0):
 		BetterTerrain.set_cell(self, pos, -1)
 		BetterTerrain.update_terrain_cell(self, pos)
+		for mining_wall in data.connected_mining_walls:
+			if (is_instance_valid(mining_wall)):
+				mining_wall.queue_free()
 		_cell_data.erase(pos)
 		
 	# TODO : Add particles
