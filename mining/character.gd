@@ -7,6 +7,7 @@ const STEP_DURATION := .24
 
 var walls : WallTileMapLayer
 @onready var cursor_pivot: CursorPivot = $CursorPivot
+@onready var sprite: AnimatedSprite2D = $Sprite
 
 var tile_edge : int
 var pickaxe_level := 0
@@ -53,6 +54,15 @@ func _step() -> void:
 		_move(direction)
 	else:
 		_last_direction = Vector2i.ZERO
+		
+	if direction.x > 0:
+		sprite.play(&"right")
+	if direction.x < 0:
+		sprite.play(&"left")
+	if direction.y < 0:
+		sprite.play(&"up")
+	if direction.y > 0:
+		sprite.play(&"down")
 
 func _move(movement : Vector2i) -> void:
 	var new_position = position + Vector2(movement) * tile_edge;
