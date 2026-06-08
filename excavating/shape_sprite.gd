@@ -11,20 +11,20 @@ const ZOOM : Vector2 = Vector2(SIZE, SIZE)
 const SCALE : Vector2 = Vector2(1./ SIZE, 1./ SIZE)
 const HALF_SCALE : Vector2 = SCALE / 2.;
 
-func generate(shape: Shape) -> Node2D:
+func generate_render(shape: Shape) -> Node2D:
 	var node = Node2D.new()
-	return self.append(shape, node)
+	return self.append_render(shape, node)
 
-func clear(node: Node2D) -> Node2D:
+func clear_render(node: Node2D) -> Node2D:
 	for child in node.get_children():
 		child.queue_free()
 	return node
 	
-func update(shape: Shape, node: Node2D) -> Node2D:
-	return append(shape, clear(node))
+func update_render(shape: Shape, node: Node2D) -> Node2D:
+	return append_render(shape, clear_render(node))
 
 # Append the subnode/drawing instruction into the node
-func append(shape: Shape, node: Node2D) -> Node2D:
+func append_render(shape: Shape, node: Node2D) -> Node2D:
 	if per_tile:
 		for tile in shape.tiles():
 			var new_sprite = per_tile.duplicate()

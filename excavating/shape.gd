@@ -161,6 +161,16 @@ var nb_tile_visible : int = 0:
 			return
 		nb_tile_visible = value
 		
+		if not is_treasure():
+			return
+			
+		for node in render_node.get_children():
+			if node is Sprite2D:
+				if is_collected():
+					node.modulate = Color.DIM_GRAY
+				else:
+					node.modulate = Color.WHITE
+		
 		#print("tile visible: " + str(nb_tile_visible) + " / " + str(nb_tile()) + " = " + str(coef_tile_visible() * 100.) + " %")
 
 #var _tile: Tiles = Tiles.new():
@@ -204,7 +214,7 @@ var sprite: ShapeSprite = ShapeSprite.new():
 	set(value):
 		sprite = value
 		assert(render_node != null)
-		sprite.update(self, render_node)
+		sprite.update_render(self, render_node)
 		
 var shape_name: GE.ShapeName = GE.ShapeName.Unknow;
 #endregion
@@ -231,7 +241,7 @@ func with_area(area: GameArea) -> Shape:
 
 	
 func on_tile_changed():
-	self.sprite.update(self, render_node)
+	self.sprite.update_render(self, render_node)
 	
 
 
