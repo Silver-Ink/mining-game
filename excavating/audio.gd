@@ -15,6 +15,8 @@ func add_key(key: String, path: String):
 		push_error("Failed to load audio stream from path: ", path)
 
 func play(key: String):
+	if key == &"": 
+		return
 	if _lookup.has(key):
 		_stream.stream = _lookup[key]
 		_stream.play()

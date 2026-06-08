@@ -42,15 +42,16 @@ var game : ExcavatingGame = null:
 		game = value
 
 var _sounds: Dictionary = {
-	"hum":"678493__adamcreeper__hmmmm.ogg",
-	"find_treasure":"817813__el_boss__treasure-collected-coin-tinkle-game-sound-effect.ogg",
+	"treasure_reveal_partial":"678493__adamcreeper__hmmmm.wav",
+	"treasure_reveal_total":"817813__el_boss__treasure-collected-coin-tinkle-game-sound-effect.wav",
+	"treasure_unreveal": "160909__racche__scratch-speed.wav",
 	
-	"pickaxe":"728759__techspiredminds__metallic-pickaxe-44.ogg",
-	"cant_dig":"654499__bigal13__pickaxe-striking-hard-rock.ogg",
+	"pickaxe":"728759__techspiredminds__metallic-pickaxe-44.wav",
+	"cant_dig":"654499__bigal13__pickaxe-striking-hard-rock.wav",
 	
-	"hammer": "420878__inspectorj__digging-ice-hammer-a.ogg",
+	"hammer": "420878__inspectorj__digging-ice-hammer-a.wav",
 	
-	"sand":"651292__f3bbbo__digging-in-wet-course-sand-1.ogg",
+	"sand":"651292__f3bbbo__digging-in-wet-course-sand-1.wav",
 }
 
 var sfx : Audio = Audio.new()

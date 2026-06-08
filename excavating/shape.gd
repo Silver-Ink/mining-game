@@ -5,6 +5,15 @@ class_name Shape
 var _tiles: Dictionary[Vector2i,Tile] = {}
 var _bounding_box: Rect2i = Rect2i();
 
+### When a tile inside the shape is digged
+var sfx_dig : String = &""
+## When the shape is fully visible
+var sfx_visibility_gain_total   : String = &""
+## When the shape is revealed a bit more, but not fully
+var sfx_visibility_gain_partial : String = &""
+## When the shape lose some visibility (either total or partial)
+var sfx_visibility_lose : String = &""
+
 #region Trait Tiled. Thank godot for not supporting them...
 func on_tile_added():
 	self.on_tile_changed()
@@ -159,20 +168,28 @@ var nb_tile_visible : int = 0:
 	set(value):
 		if nb_tile_visible == value:
 			return
+		var old_value = nb_tile_visible
 		nb_tile_visible = value
-		
-		if not is_treasure():
-			return
-			
+					
 		if area:
-			area.sfx.play("hum")
-			
-		for node in render_node.get_children():
-			if node is Sprite2D:
-				if is_collected():
-					node.modulate = Color.DIM_GRAY
+			if nb_tile_visible > old_value:
+				if nb_tile_visible == nb_tile():
+					area.sfx.play(self.sfx_visibility_gain_total)
 				else:
-					node.modulate = Color.WHITE
+					area.sfx.play(self.sfx_visibility_gain_partial)
+			else:
+				area.sfx.play(self.sfx_visibility_lose)
+		
+		if self.is_treasure():
+			for node in render_node.get_children():
+				if node is Sprite2D:
+					if is_collected():
+						#node.modulate = Color.DIM_GRAY
+						var tween = create_tween()
+						tween.tween_property(node, "modulate", Color(2, 2, 2, 1), 0.1)
+						tween.tween_property(node, "modulate", Color.DIM_GRAY, 0.3)
+					else:
+						node.modulate = Color.WHITE
 		
 		#print("tile visible: " + str(nb_tile_visible) + " / " + str(nb_tile()) + " = " + str(coef_tile_visible() * 100.) + " %")
 
@@ -271,7 +288,6 @@ func preset_tileset_bone() -> Shape:
 	self.absorb_dig = true
 	return self.preset_layer_treasure()
 
-
 func preset_treasure_bracelet() -> Shape:
 	self.sprite = ShapeSprite.BRACELET
 	self.add_all_tile(
@@ -281,14 +297,17 @@ func preset_treasure_bracelet() -> Shape:
 			Vector2i(-1, 0)                , Vector2i(1, 0),
 			Vector2i(-1, 1), Vector2i(0,1) , Vector2i(1, 1),
 		], Tile.new())
-	self.shape_name = GE.ShapeName.Bracelet
-	return self.preset_treasure()
+	return self.preset_treasure(GE.ShapeName.Bracelet)
 
-func preset_treasure(offset = 0) -> Shape:
+func preset_treasure(name : GE.ShapeName, offset = 0) -> Shape:
 	self.preset_layer_treasure(offset)
 	self.is_destructible = false
 	self.absorb_dig = true
 	self.is_fragile = false
+	self.shape_name = name
+	self.sfx_visibility_gain_partial = "treasure_reveal_partial"
+	self.sfx_visibility_gain_total = "treasure_reveal_total"
+	self.sfx_visibility_lose = "treasure_unreveal"
 	return self
 	
 
