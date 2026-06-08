@@ -13,6 +13,8 @@ var sfx_visibility_gain_total   : String = &""
 var sfx_visibility_gain_partial : String = &""
 ## When the shape lose some visibility (either total or partial)
 var sfx_visibility_lose : String = &""
+## When destroyed because it is frage
+var sfx_fragile_break : String = &""
 
 #region Trait Tiled. Thank godot for not supporting them...
 func on_tile_added():
@@ -21,6 +23,8 @@ func on_tile_added():
 func on_tile_removed():
 	self.on_tile_changed()
 	if self.is_fragile:
+		if area:
+			self.area.sfx.play(self.sfx_fragile_break);
 		self.clear_tile()
 		
 func _add_tile(pos: Vector2i, tile: Tile) -> Shape:
@@ -285,6 +289,7 @@ func preset_tileset_bone() -> Shape:
 	self.sprite = ShapeSprite.BONE
 	self.is_destructible = true
 	self.is_fragile = true
+	self.sfx_fragile_break = &"bone_break";
 	self.absorb_dig = true
 	return self.preset_layer_treasure()
 

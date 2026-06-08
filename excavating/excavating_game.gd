@@ -63,3 +63,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			var pos : Vector2i = area_active.mouse_tile_pos()
 			area_active.use_tool(GE.Tools.Pickaxe, pos)
 			self.nb_dig += 1
+			if self.finish_digging():
+				# Todo: disable the pickaxe cursor
+				CustomCursor.set_icon(Texture2D.new())
