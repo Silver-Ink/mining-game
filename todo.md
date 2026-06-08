@@ -17,7 +17,7 @@ Minimal feature todo
 
 # Mining
 
-- faire une UI pour la liste des tresors trouvé
+- Inventaire / faire une UI pour la liste des tresors trouvé
 - Sprite du perso (4 dir?)
 - Shop
 
