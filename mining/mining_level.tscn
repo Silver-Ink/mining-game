@@ -37,3 +37,5 @@ metadata/_edit_lock_ = true
 script = ExtResource("4_a11ud")
 walls_tile_map = NodePath("../Walls")
 metadata/_edit_lock_ = true
+
+[node name="Interractibles" type="Node2D" parent="." unique_id=95912201]
