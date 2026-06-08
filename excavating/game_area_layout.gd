@@ -26,7 +26,7 @@ func _generate(l: GameArea):
 	bg.area = l;
 	
 	var rock : Shape = Shape.new();
-	rock.add_tile_rect(Rect2i(0,0,size.x,size.y), Tile.new())
+	rock.add_tile_rect(Rect2i(0,0,size.x,size.y), Tile.new().with_hp_max(3).with_hp(3))
 	rock.preset_tileset_rock()
 	rock.area = l;
 	

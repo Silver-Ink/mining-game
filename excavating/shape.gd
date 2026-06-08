@@ -5,6 +5,7 @@ class_name Shape
 var _tiles: Dictionary[Vector2i,Tile] = {}
 var _bounding_box: Rect2i = Rect2i();
 
+# I miss my Rust `Option<Asset<Audio>>` type
 ### When a tile inside the shape is digged
 var sfx_dig : String = &""
 ## When the shape is fully visible
@@ -34,7 +35,7 @@ func _add_tile(pos: Vector2i, tile: Tile) -> Shape:
 		self.area._shape_add_tile(self, pos)
 	return self
 
-func _remove_tile(pos: Vector2i) -> Object:
+func _remove_tile(pos: Vector2i) -> Tile:
 	if self._tiles.get(pos):
 		var value = self._tiles.get(pos)
 		self._tiles.erase(pos)
@@ -44,7 +45,7 @@ func _remove_tile(pos: Vector2i) -> Object:
 		return value
 	return null
 
-func get_tile(pos: Vector2i) -> Object:
+func get_tile(pos: Vector2i) -> Tile:
 	return self._tiles.get(pos, null)
 	
 func contains_tile(pos: Vector2i) -> bool:
@@ -90,19 +91,19 @@ func add_all_tile(elements: Array[Vector2i], tile: Tile) -> Shape:
 	self.on_tile_added()
 	return self
 
-func merge_tile(other: Dictionary[Vector2i,Object]) -> Shape:
+func merge_tile(other: Dictionary[Vector2i,Tile]) -> Shape:
 	for e in other:
 		self._add_tile(e, other[e].duplicate())
 	self.on_tile_added()
 	return self
 
-func remove_tile(element: Vector2i) -> Object:
+func remove_tile(element: Vector2i) -> Tile:
 	var removed = _remove_tile(element)
 	if removed:
 		self.on_tile_removed()
 	return removed
 
-func remove_all_tile(elements: Array[Vector2i]) -> Dictionary[Vector2i, Object]:
+func remove_all_tile(elements: Array[Vector2i]) -> Dictionary[Vector2i, Tile]:
 	var removed = Dictionary()
 	for pos in elements:
 		var remove = _remove_tile(pos)

@@ -66,3 +66,5 @@ func _unhandled_input(event: InputEvent) -> void:
 			if self.finish_digging():
 				# Todo: disable the pickaxe cursor
 				CustomCursor.set_icon(Texture2D.new())
+				if self.area_active:
+					self.area_active.sfx.play("done");

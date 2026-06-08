@@ -53,6 +53,8 @@ var _sounds: Dictionary = {
 	
 	&"sand":&"651292__f3bbbo__digging-in-wet-course-sand-1.wav",
 	&"bone_break": &"188034__antumdeluge__bones-2.wav",
+
+	&"done" : &"256113__nckn__done.wav",
 }
 
 var sfx : Audio = Audio.new()
@@ -331,13 +333,19 @@ func use_tool(tool: GE.Tools, pos: Vector2i):
 
 
 
-func dig(pos: Vector2i, force: int) -> bool:
+func dig(pos: Vector2i, force: int):
 	for shape: Shape in self.get_at(pos):
 		if shape.absorb_dig:
 			if shape.is_destructible:
-				shape.remove_tile(pos)
-			return true
-	return false
+				var tile : Tile = shape.get_tile(pos)
+				tile.hp -= force
+				if tile.hp <= 0:
+					force = abs(tile.hp)
+					shape.remove_tile(pos)
+				
+				if force <= 0:
+					return
+			return
 	
 
 func _generate():
