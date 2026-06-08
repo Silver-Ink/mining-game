@@ -1,24 +1,26 @@
 extends Node
 class_name Audio
 
-var _stream: AudioStreamPlayer = AudioStreamPlayer.new()
-var _lookup: Dictionary[String, AudioStream] = {}
+class AudioPlayer:
+	var player: AudioStreamPlayer
+	var stream: AudioStream
+	
+	func _init(path: String, parent: Node):
+		stream = load(path) as AudioStream
+		player = AudioStreamPlayer.new()
+		player.stream = stream
+		parent.add_child(player)
 
-func _ready():
-	add_child(_stream)
+var _lookup: Dictionary[String, AudioPlayer] = {}
 
 func add_key(key: String, path: String):
-	var stream = load(path) as AudioStream
-	if stream:
-		_lookup[key] = stream
-	else:
-		push_error("Failed to load audio stream from path: ", path)
+	var audio_player = AudioPlayer.new(path, self)
+	_lookup[key] = audio_player
 
 func play(key: String):
-	if key == &"": 
+	if key == "":
 		return
 	if _lookup.has(key):
-		_stream.stream = _lookup[key]
-		_stream.play()
+		_lookup[key].player.play()
 	else:
 		push_warning("No sound found for key: ", key)

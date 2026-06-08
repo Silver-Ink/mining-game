@@ -5,9 +5,14 @@ class_name Shape
 var _tiles: Dictionary[Vector2i,Tile] = {}
 var _bounding_box: Rect2i = Rect2i();
 
+#region Sfx
 # I miss my Rust `Option<Asset<Audio>>` type
 ### When a tile inside the shape is digged
 var sfx_dig : String = &""
+
+### When a tile is damaged
+var sfx_damage : String = &""
+
 ## When the shape is fully visible
 var sfx_visibility_gain_total   : String = &""
 ## When the shape is revealed a bit more, but not fully
@@ -17,12 +22,21 @@ var sfx_visibility_lose : String = &""
 ## When destroyed because it is frage
 var sfx_fragile_break : String = &""
 
+## For setting sfx_visibility_gain_total and sfx_visibility_gain_partial
+var sfx_visibility_gain : String:
+	set(value):
+		sfx_visibility_gain_total = value
+		sfx_visibility_gain_partial = value
+#endregion
+
 #region Trait Tiled. Thank godot for not supporting them...
 func on_tile_added():
 	self.on_tile_changed()
 	
 func on_tile_removed():
 	self.on_tile_changed()
+	if area:
+		self.area.sfx.play(self.sfx_dig)
 	if self.is_fragile:
 		if area:
 			self.area.sfx.play(self.sfx_fragile_break);
@@ -274,8 +288,12 @@ func update_render():
 func _ready() -> void:
 	add_child(self.render_node)
 
-
 func preset_tileset_rock() -> Shape:
+	for pos in self._tiles:
+		self._tiles[pos].with_hp_max(3).with_hp(3)
+	
+	self.sfx_dig = &"rock_dig"
+	self.sfx_damage = &"rock_damage"
 	self.sprite = ShapeSprite.ROCK
 	self.is_destructible = true
 	self.absorb_dig = true

@@ -46,9 +46,9 @@ var _sounds: Dictionary = {
 	&"treasure_reveal_total":&"817813__el_boss__treasure-collected-coin-tinkle-game-sound-effect.wav",
 	&"treasure_unreveal": &"160909__racche__scratch-speed.wav",
 	
-	&"pickaxe":&"728759__techspiredminds__metallic-pickaxe-44.wav",
-	&"cant_dig":&"654499__bigal13__pickaxe-striking-hard-rock.wav",
-	
+	&"rock_damage": &"654499__bigal13__pickaxe-striking-hard-rock.ogg",
+	&"rock_dig":&"728759__techspiredminds__metallic-pickaxe-44.wav",
+
 	&"hammer": &"420878__inspectorj__digging-ice-hammer-a.wav",
 	
 	&"sand":&"651292__f3bbbo__digging-in-wet-course-sand-1.wav",
@@ -346,6 +346,7 @@ func dig(pos: Vector2i, force: int):
 					shape.remove_tile(pos)
 				else:
 					force = 0
+					self.sfx.play(shape.sfx_damage)
 					shape.update_render() 
 				
 				if force <= 0:
