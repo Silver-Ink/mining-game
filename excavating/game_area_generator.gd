@@ -1,10 +1,10 @@
-class_name GameAreaLayout
+class_name GameAreaGenerator
 
 var size : Vector2i = Vector2i(16,9);
 
-static func default() -> GameAreaLayout:
-	var default_layout = GameAreaLayout.new() #?
-	return default_layout
+static func default() -> GameAreaGenerator:
+	var default_generator = GameAreaGenerator.new() #?
+	return default_generator
 
 func instanciate() -> GameArea:
 	var area = GameArea.new(self)
@@ -36,7 +36,9 @@ func _generate(l: GameArea):
 	bone.area = l;
 	
 	var bracelet = Shape.new().preset_treasure_bracelet()
+	print(bracelet.tiles())
 	bracelet.move_all_tile(Vector2(2,3))
+	print(bracelet.tiles())
 	bracelet.area = l;
 	
 	

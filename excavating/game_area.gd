@@ -31,7 +31,7 @@ func collected_treasure() -> Array[Shape]:
 
 # Dictionary[Vector2i, Array[Shape]]
 
-var layout : GameAreaLayout = null
+var generator : GameAreaGenerator = null
 
 var game : ExcavatingGame = null:
 	get:
@@ -48,6 +48,9 @@ var _sounds: Dictionary = {
 	
 	&"rock_damage": &"654499__bigal13__pickaxe-striking-hard-rock.ogg",
 	&"rock_dig":&"728759__techspiredminds__metallic-pickaxe-44.wav",
+
+	&"leaf_damage": &"106130__j1987__leafpilehit.wav",
+	&"leaf_dig": &"106130__j1987__leafpilehit.wav",
 
 	&"hammer": &"420878__inspectorj__digging-ice-hammer-a.wav",
 	
@@ -232,9 +235,9 @@ func move(tiled: Shape, delta: Vector2i):
 	
 	
 	
-func _init(layout : GameAreaLayout) -> void:
-	assert(layout != null)
-	self.layout = layout
+func _init(generator : GameAreaGenerator) -> void:
+	assert(generator != null)
+	self.generator = generator
 
 func _ready() -> void:
 	
@@ -355,4 +358,4 @@ func dig(pos: Vector2i, force: int):
 	
 
 func _generate():
-	layout.generate_in(self)
+	generator.generate_in(self)

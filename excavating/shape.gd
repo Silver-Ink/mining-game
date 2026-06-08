@@ -7,10 +7,10 @@ var _bounding_box: Rect2i = Rect2i();
 
 #region Sfx
 # I miss my Rust `Option<Asset<Audio>>` type
-### When a tile inside the shape is digged
+## When a tile inside the shape is digged
 var sfx_dig : String = &""
 
-### When a tile is damaged
+## When a tile is damaged
 var sfx_damage : String = &""
 
 ## When the shape is fully visible
@@ -101,7 +101,9 @@ func add_tile_rect(rect: Rect2i, tile: Tile) -> Shape:
 
 func add_all_tile(elements: Array[Vector2i], tile: Tile) -> Shape:
 	for pos in elements:
+		print(pos)
 		self._add_tile(pos, tile.duplicate())
+	print(_tiles)
 	self.on_tile_added()
 	return self
 
@@ -210,7 +212,7 @@ var nb_tile_visible : int = 0:
 					else:
 						node.modulate = Color.WHITE
 		
-		#print("tile visible: " + str(nb_tile_visible) + " / " + str(nb_tile()) + " = " + str(coef_tile_visible() * 100.) + " %")
+		print("tile visible: " + str(nb_tile_visible) + " / " + str(nb_tile()) + " = " + str(coef_tile_visible() * 100.) + " %")
 
 #var _tile: Tiles = Tiles.new():
 	#get:
@@ -287,14 +289,25 @@ func update_render():
 
 func _ready() -> void:
 	add_child(self.render_node)
+	
+func preset_set_tile_max_hp(hp_max: int):
+	for pos in self._tiles:
+		self._tiles[pos].with_hp_max(hp_max).with_hp(hp_max)
 
 func preset_tileset_rock() -> Shape:
-	for pos in self._tiles:
-		self._tiles[pos].with_hp_max(3).with_hp(3)
-	
+	preset_set_tile_max_hp(3)
 	self.sfx_dig = &"rock_dig"
 	self.sfx_damage = &"rock_damage"
 	self.sprite = ShapeSprite.ROCK
+	self.is_destructible = true
+	self.absorb_dig = true
+	return self.preset_layer_foreground()
+	
+func preset_tileset_leaf() -> Shape:
+	preset_set_tile_max_hp(2)
+	self.sfx_dig = &"leaf_dig"
+	self.sfx_damage = &"leaf_damage"
+	self.sprite = ShapeSprite.LEAF
 	self.is_destructible = true
 	self.absorb_dig = true
 	return self.preset_layer_foreground()
@@ -320,7 +333,7 @@ func preset_treasure_bracelet() -> Shape:
 			# Un petit côté Alain D.
 			Vector2i(-1,-1), Vector2i(0,-1), Vector2i(1,-1),
 			Vector2i(-1, 0)                , Vector2i(1, 0),
-			Vector2i(-1, 1), Vector2i(0,1) , Vector2i(1, 1),
+			Vector2i(-1, 1), Vector2i(0, 1), Vector2i(1, 1),
 		], Tile.new())
 	return self.preset_treasure(GE.ShapeName.Bracelet)
 

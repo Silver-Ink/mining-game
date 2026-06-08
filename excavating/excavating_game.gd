@@ -33,8 +33,8 @@ func _on_window_resized():
 	call_deferred("update_camera")
 
 func _ready() -> void:
-	var layout = GameAreaLayout.default();
-	area_active = layout.instanciate()
+	var generator = GameAreaGenerator.default();
+	area_active = generator.instanciate()
 	update_camera()
 	get_tree().root.connect("size_changed", update_camera)
 	

@@ -76,6 +76,11 @@ static var ROCK : ShapeSprite = ShapeSprite.new() \
 	.add_tileset("uid://dh8ficnqa4uqq") \
 	.add_tileset("uid://dsgc5okwn6ty4") \
 	.add_tileset("uid://cncc3s8j1385c")
+
+static var LEAF : ShapeSprite = ShapeSprite.new() \
+	.add_tileset("uid://tetbgpjanx8u") \
+	.add_tileset("uid://bktw8wydqr5r4")
+	
 static var SAND : ShapeSprite = ShapeSprite.new().add_tileset("uid://ig4wnf2j7ufe")
 static var WALL : ShapeSprite = ShapeSprite.new().add_tileset("uid://e37kapqjwwh2")
 
