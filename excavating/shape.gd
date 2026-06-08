@@ -2,93 +2,159 @@
 extends Node2D
 class_name Shape
 
+class Tile:
+	var hp: int
+	var hp_max: int
+	
+	func with_hp(hp: int) -> Tile:
+		self.hp = clamp(hp, 0, self.hp_max)
+		return self
+
+	func with_hp_max(hp_max: int) -> Tile:
+		self.hp_max = hp_max;
+		self.hp = clamp(self.hp, 0, self.hp_max)
+		return self
+
+
+var _tiles: Dictionary[Vector2i,Tile]
+var _bounding_box: Rect2i = Rect2i();
+
 #region Trait Tiled. Thank godot for not supporting them...
 func on_tile_added():
-	on_tile_changed()
+	self.on_tile_changed()
 	
 func on_tile_removed():
-	on_tile_changed()
-	if is_fragile && !is_empty():
-		clear()
+	self.on_tile_changed()
+	if self.is_fragile:
+		self.clear_tile()
 		
-func _add(element: Vector2i) -> Shape:
-	self._tile.add(element)
-	if area:
-		area._shape_add_tile(self, element)
+func _add_tile(pos: Vector2i, tile: Tile) -> Shape:
+	self._tiles[pos] = tile
+	_update_bounding_box() # O(n), can be O(1) but whatever
+	if self.area:
+		self.area._shape_add_tile(self, pos)
 	return self
 
-func _remove(element: Vector2i) -> bool:
-	if self._tile.remove(element):
-		if area:
-			area._shape_remove_tile(self, element)
-		return true
-	return false
+func _remove_tile(pos: Vector2i) -> Object:
+	if self._tiles.get(pos):
+		var value = self._tiles.get(pos)
+		self._tiles.erase(pos)
+		_update_bounding_box()
+		if self.area:
+			self.area._shape_remove_tile(self, pos)
+		return value
+	return null
 
-func contains(element: Vector2i) -> bool:
-	return self._tile.contains(element)
+func get_tile(pos: Vector2i) -> Object:
+	return self._tiles.get(pos, null)
+	
+func contains_tile(pos: Vector2i) -> bool:
+	return self._tile.has(pos)
 
 func tiles() -> Array[Vector2i]:
-	return self._tile.tiles()
+	return self._tile.keys().duplicate()
 	
 func bounding_box() -> Rect2i:
-	return _tile.bounding_box()
+	return self._bounding_box
 	
-func move_all(delta: Vector2i):
-	_tile.move_all(delta)
+func move_all_tile(delta: Vector2i):
+	if delta == Vector2i.ZERO:
+		return
+	
+	for pos in self._tiles:
+		self._remove_tile(pos)
+		
+	var old_tiles = _tiles
+	_tiles = Dictionary()
+	
+	for pos in old_tiles:
+		self._add_tile(pos + delta, old_tiles[pos])
+	
 	self.render_node.position += Vector2(delta) * ShapeSprite.ZOOM;
-	#self.render_node.move_local_x(delta.x)
-	#self.render_node.move_local_y(delta.y)
 
 #region Default impl
-func add(element: Vector2i) -> Shape:
-	_add(element)
-	on_tile_added()
+func add_tile(pos: Vector2i, tile: Tile) -> Shape:
+	self._add_tile(pos, tile)
+	self.on_tile_added()
 	return self
 	
-func add_rect(rect: Rect2i) -> Shape:
+func add_tile_rect(rect: Rect2i, tile: Tile) -> Shape:
 	for x in range(rect.position.x, rect.end.x):
 		for y in range(rect.position.y, rect.end.y):
-			_add(Vector2i(x, y))
-	on_tile_added()
+			self._add_tile(Vector2i(x, y), tile.duplicate())
+	self.on_tile_added()
 	return self
 
-func add_all(elements: Array[Vector2i]) -> Shape:
-	for element in elements:
-		_add(element)
-	on_tile_added()
+func add_all_tile(elements: Array[Vector2i], tile: Tile) -> Shape:
+	for pos in elements:
+		self._add_tile(pos, tile.duplicate())
+	self.on_tile_added()
 	return self
 
-func merge(other: Tiles) -> Shape:
-	add_all(other.tiles())
+func merge_tile(other: Dictionary[Vector2i,Object]) -> Shape:
+	for e in other:
+		self._add_tile(e, other[e].duplicate())
+	self.on_tile_added()
 	return self
 
-func remove(element: Vector2i) -> bool:
-	var removed = _remove(element)
+func remove_tile(element: Vector2i) -> Object:
+	var removed = _remove_tile(element)
 	if removed:
-		on_tile_removed()
+		self.on_tile_removed()
 	return removed
 
-func remove_all(elements: Array[Vector2i]) -> Array[Vector2i]:
-	var removed = []
-	for element in elements:
-		if _remove(element):
-			removed.append(element)
+func remove_all_tile(elements: Array[Vector2i]) -> Dictionary[Vector2i, Object]:
+	var removed = Dictionary()
+	for pos in elements:
+		var remove = _remove_tile(pos)
+		if remove:
+			removed[pos] = remove
 	if !removed.is_empty():
-		on_tile_removed()
+		self.on_tile_removed()
 	return removed
 
 
 func nb_tile() -> int:
-	return tiles().size() # Not opti because we don't need cloning the tiles
+	return self.tiles().size()
 
-func clear():
-	for t in tiles():
-		self._remove(t)
-	on_tile_removed()
+func clear_tile():
+	var any_cleared = false
+	for t in self.tiles():
+		self._remove_tile(t)
+		any_cleared = true
+	if  any_cleared:
+		self.on_tile_removed()
 
-func is_empty():
-	return nb_tile() <= 0
+func is_tile_empty():
+	return self.nb_tile() <= 0
 #endregion
+
+func _update_bounding_box() -> void:
+	if _tiles.is_empty():
+		_bounding_box = Rect2i()
+		return
+	
+	var min_x: int = 0
+	var min_y: int = 0
+	var max_x: int = 0
+	var max_y: int = 0
+	var first: bool = true
+	
+	for pos in _tiles.keys():
+		if first:
+			min_x = pos.x
+			min_y = pos.y
+			max_x = pos.x
+			max_y = pos.y
+			first = false
+		else:
+			min_x = min(min_x, pos.x)
+			min_y = min(min_y, pos.y)
+			max_x = max(max_x, pos.x)
+			max_y = max(max_y, pos.y)
+	
+	_bounding_box = Rect2i(Vector2i(min_x, min_y), Vector2i(max_x - min_x + 1, max_y - min_y + 1))
+	
 #endregion End of the Tiled Trait
 
 #region Shape properties
@@ -110,28 +176,16 @@ var nb_tile_visible : int = 0:
 		nb_tile_visible = value
 		
 		#print("tile visible: " + str(nb_tile_visible) + " / " + str(nb_tile()) + " = " + str(coef_tile_visible() * 100.) + " %")
-		
-#endregion
 
-
-func coef_tile_visible() -> float:
-	var nb_tile = nb_tile()
-	if nb_tile != 0:
-		return nb_tile_visible as float / nb_tile() as float
-	return 0.
-
-#@export var _tile: Tiles = Tiles.new():
-
-var _tile: Tiles = Tiles.new():
-	get:
-		return _tile
-	set(value):
-		if area:
-			area.remove(self)
-		_tile = value
-		if area:
-			area.insert(self)
-
+#var _tile: Tiles = Tiles.new():
+	#get:
+		#return _tile
+	#set(value):
+		#if area:
+			#area.remove(self)
+		#_tile = value
+		#if area:
+			#area.insert(self)
 
 # Z level
 @export var height : int = 0:
@@ -139,6 +193,7 @@ var _tile: Tiles = Tiles.new():
 		return height
 	set(value):
 		height = value
+		
 
 var area: GameArea = null:
 	get:
@@ -154,14 +209,9 @@ var area: GameArea = null:
 		area = value
 		if value != null:
 			value.insert(self)
+
 var render_node: Node2D = Node2D.new()
 
-
-func with_area(area: GameArea) -> Shape:
-	self.area = area
-	return self
-
-	
 var sprite: ShapeSprite = ShapeSprite.new():
 	get:
 		return sprite
@@ -169,8 +219,22 @@ var sprite: ShapeSprite = ShapeSprite.new():
 		sprite = value
 		assert(render_node != null)
 		sprite.update(self, render_node)
+#endregion
 
 
+func coef_tile_visible() -> float:
+	var nb_tile = nb_tile()
+	if nb_tile != 0:
+		return nb_tile_visible as float / nb_tile() as float
+	return 0.
+
+#@export var _tile: Tiles = Tiles.new():
+
+
+
+func with_area(area: GameArea) -> Shape:
+	self.area = area
+	return self
 
 	
 func on_tile_changed():
@@ -204,7 +268,7 @@ func preset_tileset_bone() -> Shape:
 
 func preset_treasure_bracelet() -> Shape:
 	self.sprite = ShapeSprite.BRACELET
-	self.add_all(
+	self.add_all_tile(
 		[
 			# Un petit côté Alain D.
 			Vector2i(-1,-1), Vector2i(0,-1), Vector2i(1,-1),
@@ -212,14 +276,6 @@ func preset_treasure_bracelet() -> Shape:
 			Vector2i(-1, 1), Vector2i(0,1) , Vector2i(1, 1),
 		])
 	return self.preset_treasure()
-
-enum Layer 
-{
-	BACKGROUND = -100,
-	TREASURE = 100,
-	#FOREGROUND = 200,
-	FOREGROUND = 50, # For debugging
-}
 
 func preset_treasure(offset = 0) -> Shape:
 	self.preset_layer_treasure(offset)

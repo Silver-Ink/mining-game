@@ -253,9 +253,9 @@ func leave():
 
 
 
-func use_tool(tool: ExcavatingGame.Tools, pos: Vector2i):
+func use_tool(tool: GE.Tools, pos: Vector2i):
 	match tool:
-		ExcavatingGame.Tools.Pickaxe:
+		GE.Tools.Pickaxe:
 # .1.
 # 121
 # .1.
@@ -265,7 +265,7 @@ func use_tool(tool: ExcavatingGame.Tools, pos: Vector2i):
 			dig(pos + Vector2i.UP, 1)
 			dig(pos + Vector2i.DOWN, 1)
 			pass
-		ExcavatingGame.Tools.Hammer:
+		GE.Tools.Hammer:
 # 121
 # 222
 # 121

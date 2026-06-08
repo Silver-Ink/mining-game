@@ -6,3 +6,16 @@ enum Direction{
 	South,
 	West
 }
+
+enum Layer 
+{
+	BACKGROUND = -100,
+	TREASURE = 100,
+	#FOREGROUND = 200,
+	FOREGROUND = 50, # For debugging
+}
+
+enum Tools {
+	Pickaxe,
+	Hammer,
+}
