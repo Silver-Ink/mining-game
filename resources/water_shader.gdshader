@@ -12,9 +12,10 @@ void vertex() {
 
 const float WAVE_SPEED = 1.5;
 const float WAVE_LENGTH = 2.;
+const vec4 MASK_COLOR = vec4(1.,0., 0., 1.);
 
 void fragment() {
-	if (COLOR.r == 1.)
+	if (COLOR == MASK_COLOR)
 	{
 		float wave_time = TIME * WAVE_SPEED;
 		float wave_movement = world_position.y * WAVE_LENGTH;
