@@ -70,7 +70,7 @@ func _update_checkboxes(export := true) -> void:
 		_export_shape()
 
 func _export_shape() -> void:
-	var tiles = Tiles.new()
+	var tiles = Tile.new()
 	var positions : Array[Vector2i]
 	for i in range(x):
 		for j in range(y):

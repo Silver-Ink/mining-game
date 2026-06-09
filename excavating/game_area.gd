@@ -61,8 +61,19 @@ var _sounds: Dictionary = {
 	
 	&"sand":&"651292__f3bbbo__digging-in-wet-course-sand-1.wav",
 	&"bone_break": &"188034__antumdeluge__bones-2.wav",
-	
+
 	&"boomerang": &"703084__xkeril__you-miss-your-attack-sfx.wav",
+	&"roman_ruler": &"jixaw-metal-pipe-falling-sound.mp3",
+	&"red_gem": &"767613__danluxradium__ring-drop.wav",
+	&"diamound": &"849035__sergequadrado__diamonds.wav",
+	&"microwave": &"179198__snapper4298__micro_bell.wav",
+	&"trex": &"643747__nerdwizard78__t-rex-roar-kingoftheforest.wav",
+	&"skull_saber": &"562295__colorscrimsontears__brushing-teeth.wav",
+	&"glued_stone": &"49174__gmtechb__shellsplot_01.wav",
+	&"bat_talisman": &"837675__thekingofgeeks360__songbirds-owl-finch.wav",
+	&"snake": &"553374__xoiziox__snake-hiss.aiff",
+	&"peru_knife": &"417222__lhermanns__polish-kitchen-knife-3.wav",
+	&"horseshoe_crab": &"193873__ligidium__door-knock-42.wav",
 
 	&"done" : &"256113__nckn__done.wav",
 }
@@ -399,6 +410,8 @@ func _spawn_shape(kind: GE.ShapeName) -> Shape:
 			return Shape.new().preset_treasure_tenon_head()
 		GE.ShapeName.Trex:
 			return Shape.new().preset_treasure_trex()
+		GE.ShapeName.Microwav:
+			return Shape.new().preset_treasure_microwave()
 
 		GE.ShapeName.Bg:
 			return Shape.new().preset_tileset_background()
@@ -411,7 +424,7 @@ func _spawn_shape(kind: GE.ShapeName) -> Shape:
 		GE.ShapeName.Bone:
 			return Shape.new().preset_tileset_bone()
 		_:
-			return null
+			assert(false,"todo handle " +  GE.ShapeName.keys()[kind])
 	return null
 	
 	

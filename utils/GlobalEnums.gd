@@ -47,7 +47,8 @@ enum ShapeName
 	SkaraBrae,
 	SkullSaber,
 	TenonHead,
-	Trex
+	Trex,
+	Microwav,
 }
 
 const ShapeNameTreasure : Array[ShapeName] = [
@@ -66,7 +67,8 @@ const ShapeNameTreasure : Array[ShapeName] = [
 	ShapeName.SkaraBrae,
 	ShapeName.SkullSaber,
 	ShapeName.TenonHead,
-	ShapeName.Trex
+	ShapeName.Trex,
+	ShapeName.Microwav,
 ]
 
 # Non Rectangle size
@@ -75,5 +77,5 @@ const ShapeNameTreasureInterestingShape : Array[ShapeName] = [
 	ShapeName.Snake,
 	ShapeName.GluedStone,
 	ShapeName.RomanRuler,
-	ShapeName.Trex
+	ShapeName.Trex,
 ]

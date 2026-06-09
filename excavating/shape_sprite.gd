@@ -3,7 +3,6 @@ class_name ShapeSprite
 
 var tileset : Array[Texture2D] = []
 var per_tile : Sprite2D  = null
-## top left is (0,0)
 var global : Sprite2D = null
 
 const SIZE : int = 8
@@ -71,14 +70,17 @@ func set_tile_sprite(texture_uid : String) -> ShapeSprite:
 func add_global_sprite(texture_uid : String) -> ShapeSprite:
 	self.global = Sprite2D.new()
 	self.global.texture = load(texture_uid)
+	#self.global.offset = ((self.global.texture.get_size() / ZOOM) * 0.5).floor() * ZOOM
 	self.global.offset = ((self.global.texture.get_size() / ZOOM) * 0.5) * ZOOM - ZOOM / 2
 	return self
 	
 static var BONE : ShapeSprite = ShapeSprite.new().add_tileset("uid://bmb7m3xfcik21")
+
+# Currently use stone
 static var ROCK : ShapeSprite = ShapeSprite.new() \
-	.add_tileset("uid://dh8ficnqa4uqq") \
-	.add_tileset("uid://dsgc5okwn6ty4") \
-	.add_tileset("uid://cncc3s8j1385c")
+	.add_tileset("uid://carpwq7xyvjlx") \
+	.add_tileset("uid://xxs0i1s6ih7p") \
+	.add_tileset("uid://biqcjps7tf2xc")
 
 static var LEAF : ShapeSprite = ShapeSprite.new() \
 	.add_tileset("uid://tetbgpjanx8u") \
@@ -103,3 +105,4 @@ static var SKARA_BRAE : ShapeSprite = ShapeSprite.new().add_global_sprite("uid:/
 static var SKULL_SABER : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://bweivsk68aasj")
 static var TENON_HEAD : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://di5pr228d1n1")
 static var TREX : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://drwo01r6ughp6")
+static var MICROWAV : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://bwljdrkcdfslv")

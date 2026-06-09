@@ -59,7 +59,7 @@ func _generate(l: GameArea):
 				else:
 					break
 	
-	#l.spawn_shape(GE.ShapeName.Rock).add_tile_rect(rect)
+	l.spawn_shape(GE.ShapeName.Rock).add_tile_rect(rect)
 	#l.spawn_shape(GE.ShapeName.Leaf).add_tile_rect(rect)
 	#l.spawn_shape(GE.ShapeName.Bone).add_tile_rect(Rect2i(size.x / 2 - 1,size.y / 2 - 1,3,3))
 	
