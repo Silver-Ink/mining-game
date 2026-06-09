@@ -1,6 +1,12 @@
 extends Node
 class_name Audio
 
+var muted : bool = false:
+	get:
+		return muted
+	set(value):
+		muted = value
+		
 class AudioPlayer:
 	var player: AudioStreamPlayer
 	var stream: AudioStream
@@ -18,7 +24,7 @@ func add_key(key: String, path: String):
 	_lookup[key] = audio_player
 
 func play(key: String):
-	if key == "":
+	if key == "" || muted:
 		return
 	if _lookup.has(key):
 		_lookup[key].player.play()

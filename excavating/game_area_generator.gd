@@ -20,8 +20,10 @@ func instanciate() -> GameArea:
 
 func generate_in(l: GameArea):
 	l.is_generating = true
+	l.sfx.muted = true
 	self._generate(l)
 	l.is_generating = false
+	l.sfx.muted = false
 
 func _generate(l: GameArea):
 	l.clear()
