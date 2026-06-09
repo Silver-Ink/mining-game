@@ -73,7 +73,11 @@ func tiles() -> Array[Vector2i]:
 	
 func bounding_box() -> Rect2i:
 	return self._bounding_box
-	
+
+# Tp the top left tile corner at the given pos
+func set_tile_pos_origin(delta: Vector2i) -> Shape:
+	return self.move_all_tile(-self.bounding_box().position + delta)
+
 func move_all_tile(delta: Vector2i) -> Shape:
 	if delta == Vector2i.ZERO:
 		return self
@@ -91,7 +95,6 @@ func move_all_tile(delta: Vector2i) -> Shape:
 	self.render_node.position += Vector2(delta) * ShapeSprite.ZOOM;
 	return self
 
-#region Default impl
 func add_tile(pos: Vector2i, tile: Tile = null) -> Shape:
 	if tile == null:
 		tile = _default_tile.duplicate()
@@ -107,6 +110,10 @@ func add_tile_rect(rect: Rect2i, tile: Tile = null) -> Shape:
 			self._add_tile(Vector2i(x, y), tile.duplicate())
 	self.on_tile_added()
 	return self
+
+# Helper method
+func add_tile_rect_size(size_x:int, size_y: int, tile: Tile = null) -> Shape:
+	return self.add_tile_rect(Rect2i(0,0,size_x,size_y))
 
 func add_all_tile(elements: Array[Vector2i], tile: Tile = null) -> Shape:
 	if tile == null:
@@ -153,7 +160,10 @@ func clear_tile():
 
 func is_tile_empty():
 	return self.nb_tile() <= 0
-#endregion
+	
+func overlap(other: Shape) -> bool:
+	# That lambda syntax..., the need to use the `return` kw... 
+	return self.tiles().any(func(tile): return other.contains_tile(tile))
 
 func _update_bounding_box() -> void:
 	if _tiles.is_empty():
@@ -300,7 +310,12 @@ func update_render():
 
 func _ready() -> void:
 	add_child(self.render_node)
-	
+
+
+
+
+#region Preset
+
 func preset_set_tile_max_hp(hp_max: int):
 	self._default_tile.with_hp_max(hp_max).with_hp(hp_max)
 	for pos in self._tiles:
@@ -351,34 +366,112 @@ func preset_tileset_bone() -> Shape:
 func preset_treasure_bracelet() -> Shape:
 	self.sprite = ShapeSprite.BRACELET
 	self.shape_name =  GE.ShapeName.Bracelet
-	self.add_all_tile(
-		[
-			# Un petit côté Alain D.
-			Vector2i(0,0), Vector2i(1,0), Vector2i(2,0),
-			Vector2i(0,1)               , Vector2i(2,1),
-			Vector2i(0,2), Vector2i(1,2), Vector2i(2,2),
-		], Tile.new())
+	self.add_tile_rect_size(3,3)
+	self.remove_tile(Vector2i(1,1))
 	return self.preset_treasure()
 	
 func preset_treasure_bat_talisman() -> Shape:
 	self.sprite = ShapeSprite.BAT_TALISMAN
 	self.shape_name =  GE.ShapeName.BatTalisman
-	self.add_all_tile(
-		[
-			Vector2i(-1,-1), Vector2i(0,-1), Vector2i(1,-1),
-		], Tile.new())
+	self.add_tile_rect_size(3,1)
 	return self.preset_treasure()
 	
 func preset_treasure_boomerang() -> Shape:
 	self.sprite = ShapeSprite.BOOMERANG
 	self.shape_name =  GE.ShapeName.Boomerang
+	self.sfx_visibility_gain_total = &"boomerang"
 	self.add_all_tile(
 		[
-			Vector2i(-1,-1), Vector2i(-1,0), Vector2i(0,0),
-		], Tile.new())
+			Vector2i(0,0), Vector2i(0,1), Vector2i(1,0),
+		])
 	return self.preset_treasure()
 
+func preset_treasure_diamound() -> Shape:
+	self.sprite = ShapeSprite.DIAMOUND
+	self.shape_name =  GE.ShapeName.Diamound
+	self.add_tile_rect_size(2,2)
+	return self.preset_treasure()
 
+func preset_treasure_snake() -> Shape:
+	self.sprite = ShapeSprite.SNAKE
+	self.shape_name =  GE.ShapeName.Snake
+	self.add_tile_rect_size(5,3)
+	self.remove_tile(Vector2i(1,1))
+	self.remove_tile(Vector2i(3,0))
+	self.remove_tile(Vector2i(5,1))
+	return self.preset_treasure()
+
+func preset_treasure_glued_stone() -> Shape:
+	self.sprite = ShapeSprite.GLUED_STONE
+	self.shape_name =  GE.ShapeName.GluedStone
+	self.add_tile_rect_size(3,3)
+	self.remove_tile(Vector2i(0,0))
+	self.remove_tile(Vector2i(2,2))
+	return self.preset_treasure()
+
+func preset_treasure_horseshoe_crab() -> Shape:
+	self.sprite = ShapeSprite.HORSESHOE_CRAB
+	self.shape_name =  GE.ShapeName.HorshoeCrab
+	self.add_tile_rect_size(3,3)
+	return self.preset_treasure()
+
+func preset_treasure_peru_knife() -> Shape:
+	self.sprite = ShapeSprite.PERU_KNIFE
+	self.shape_name =  GE.ShapeName.PeruKnife
+	self.add_tile_rect_size(1,3)
+	return self.preset_treasure()
+
+func preset_treasure_red_gem() -> Shape:
+	self.sprite = ShapeSprite.RED_GEM
+	self.shape_name =  GE.ShapeName.RedGem
+	self.add_tile_rect_size(2,2)
+	return self.preset_treasure()
+
+func preset_treasure_roman_ruler() -> Shape:
+	self.sprite = ShapeSprite.ROMAN_RULER
+	self.shape_name =  GE.ShapeName.RomanRuler
+	self.add_tile_rect_size(1,3)
+	self.add_tile_rect(Rect2i(0,2,3,1))
+	return self.preset_treasure()
+
+func preset_treasure_ruby() -> Shape:
+	self.sprite = ShapeSprite.RUBY
+	self.shape_name =  GE.ShapeName.Ruby
+	self.add_tile_rect_size(2,2)
+	return self.preset_treasure()
+
+func preset_treasure_shell() -> Shape:
+	self.sprite = ShapeSprite.SHELL
+	self.shape_name =  GE.ShapeName.Shell
+	self.add_tile_rect_size(3,3)
+	return self.preset_treasure()
+
+func preset_treasure_skara_brae() -> Shape:
+	self.sprite = ShapeSprite.SKARA_BRAE
+	self.shape_name =  GE.ShapeName.SkaraBrae
+	self.add_tile_rect_size(3,1)
+	self.add_tile(Vector2i(1,1))
+	return self.preset_treasure()
+
+func preset_treasure_skull_saber() -> Shape:
+	self.sprite = ShapeSprite.SKULL_SABER
+	self.shape_name =  GE.ShapeName.SkullSaber
+	self.add_tile_rect_size(3,3)
+	return self.preset_treasure()
+
+func preset_treasure_tenon_head() -> Shape:
+	self.sprite = ShapeSprite.TENON_HEAD
+	self.shape_name =  GE.ShapeName.TenonHead
+	self.add_tile_rect_size(2,2)
+	return self.preset_treasure()
+
+func preset_treasure_trex() -> Shape:
+	self.sprite = ShapeSprite.TREX
+	self.shape_name =  GE.ShapeName.Trex
+	self.add_tile_rect_size(5,4)
+	self.remove_tile(Vector2i(0,2))
+	self.remove_tile(Vector2i(1,2))
+	return self.preset_treasure()
 
 
 func preset_treasure(offset = 0) -> Shape:
@@ -388,9 +481,12 @@ func preset_treasure(offset = 0) -> Shape:
 	self.absorb_dig = true
 	self.is_fragile = false
 	#self.shape_name = name
-	self.sfx_visibility_gain_partial = "treasure_reveal_partial"
-	self.sfx_visibility_gain_total = "treasure_reveal_total"
-	self.sfx_visibility_lose = "treasure_unreveal"
+	if !self.sfx_visibility_gain_partial.is_empty():
+		self.sfx_visibility_gain_partial = "treasure_reveal_partial"
+	if !self.sfx_visibility_gain_total.is_empty():
+		self.sfx_visibility_gain_total = "treasure_reveal_total"
+	if !self.sfx_visibility_lose.is_empty():
+		self.sfx_visibility_lose = "treasure_unreveal"
 	return self
 	
 
@@ -407,3 +503,4 @@ func preset_layer_treasure(offset = 0) -> Shape:
 
 func preset_layer_foreground(offset = 0) -> Shape:
 	return self.preset_layer(GE.Layer.FOREGROUND, offset)
+#endregion

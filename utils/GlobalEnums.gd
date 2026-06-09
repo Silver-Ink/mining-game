@@ -68,3 +68,12 @@ const ShapeNameTreasure : Array[ShapeName] = [
 	ShapeName.TenonHead,
 	ShapeName.Trex
 ]
+
+# Non Rectangle size
+const ShapeNameTreasureInterestingShape : Array[ShapeName] = [
+	ShapeName.Bracelet,
+	ShapeName.Snake,
+	ShapeName.GluedStone,
+	ShapeName.RomanRuler,
+	ShapeName.Trex
+]

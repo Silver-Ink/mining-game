@@ -53,6 +53,7 @@ var _sounds: Dictionary = {
 	&"rock_damage": &"654499__bigal13__pickaxe-striking-hard-rock.ogg",
 	&"rock_dig":&"728759__techspiredminds__metallic-pickaxe-44.wav",
 
+
 	&"leaf_damage": &"106130__j1987__leafpilehit.wav",
 	&"leaf_dig": &"106130__j1987__leafpilehit.wav",
 
@@ -60,6 +61,8 @@ var _sounds: Dictionary = {
 	
 	&"sand":&"651292__f3bbbo__digging-in-wet-course-sand-1.wav",
 	&"bone_break": &"188034__antumdeluge__bones-2.wav",
+	
+	&"boomerang": &"703084__xkeril__you-miss-your-attack-sfx.wav",
 
 	&"done" : &"256113__nckn__done.wav",
 }
@@ -371,44 +374,31 @@ func _spawn_shape(kind: GE.ShapeName) -> Shape:
 		GE.ShapeName.Boomerang:
 			return Shape.new().preset_treasure_boomerang()
 		GE.ShapeName.Diamound:
-			# Spawn diamond treasure
-			pass
+			return Shape.new().preset_treasure_diamound()
 		GE.ShapeName.Snake:
-			# Spawn snake treasure
-			pass
+			return Shape.new().preset_treasure_snake()
 		GE.ShapeName.GluedStone:
-			# Spawn glued stone treasure
-			pass
+			return Shape.new().preset_treasure_glued_stone()
 		GE.ShapeName.HorshoeCrab:
-			# Spawn horseshoe crab treasure
-			pass
+			return Shape.new().preset_treasure_horseshoe_crab()
 		GE.ShapeName.PeruKnife:
-			# Spawn Peru knife treasure
-			pass
+			return Shape.new().preset_treasure_peru_knife()
 		GE.ShapeName.RedGem:
-			# Spawn red gem treasure
-			pass
+			return Shape.new().preset_treasure_red_gem()
 		GE.ShapeName.RomanRuler:
-			# Spawn Roman ruler treasure
-			pass
+			return Shape.new().preset_treasure_roman_ruler()
 		GE.ShapeName.Ruby:
-			# Spawn ruby treasure
-			pass
+			return Shape.new().preset_treasure_ruby()
 		GE.ShapeName.Shell:
-			# Spawn shell treasure
-			pass
+			return Shape.new().preset_treasure_shell()
 		GE.ShapeName.SkaraBrae:
-			# Spawn Skara Brae treasure
-			pass
+			return Shape.new().preset_treasure_skara_brae()
 		GE.ShapeName.SkullSaber:
-			# Spawn skull saber treasure
-			pass
+			return Shape.new().preset_treasure_skull_saber()
 		GE.ShapeName.TenonHead:
-			# Spawn tenon head treasure
-			pass
+			return Shape.new().preset_treasure_tenon_head()
 		GE.ShapeName.Trex:
-			# Spawn T-Rex treasure
-			pass
+			return Shape.new().preset_treasure_trex()
 
 		GE.ShapeName.Bg:
 			return Shape.new().preset_tileset_background()
