@@ -497,11 +497,11 @@ func preset_treasure(offset = 0) -> Shape:
 	self.absorb_dig = true
 	self.is_fragile = false
 	#self.shape_name = name
-	if !self.sfx_visibility_gain_partial.is_empty():
+	if self.sfx_visibility_gain_partial.is_empty():
 		self.sfx_visibility_gain_partial = "treasure_reveal_partial"
-	if !self.sfx_visibility_gain_total.is_empty():
+	if self.sfx_visibility_gain_total.is_empty():
 		self.sfx_visibility_gain_total = "treasure_reveal_total"
-	if !self.sfx_visibility_lose.is_empty():
+	if self.sfx_visibility_lose.is_empty():
 		self.sfx_visibility_lose = "treasure_unreveal"
 	return self
 	
