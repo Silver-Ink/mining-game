@@ -4,6 +4,7 @@ class_name Shape
 
 var _tiles: Dictionary[Vector2i,Tile] = {}
 var _bounding_box: Rect2i = Rect2i();
+var _default_tile = Tile.new()
 
 #region Sfx
 # I miss my Rust `Option<Asset<Audio>>` type
@@ -42,7 +43,9 @@ func on_tile_removed():
 			self.area.sfx.play(self.sfx_fragile_break);
 		self.clear_tile()
 		
-func _add_tile(pos: Vector2i, tile: Tile) -> Shape:
+func _add_tile(pos: Vector2i, tile: Tile = null) -> Shape:
+	if tile == null:
+		tile = _default_tile.duplicate()
 	self._tiles[pos] = tile
 	_update_bounding_box() # O(n), can be O(1) but whatever
 	if self.area:
@@ -89,19 +92,25 @@ func move_all_tile(delta: Vector2i) -> Shape:
 	return self
 
 #region Default impl
-func add_tile(pos: Vector2i, tile: Tile) -> Shape:
+func add_tile(pos: Vector2i, tile: Tile = null) -> Shape:
+	if tile == null:
+		tile = _default_tile.duplicate()
 	self._add_tile(pos, tile)
 	self.on_tile_added()
 	return self
 	
-func add_tile_rect(rect: Rect2i, tile: Tile) -> Shape:
+func add_tile_rect(rect: Rect2i, tile: Tile = null) -> Shape:
+	if tile == null:
+		tile = _default_tile.duplicate()
 	for x in range(rect.position.x, rect.end.x):
 		for y in range(rect.position.y, rect.end.y):
 			self._add_tile(Vector2i(x, y), tile.duplicate())
 	self.on_tile_added()
 	return self
 
-func add_all_tile(elements: Array[Vector2i], tile: Tile) -> Shape:
+func add_all_tile(elements: Array[Vector2i], tile: Tile = null) -> Shape:
+	if tile == null:
+		tile = _default_tile.duplicate()
 	for pos in elements:
 		print(pos)
 		self._add_tile(pos, tile.duplicate())
@@ -286,14 +295,17 @@ func on_tile_changed():
 	self.update_render()
 	
 func update_render():
-	self.sprite.update_render(self, render_node)
+	if area && !area.is_generating:
+		self.sprite.update_render(self, render_node)
 
 func _ready() -> void:
 	add_child(self.render_node)
 	
 func preset_set_tile_max_hp(hp_max: int):
+	self._default_tile.with_hp_max(hp_max).with_hp(hp_max)
 	for pos in self._tiles:
 		self._tiles[pos].with_hp_max(hp_max).with_hp(hp_max)
+	
 
 func preset_tileset_rock() -> Shape:
 	preset_set_tile_max_hp(3)
@@ -342,9 +354,9 @@ func preset_treasure_bracelet() -> Shape:
 	self.add_all_tile(
 		[
 			# Un petit côté Alain D.
-			Vector2i(-1,-1), Vector2i(0,-1), Vector2i(1,-1),
-			Vector2i(-1, 0)                , Vector2i(1, 0),
-			Vector2i(-1, 1), Vector2i(0, 1), Vector2i(1, 1),
+			Vector2i(0,0), Vector2i(1,0), Vector2i(2,0),
+			Vector2i(0,1)               , Vector2i(2,1),
+			Vector2i(0,2), Vector2i(1,2), Vector2i(2,2),
 		], Tile.new())
 	return self.preset_treasure()
 	

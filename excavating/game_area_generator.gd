@@ -1,6 +1,9 @@
 class_name GameAreaGenerator
 
 var size : Vector2i = Vector2i(16,9);
+var rect : Rect2i:
+	get:
+		return Rect2i(0,0, size.x, size.y)
 
 var min_treasure : int = 0
 var max_treasure : int = 0
@@ -22,25 +25,14 @@ func generate_in(l: GameArea):
 	
 	
 func _generate(l: GameArea):
-	
 	l.clear()
 	
-	var bg : Shape = Shape.new();
-	bg.add_tile_rect(Rect2i(0,0,size.x,size.y), Tile.new())
-	bg.preset_tileset_background()
-	bg.area = l;
+	l.spawn_shape(GE.ShapeName.Bg).add_tile_rect(rect)
+	#l.spawn_shape(GE.ShapeName.Rock).add_tile_rect(rect)
+	l.spawn_shape(GE.ShapeName.Bone).add_tile_rect(Rect2i(size.x / 2 - 1,size.y / 2 - 1,3,3))
 	
-	var rock : Shape = Shape.new();
-	rock.add_tile_rect(Rect2i(0,0,size.x,size.y), Tile.new().with_hp_max(3).with_hp(3))
-	rock.preset_tileset_rock()
-	rock.area = l;
-	
-	var bone = Shape.new();
-	bone.add_tile_rect(Rect2i(size.x / 2 - 1,size.y / 2 - 1,3,3), Tile.new())
-	bone.preset_tileset_bone()
-	bone.area = l;
-	
-	l.spawn_shape(GE.ShapeName.Bracelet).move_all_tile(Vector2(2,3))
+	l.spawn_shape(GE.ShapeName.Bracelet)#.move_all_tile(Vector2(2,3))
+	l.spawn_shape(GE.ShapeName.Boomerang)#.move_all_tile(Vector2(5,4))
 	#var bracelet = Shape.new().preset_treasure_bracelet()
 	#bracelet.move_all_tile(Vector2(2,3))
 	#bracelet.area = l;

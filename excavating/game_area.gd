@@ -16,6 +16,9 @@ var is_generating : bool = true:
 		if is_generating == value:
 			return
 		is_generating = value
+		
+		for s in self._shapes:
+			s.update_render()
 		#if !is_generating:
 			#_collected_treasure.clear()
 			#for shape in _shapes:

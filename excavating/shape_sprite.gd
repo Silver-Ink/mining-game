@@ -3,11 +3,13 @@ class_name ShapeSprite
 
 var tileset : Array[Texture2D] = []
 var per_tile : Sprite2D  = null
+## top left is (0,0)
 var global : Sprite2D = null
 
 const SIZE : int = 8
 
 const ZOOM : Vector2 = Vector2(SIZE, SIZE)
+
 const SCALE : Vector2 = Vector2(1./ SIZE, 1./ SIZE)
 const HALF_SCALE : Vector2 = SCALE / 2.;
 
@@ -19,7 +21,7 @@ func clear_render(node: Node2D) -> Node2D:
 	for child in node.get_children():
 		child.queue_free()
 	return node
-	
+
 func update_render(shape: Shape, node: Node2D) -> Node2D:
 	return append_render(shape, clear_render(node))
 
@@ -69,6 +71,7 @@ func set_tile_sprite(texture_uid : String) -> ShapeSprite:
 func add_global_sprite(texture_uid : String) -> ShapeSprite:
 	self.global = Sprite2D.new()
 	self.global.texture = load(texture_uid)
+	self.global.offset = ((self.global.texture.get_size() / ZOOM) * 0.5) * ZOOM - ZOOM / 2
 	return self
 	
 static var BONE : ShapeSprite = ShapeSprite.new().add_tileset("uid://bmb7m3xfcik21")
