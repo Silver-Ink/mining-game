@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://pox7n7l5qutn"]
+
+[ext_resource type="Texture2D" uid="uid://benhb7juvi00j" path="res://assets/cat-watermelon.png" id="1_dpoke"]
+[ext_resource type="Texture2D" uid="uid://c2suucd6ch50s" path="res://assets/element/shell.png" id="2_qnbno"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6p1qm"]
+texture = ExtResource("1_dpoke")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_pxiap"]
+texture = ExtResource("2_qnbno")
+
+[node name="Treasure" type="VBoxContainer" unique_id=324635968]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Sprite" type="Panel" parent="." unique_id=1098818438]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_6p1qm")
+
+[node name="Button" type="Button" parent="." unique_id=1371599540]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Button" unique_id=304338496]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Button/HBoxContainer" unique_id=441307273]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "100"
+
+[node name="Panel" type="Panel" parent="Button/HBoxContainer" unique_id=1373591319]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxTexture_pxiap")

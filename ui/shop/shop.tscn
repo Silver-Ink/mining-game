@@ -1,0 +1,93 @@
+[gd_scene format=3 uid="uid://cunfliqucqbna"]
+
+[ext_resource type="Script" uid="uid://dc7aq3wkhp457" path="res://ui/shop/shop.gd" id="1_foe6g"]
+[ext_resource type="PackedScene" uid="uid://pox7n7l5qutn" path="res://ui/shop/treasure.tscn" id="2_qn6t7"]
+
+[node name="Shop" type="Control" unique_id=338637777]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_foe6g")
+
+[node name="Panel" type="Panel" parent="." unique_id=1902344160]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 1428.0
+offset_top = 660.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel" unique_id=1758237033]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+draw_focus_border = true
+scroll_hint_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="GridContainer" type="GridContainer" parent="Panel/ScrollContainer" unique_id=1540301264]
+layout_mode = 2
+columns = 2
+
+[node name="Treasure2" parent="Panel/ScrollContainer/GridContainer" unique_id=1558843872 instance=ExtResource("2_qn6t7")]
+layout_mode = 2
+
+[node name="Treasure3" parent="Panel/ScrollContainer/GridContainer" unique_id=439500509 instance=ExtResource("2_qn6t7")]
+layout_mode = 2
+
+[node name="Treasure4" parent="Panel/ScrollContainer/GridContainer" unique_id=26240663 instance=ExtResource("2_qn6t7")]
+layout_mode = 2
+
+[node name="Treasure5" parent="Panel/ScrollContainer/GridContainer" unique_id=1649991831 instance=ExtResource("2_qn6t7")]
+layout_mode = 2
+
+[node name="Treasure" parent="Panel/ScrollContainer/GridContainer" unique_id=324635968 instance=ExtResource("2_qn6t7")]
+layout_mode = 2
+
+[node name="Panel2" type="Panel" parent="." unique_id=423832836]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.31458333
+anchor_bottom = 0.98888886
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel2" unique_id=1974880328]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel2/ScrollContainer" unique_id=489435934]
+layout_mode = 2
+
+[node name="Panel3" type="Panel" parent="." unique_id=833049443]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.363
+anchor_right = 0.6625
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+metadata/_edit_group_ = true
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Panel3" unique_id=168164221]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true

@@ -11,7 +11,7 @@ enum SceneId{
 const SCENE_PACKED_SCENES : Dictionary[SceneId, String] = {
 	SceneId.Hub : "res://mining/levels/hub.tscn",
 	SceneId.ShopLevel : "res://mining/levels/shop.tscn",
-	SceneId.Shop : "res://ui/shop.tscn",
+	SceneId.Shop : "res://ui/shop/shop.tscn",
 	SceneId.Excavate : "res://excavating/excavating_game.tscn"
 }
 
@@ -51,9 +51,9 @@ func pop_scene(switch_mode := false) -> void:
 	var removed_scene : Scene = _scene_stack.pop_back()
 	if (removed_scene.do_keep_alive()):
 		_remove_from_tree(removed_scene)
-		removed_scene.on_popped()
 	else:
 		removed_scene.queue_free()
+	removed_scene.on_popped()
 		
 	var unshelved_scene = current_scene()
 	if (unshelved_scene):
