@@ -4,8 +4,7 @@
 [ext_resource type="Script" uid="uid://clix244xnmjdi" path="res://ui/scaling_container.gd" id="1_qnbno"]
 [ext_resource type="Texture2D" uid="uid://cf17simlckrfa" path="res://assets/element/ladder_up.png" id="3_qnbno"]
 
-[node name="Content" type="VBoxContainer" unique_id=324635968]
-custom_minimum_size = Vector2(0, 100)
+[node name="Panel" type="PanelContainer" unique_id=1918277729]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -14,18 +13,33 @@ grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ScalingContainer" type="Container" parent="." unique_id=1004379505]
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=719041332]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="Content" type="VBoxContainer" parent="MarginContainer" unique_id=324635968]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ScalingContainer" type="Container" parent="MarginContainer/Content" unique_id=1004379505]
+custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 3
+size_flags_stretch_ratio = 2.88
 script = ExtResource("1_qnbno")
 texture = ExtResource("1_dpoke")
 metadata/_custom_type_script = "uid://clix244xnmjdi"
 
-[node name="s" type="Button" parent="." unique_id=1371599540]
+[node name="Button" type="Button" parent="MarginContainer/Content" unique_id=1371599540]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/h_separation = 4
 
-[node name="HBoxContainer" type="HBoxContainer" parent="s" unique_id=304338496]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Content/Button" unique_id=304338496]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -33,13 +47,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="s/HBoxContainer" unique_id=441307273]
+[node name="Label" type="Label" parent="MarginContainer/Content/Button/HBoxContainer" unique_id=441307273]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "100"
 horizontal_alignment = 1
 
-[node name="ScalableTextureRect" type="Container" parent="s/HBoxContainer" unique_id=2097265244]
+[node name="ScalableTextureRect" type="Container" parent="MarginContainer/Content/Button/HBoxContainer" unique_id=2097265244]
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("1_qnbno")

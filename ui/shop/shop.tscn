@@ -33,28 +33,36 @@ grow_horizontal = 2
 grow_vertical = 2
 draw_focus_border = true
 scroll_hint_mode = 2
-metadata/_edit_use_anchors_ = true
 
-[node name="GridContainer" type="GridContainer" parent="Panel/ScrollContainer" unique_id=1540301264]
+[node name="MarginContainer" type="MarginContainer" parent="Panel/ScrollContainer" unique_id=1784283985]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_constants/h_separation = 12
-theme_override_constants/v_separation = 11
+size_flags_vertical = 3
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="GridContainer" type="GridContainer" parent="Panel/ScrollContainer/MarginContainer" unique_id=1540301264]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
 columns = 2
 
-[node name="Treasure2" parent="Panel/ScrollContainer/GridContainer" unique_id=1558843872 instance=ExtResource("2_qn6t7")]
+[node name="Treasure2" parent="Panel/ScrollContainer/MarginContainer/GridContainer" unique_id=1558843872 instance=ExtResource("2_qn6t7")]
 layout_mode = 2
 
-[node name="Treasure3" parent="Panel/ScrollContainer/GridContainer" unique_id=439500509 instance=ExtResource("2_qn6t7")]
+[node name="Treasure3" parent="Panel/ScrollContainer/MarginContainer/GridContainer" unique_id=439500509 instance=ExtResource("2_qn6t7")]
 layout_mode = 2
 
-[node name="Treasure4" parent="Panel/ScrollContainer/GridContainer" unique_id=26240663 instance=ExtResource("2_qn6t7")]
+[node name="Treasure4" parent="Panel/ScrollContainer/MarginContainer/GridContainer" unique_id=26240663 instance=ExtResource("2_qn6t7")]
 layout_mode = 2
 
-[node name="Treasure5" parent="Panel/ScrollContainer/GridContainer" unique_id=1649991831 instance=ExtResource("2_qn6t7")]
+[node name="Treasure5" parent="Panel/ScrollContainer/MarginContainer/GridContainer" unique_id=1649991831 instance=ExtResource("2_qn6t7")]
 layout_mode = 2
 
-[node name="Treasure" parent="Panel/ScrollContainer/GridContainer" unique_id=324635968 instance=ExtResource("2_qn6t7")]
+[node name="Treasure" parent="Panel/ScrollContainer/MarginContainer/GridContainer" unique_id=324635968 instance=ExtResource("2_qn6t7")]
 layout_mode = 2
 
 [node name="Panel2" type="Panel" parent="." unique_id=423832836]
