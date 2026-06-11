@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://c64r1ufd6mp7a"]
+
+[ext_resource type="Script" uid="uid://b8djc7bgw02tx" path="res://ui/shop/money_button.gd" id="1_eciet"]
+[ext_resource type="Script" uid="uid://clix244xnmjdi" path="res://ui/scaling_container.gd" id="1_u703b"]
+[ext_resource type="Texture2D" uid="uid://byud853m38kut" path="res://assets/element/coin/coin.tres" id="3_eciet"]
+
+[node name="MoneyButton" type="PanelContainer" unique_id=1422552932]
+offset_right = 32.0
+offset_bottom = 23.0
+script = ExtResource("1_eciet")
+
+[node name="Button" type="Button" parent="." unique_id=567380316]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 1
+theme_override_constants/h_separation = 4
+keep_pressed_outside = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=830686750]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="HBoxContainer" unique_id=813271684]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "100"
+horizontal_alignment = 1
+
+[node name="ScalableTextureRect" type="Container" parent="HBoxContainer" unique_id=58241064]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+script = ExtResource("1_u703b")
+texture = ExtResource("3_eciet")
+metadata/_custom_type_script = "uid://clix244xnmjdi"
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]

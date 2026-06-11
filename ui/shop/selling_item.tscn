@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://coxbi55qccp4y"]
+
+[ext_resource type="Script" uid="uid://b1qg1v2okbrlq" path="res://ui/shop/selling_item.gd" id="1_2ifxe"]
+[ext_resource type="Script" uid="uid://clix244xnmjdi" path="res://ui/scaling_container.gd" id="1_dym11"]
+[ext_resource type="Texture2D" uid="uid://diwa4wudtt3bn" path="res://assets/element/boomerang.png" id="2_etno6"]
+[ext_resource type="PackedScene" uid="uid://c64r1ufd6mp7a" path="res://ui/shop/money_button.tscn" id="3_jy7i4"]
+[ext_resource type="Texture2D" uid="uid://drwo01r6ughp6" path="res://assets/element/trex.png" id="4_2ifxe"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jy7i4"]
+
+[node name="SellingItem" type="PanelContainer" unique_id=871239066]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+script = ExtResource("1_2ifxe")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=582698111]
+layout_mode = 2
+theme_override_constants/margin_left = 6
+theme_override_constants/margin_top = 6
+theme_override_constants/margin_right = 6
+theme_override_constants/margin_bottom = 6
+
+[node name="ItemSelling" type="PanelContainer" parent="MarginContainer" unique_id=1658026691]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/ItemSelling" unique_id=692399251]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="ScalableTextureRect" type="Container" parent="MarginContainer/ItemSelling/HBoxContainer" unique_id=1180737318]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("1_dym11")
+texture = ExtResource("2_etno6")
+metadata/_custom_type_script = "uid://clix244xnmjdi"
+
+[node name="BuyButton" parent="MarginContainer/ItemSelling/HBoxContainer" unique_id=1422552932 instance=ExtResource("3_jy7i4")]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 1
+
+[node name="TreasureLock" type="PanelContainer" parent="MarginContainer" unique_id=892439633]
+custom_minimum_size = Vector2(0, 58.485)
+layout_mode = 2
+mouse_filter = 1
+theme_override_styles/panel = SubResource("StyleBoxFlat_jy7i4")
+
+[node name="ScalableTextureRect" type="Container" parent="MarginContainer/TreasureLock" unique_id=1807392370]
+layout_mode = 2
+script = ExtResource("1_dym11")
+texture = ExtResource("4_2ifxe")
+content_scale = 2.0
+metadata/_custom_type_script = "uid://clix244xnmjdi"
+
+[connection signal="button_pressed" from="MarginContainer/ItemSelling/HBoxContainer/BuyButton" to="." method="_on_buy_button_button_pressed"]
+[connection signal="gui_input" from="MarginContainer/TreasureLock" to="." method="_on_treasure_lock_gui_input"]
+[connection signal="mouse_entered" from="MarginContainer/TreasureLock" to="." method="_on_treasure_lock_mouse_entered"]
+[connection signal="mouse_exited" from="MarginContainer/TreasureLock" to="." method="_on_treasure_lock_mouse_exited"]

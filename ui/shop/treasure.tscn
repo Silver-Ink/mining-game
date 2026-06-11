@@ -2,9 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://cryqh1j2hcevb" path="res://assets/element/diamound.png" id="1_dpoke"]
 [ext_resource type="Script" uid="uid://clix244xnmjdi" path="res://ui/scaling_container.gd" id="1_qnbno"]
-[ext_resource type="Texture2D" uid="uid://cf17simlckrfa" path="res://assets/element/ladder_up.png" id="3_qnbno"]
+[ext_resource type="PackedScene" uid="uid://c64r1ufd6mp7a" path="res://ui/shop/money_button.tscn" id="3_qnbno"]
 
 [node name="Panel" type="PanelContainer" unique_id=1918277729]
+custom_minimum_size = Vector2(55, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -34,28 +35,5 @@ script = ExtResource("1_qnbno")
 texture = ExtResource("1_dpoke")
 metadata/_custom_type_script = "uid://clix244xnmjdi"
 
-[node name="Button" type="Button" parent="MarginContainer/Content" unique_id=1371599540]
+[node name="MoneyButton" parent="MarginContainer/Content" unique_id=1422552932 instance=ExtResource("3_qnbno")]
 layout_mode = 2
-size_flags_vertical = 3
-theme_override_constants/h_separation = 4
-
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Content/Button" unique_id=304338496]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="MarginContainer/Content/Button/HBoxContainer" unique_id=441307273]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "100"
-horizontal_alignment = 1
-
-[node name="ScalableTextureRect" type="Container" parent="MarginContainer/Content/Button/HBoxContainer" unique_id=2097265244]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("1_qnbno")
-texture = ExtResource("3_qnbno")
-metadata/_custom_type_script = "uid://clix244xnmjdi"

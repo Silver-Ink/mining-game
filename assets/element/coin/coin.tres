@@ -1,0 +1,21 @@
+[gd_resource type="AnimatedTexture" format=3 uid="uid://byud853m38kut"]
+
+[ext_resource type="Texture2D" uid="uid://3oigtalp7qfm" path="res://assets/element/coin/coin1.png" id="1_uo1qh"]
+[ext_resource type="Texture2D" uid="uid://yaq4su0cp0am" path="res://assets/element/coin/coin2.png" id="2_8fntg"]
+[ext_resource type="Texture2D" uid="uid://ccc2o7unnt4pn" path="res://assets/element/coin/coin3.png" id="3_foosn"]
+[ext_resource type="Texture2D" uid="uid://dv547gsm4tcgq" path="res://assets/element/coin/coin4.png" id="4_ngmrd"]
+[ext_resource type="Texture2D" uid="uid://dghfsec5yy863" path="res://assets/element/coin/coin5.png" id="5_fm8qm"]
+
+[resource]
+frames = 5
+speed_scale = 15.0
+frame_0/texture = ExtResource("1_uo1qh")
+frame_0/duration = 15.0
+frame_1/texture = ExtResource("2_8fntg")
+frame_1/duration = 1.0
+frame_2/texture = ExtResource("3_foosn")
+frame_2/duration = 1.0
+frame_3/texture = ExtResource("4_ngmrd")
+frame_3/duration = 1.0
+frame_4/texture = ExtResource("5_fm8qm")
+frame_4/duration = 1.0

@@ -4,7 +4,7 @@ extends Container
 
 var texture_rect : TextureRect
 
-@export var texture : CompressedTexture2D :
+@export var texture : Texture2D :
 	set(value):
 		texture = value
 		if (!is_node_ready()):
@@ -13,6 +13,7 @@ var texture_rect : TextureRect
 		if (!is_instance_valid(texture_rect)):
 			texture_rect = TextureRect.new()
 			texture_rect.stretch_mode = TextureRect.STRETCH_KEEP_CENTERED
+			texture_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			add_child(texture_rect)
 			
 		texture_rect.texture = texture
@@ -29,5 +30,5 @@ func _notification(what: int) -> void:
 		NOTIFICATION_SORT_CHILDREN:
 			for child:Control in get_children():
 				child.set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT,Control.PRESET_MODE_MINSIZE)
-				child.size /= content_scale 
+				child.set_deferred("size", size / content_scale)
 				child.scale = Vector2(content_scale,content_scale)

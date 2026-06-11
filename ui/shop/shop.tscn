@@ -1,7 +1,11 @@
 [gd_scene format=3 uid="uid://cunfliqucqbna"]
 
 [ext_resource type="Script" uid="uid://dc7aq3wkhp457" path="res://ui/shop/shop.gd" id="1_foe6g"]
+[ext_resource type="PackedScene" uid="uid://d3fgxfurtu88x" path="res://ui/shop/shop_panel.tscn" id="2_5wpfl"]
 [ext_resource type="PackedScene" uid="uid://pox7n7l5qutn" path="res://ui/shop/treasure.tscn" id="2_qn6t7"]
+[ext_resource type="PackedScene" uid="uid://coxbi55qccp4y" path="res://ui/shop/selling_item.tscn" id="4_n5hkn"]
+[ext_resource type="Script" uid="uid://clix244xnmjdi" path="res://ui/scaling_container.gd" id="5_fre4r"]
+[ext_resource type="Texture2D" uid="uid://byud853m38kut" path="res://assets/element/coin/coin.tres" id="6_kcwo1"]
 
 [node name="Shop" type="Control" unique_id=338637777]
 layout_mode = 3
@@ -13,96 +17,140 @@ grow_vertical = 2
 script = ExtResource("1_foe6g")
 metadata/_edit_use_anchors_ = true
 
-[node name="Panel" type="Panel" parent="." unique_id=1902344160]
+[node name="TreasureSelling" parent="." unique_id=1408962235 node_paths=PackedStringArray("children_container") instance=ExtResource("2_5wpfl")]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.0234375
-anchor_top = 0.055555556
-anchor_right = 0.29791668
-anchor_bottom = 0.48796296
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
+anchor_left = 0.62604165
+anchor_top = 0.45462963
+anchor_right = 0.95520836
+anchor_bottom = 0.9685185
+children_container = NodePath("GridContainer")
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel" unique_id=1758237033]
+[node name="GridContainer" type="GridContainer" parent="TreasureSelling" unique_id=1540301264]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-draw_focus_border = true
-scroll_hint_mode = 2
-
-[node name="MarginContainer" type="MarginContainer" parent="Panel/ScrollContainer" unique_id=1784283985]
-layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 3
+theme_override_constants/h_separation = 6
+theme_override_constants/v_separation = 6
+columns = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Treasure2" parent="TreasureSelling/GridContainer" unique_id=1558843872 instance=ExtResource("2_qn6t7")]
+layout_mode = 2
+
+[node name="Treasure3" parent="TreasureSelling/GridContainer" unique_id=439500509 instance=ExtResource("2_qn6t7")]
+layout_mode = 2
+
+[node name="Treasure4" parent="TreasureSelling/GridContainer" unique_id=26240663 instance=ExtResource("2_qn6t7")]
+layout_mode = 2
+
+[node name="Treasure5" parent="TreasureSelling/GridContainer" unique_id=1649991831 instance=ExtResource("2_qn6t7")]
+layout_mode = 2
+
+[node name="Treasure" parent="TreasureSelling/GridContainer" unique_id=324635968 instance=ExtResource("2_qn6t7")]
+layout_mode = 2
+
+[node name="ExcavatePanel" parent="." unique_id=975217594 node_paths=PackedStringArray("children_container") instance=ExtResource("2_5wpfl")]
+layout_mode = 1
+anchor_left = 0.0171875
+anchor_top = 0.0064814813
+anchor_right = 0.31614584
+anchor_bottom = 0.97314817
+grow_horizontal = 1
+grow_vertical = 1
+children_container = NodePath("VBoxContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ExcavatePanel" unique_id=933858849]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SellingItem" parent="ExcavatePanel/VBoxContainer" unique_id=871239066 instance=ExtResource("4_n5hkn")]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="SellingItem2" parent="ExcavatePanel/VBoxContainer" unique_id=366193468 instance=ExtResource("4_n5hkn")]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="SellingItem3" parent="ExcavatePanel/VBoxContainer" unique_id=1453446514 instance=ExtResource("4_n5hkn")]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="SellingItem4" parent="ExcavatePanel/VBoxContainer" unique_id=1158815255 instance=ExtResource("4_n5hkn")]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="SellingItem5" parent="ExcavatePanel/VBoxContainer" unique_id=688462849 instance=ExtResource("4_n5hkn")]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="SellingItem6" parent="ExcavatePanel/VBoxContainer" unique_id=497973517 instance=ExtResource("4_n5hkn")]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="SellingItem7" parent="ExcavatePanel/VBoxContainer" unique_id=1607428673 instance=ExtResource("4_n5hkn")]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="SellingItem8" parent="ExcavatePanel/VBoxContainer" unique_id=663627597 instance=ExtResource("4_n5hkn")]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="MiningPanel" parent="." unique_id=975108179 node_paths=PackedStringArray("children_container") instance=ExtResource("2_5wpfl")]
+layout_mode = 1
+anchor_left = 0.32395834
+anchor_top = 0.0037037036
+anchor_right = 0.60729164
+anchor_bottom = 0.9712963
+grow_horizontal = 1
+grow_vertical = 1
+children_container = NodePath("VBoxContainer")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MiningPanel" unique_id=88096389]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MoneyPanel" type="Panel" parent="." unique_id=2049045902]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.6234375
+anchor_top = 0.3361111
+anchor_right = 0.95729166
+anchor_bottom = 0.43888888
+grow_horizontal = 0
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="MoneyPanel" unique_id=1294220016]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/margin_left = 6
 theme_override_constants/margin_top = 6
 theme_override_constants/margin_right = 6
 theme_override_constants/margin_bottom = 6
 
-[node name="GridContainer" type="GridContainer" parent="Panel/ScrollContainer/MarginContainer" unique_id=1540301264]
+[node name="HBoxContainer" type="HBoxContainer" parent="MoneyPanel/MarginContainer" unique_id=715456632]
 layout_mode = 2
-size_flags_horizontal = 3
-theme_override_constants/h_separation = 6
-theme_override_constants/v_separation = 6
-columns = 2
+alignment = 1
 
-[node name="Treasure2" parent="Panel/ScrollContainer/MarginContainer/GridContainer" unique_id=1558843872 instance=ExtResource("2_qn6t7")]
+[node name="Label" type="Label" parent="MoneyPanel/MarginContainer/HBoxContainer" unique_id=270815495]
 layout_mode = 2
+text = "999"
 
-[node name="Treasure3" parent="Panel/ScrollContainer/MarginContainer/GridContainer" unique_id=439500509 instance=ExtResource("2_qn6t7")]
+[node name="ScalableTextureRect" type="Container" parent="MoneyPanel/MarginContainer/HBoxContainer" unique_id=1324304960]
 layout_mode = 2
-
-[node name="Treasure4" parent="Panel/ScrollContainer/MarginContainer/GridContainer" unique_id=26240663 instance=ExtResource("2_qn6t7")]
-layout_mode = 2
-
-[node name="Treasure5" parent="Panel/ScrollContainer/MarginContainer/GridContainer" unique_id=1649991831 instance=ExtResource("2_qn6t7")]
-layout_mode = 2
-
-[node name="Treasure" parent="Panel/ScrollContainer/MarginContainer/GridContainer" unique_id=324635968 instance=ExtResource("2_qn6t7")]
-layout_mode = 2
-
-[node name="Panel2" type="Panel" parent="." unique_id=423832836]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.70625
-anchor_top = 0.0037037036
-anchor_right = 0.965625
-anchor_bottom = 0.9925926
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel2" unique_id=1974880328]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Panel2/ScrollContainer" unique_id=489435934]
-layout_mode = 2
-
-[node name="Panel3" type="Panel" parent="." unique_id=833049443]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.363
-anchor_right = 0.6625
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
-metadata/_edit_group_ = true
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Panel3" unique_id=168164221]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-metadata/_edit_use_anchors_ = true
+script = ExtResource("5_fre4r")
+texture = ExtResource("6_kcwo1")
+metadata/_custom_type_script = "uid://clix244xnmjdi"
