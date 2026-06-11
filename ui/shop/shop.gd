@@ -1,17 +1,24 @@
 class_name ShopGui
 extends Scene
 
+var scale_factor := 2.
+
 class ShopSettings extends SceneSettings:
 	pass
 
+func _ready() -> void:
+	setup_screen()
 
 # Called when the scene is popped from the scene stack (in scene_manager)
 func on_popped() -> void:
-	get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_DISABLED
+	get_tree().root.content_scale_factor = 1.
 
 # Called when the scene is pushed on the scene stack (in scene_manager)
 func on_pushed(_context : SceneContext, _settings : SceneSettings) -> void:
-	get_tree().root.content_scale_mode = Window.CONTENT_SCALE_MODE_VIEWPORT
+	setup_screen()
+
+func setup_screen():
+	get_tree().root.content_scale_factor = scale_factor
 
 # Called when another scene get placed directly above in the stack
 func on_paused() -> void:
@@ -24,3 +31,4 @@ func on_resumed() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if (event.is_action_pressed("ui_cancel")):
 		SceneManager.pop_scene()
+			

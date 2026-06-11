@@ -11,16 +11,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_foe6g")
+metadata/_edit_use_anchors_ = true
 
 [node name="Panel" type="Panel" parent="." unique_id=1902344160]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 1428.0
-offset_top = 660.0
+anchors_preset = -1
+anchor_left = 0.0234375
+anchor_top = 0.055555556
+anchor_right = 0.29791668
+anchor_bottom = 0.48796296
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel" unique_id=1758237033]
 layout_mode = 1
@@ -35,6 +37,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="GridContainer" type="GridContainer" parent="Panel/ScrollContainer" unique_id=1540301264]
 layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 11
 columns = 2
 
 [node name="Treasure2" parent="Panel/ScrollContainer/GridContainer" unique_id=1558843872 instance=ExtResource("2_qn6t7")]
@@ -55,11 +60,12 @@ layout_mode = 2
 [node name="Panel2" type="Panel" parent="." unique_id=423832836]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.31458333
-anchor_bottom = 0.98888886
+anchor_left = 0.70625
+anchor_top = 0.0037037036
+anchor_right = 0.965625
+anchor_bottom = 0.9925926
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="ScrollContainer" type="ScrollContainer" parent="Panel2" unique_id=1974880328]
 layout_mode = 1
@@ -68,6 +74,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel2/ScrollContainer" unique_id=489435934]
 layout_mode = 2
