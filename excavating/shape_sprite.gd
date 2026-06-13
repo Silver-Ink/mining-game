@@ -74,35 +74,39 @@ func add_global_sprite(texture_uid : String) -> ShapeSprite:
 	self.global.offset = ((self.global.texture.get_size() / ZOOM) * 0.5) * ZOOM - ZOOM / 2
 	return self
 	
-static var BONE : ShapeSprite = ShapeSprite.new().add_tileset("uid://bmb7m3xfcik21")
-
-# Currently use stone
-static var ROCK : ShapeSprite = ShapeSprite.new() \
-	.add_tileset("uid://carpwq7xyvjlx") \
-	.add_tileset("uid://xxs0i1s6ih7p") \
-	.add_tileset("uid://biqcjps7tf2xc")
-
-static var LEAF : ShapeSprite = ShapeSprite.new() \
-	.add_tileset("uid://tetbgpjanx8u") \
-	.add_tileset("uid://bktw8wydqr5r4")
+static var SHAPE_DEF : Dictionary[GE.ShapeName, ShapeSprite] = {
 	
-static var SAND : ShapeSprite = ShapeSprite.new().add_tileset("uid://ig4wnf2j7ufe")
-static var WALL : ShapeSprite = ShapeSprite.new().add_tileset("uid://e37kapqjwwh2")
+	
+	GE.ShapeName.Bone : ShapeSprite.new().add_tileset("uid://bmb7m3xfcik21"),
 
-static var BRACELET : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://bgau2khqls2d7")
-static var BAT_TALISMAN : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://c0vyi4qn8uj1s")
-static var BOOMERANG : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://diwa4wudtt3bn")
-static var DIAMOUND : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://cryqh1j2hcevb")
-static var SNAKE : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://dwchpcqg2s83u")
-static var GLUED_STONE : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://c8tg4nsa5xkpv")
-static var HORSESHOE_CRAB : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://codvb8om2nl7v")
-static var PERU_KNIFE : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://claydltshnn5x")
-static var RED_GEM : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://b77p5v7aqsy3s")
-static var ROMAN_RULER : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://0fxe2x3fn0pl")
-static var RUBY : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://brrjup8j806h3")
-static var SHELL : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://c2suucd6ch50s")
-static var SKARA_BRAE : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://d2jliyw6wry15")
-static var SKULL_SABER : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://bweivsk68aasj")
-static var TENON_HEAD : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://di5pr228d1n1")
-static var TREX : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://drwo01r6ughp6")
-static var MICROWAV : ShapeSprite = ShapeSprite.new().add_global_sprite("uid://bwljdrkcdfslv")
+	# Currently use stone
+	GE.ShapeName.Rock : ShapeSprite.new() \
+		.add_tileset("uid://carpwq7xyvjlx") \
+		.add_tileset("uid://xxs0i1s6ih7p") \
+		.add_tileset("uid://biqcjps7tf2xc"),
+
+	GE.ShapeName.Leaf : ShapeSprite.new() \
+		.add_tileset("uid://tetbgpjanx8u") \
+		.add_tileset("uid://bktw8wydqr5r4"),
+		
+	 GE.ShapeName.Sand : ShapeSprite.new().add_tileset("uid://ig4wnf2j7ufe"),
+	 GE.ShapeName.Wall : ShapeSprite.new().add_tileset("uid://e37kapqjwwh2"),
+
+	 GE.ShapeName.Bracelet : ShapeSprite.new().add_global_sprite("uid://bgau2khqls2d7"),
+	 GE.ShapeName.BatTalisman : ShapeSprite.new().add_global_sprite("uid://c0vyi4qn8uj1s"),
+	 GE.ShapeName.Boomerang : ShapeSprite.new().add_global_sprite("uid://diwa4wudtt3bn"),
+	 GE.ShapeName.Diamound : ShapeSprite.new().add_global_sprite("uid://cryqh1j2hcevb"),
+	 GE.ShapeName.Snake : ShapeSprite.new().add_global_sprite("uid://dwchpcqg2s83u"),
+	 GE.ShapeName.GluedStone : ShapeSprite.new().add_global_sprite("uid://c8tg4nsa5xkpv"),
+	 GE.ShapeName.HorshoeCrab : ShapeSprite.new().add_global_sprite("uid://codvb8om2nl7v"),
+	 GE.ShapeName.PeruKnife : ShapeSprite.new().add_global_sprite("uid://claydltshnn5x"),
+	 GE.ShapeName.RedGem : ShapeSprite.new().add_global_sprite("uid://b77p5v7aqsy3s"),
+	 GE.ShapeName.RomanRuler : ShapeSprite.new().add_global_sprite("uid://0fxe2x3fn0pl"),
+	 GE.ShapeName.Ruby : ShapeSprite.new().add_global_sprite("uid://brrjup8j806h3"),
+	 GE.ShapeName.Shell : ShapeSprite.new().add_global_sprite("uid://c2suucd6ch50s"),
+	 GE.ShapeName.SkaraBrae : ShapeSprite.new().add_global_sprite("uid://d2jliyw6wry15"),
+	 GE.ShapeName.SkullSaber : ShapeSprite.new().add_global_sprite("uid://bweivsk68aasj"),
+	 GE.ShapeName.TenonHead : ShapeSprite.new().add_global_sprite("uid://di5pr228d1n1"),
+	 GE.ShapeName.Trex : ShapeSprite.new().add_global_sprite("uid://drwo01r6ughp6"),
+	 GE.ShapeName.Microwav : ShapeSprite.new().add_global_sprite("uid://bwljdrkcdfslv")
+}

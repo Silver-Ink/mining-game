@@ -30,6 +30,7 @@ enum ShapeName
 	Leaf,
 	Sand,
 	Bone,
+	Wall,
 	
 
 	Bracelet,
@@ -70,6 +71,14 @@ const ShapeNameTreasure : Array[ShapeName] = [
 	ShapeName.Trex,
 	ShapeName.Microwav,
 ]
+
+static func is_treasure(shape : ShapeName, do_push_error := true) -> bool:
+	if (!GE.ShapeNameTreasure.has(shape)):
+		if (do_push_error):
+			push_error("Invalid treasure variant selected : ", GE.ShapeName.keys()[shape])
+		return false
+	return true
+	
 
 # Non Rectangle size
 const ShapeNameTreasureInterestingShape : Array[ShapeName] = [

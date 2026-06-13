@@ -326,7 +326,7 @@ func preset_tileset_rock() -> Shape:
 	preset_set_tile_max_hp(3)
 	self.sfx_dig = &"rock_dig"
 	self.sfx_damage = &"rock_damage"
-	self.sprite = ShapeSprite.ROCK
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.Rock]
 	self.is_destructible = true
 	self.absorb_dig = true
 	return self.preset_layer_foreground()
@@ -335,7 +335,7 @@ func preset_tileset_leaf() -> Shape:
 	preset_set_tile_max_hp(2)
 	self.sfx_dig = &"leaf_dig"
 	self.sfx_damage = &"leaf_damage"
-	self.sprite = ShapeSprite.LEAF
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.Leaf]
 	self.is_destructible = true
 	self.absorb_dig = true
 	return self.preset_layer_foreground()
@@ -344,19 +344,19 @@ func preset_tileset_sand() -> Shape:
 	preset_set_tile_max_hp(1)
 	self.sfx_dig = &"sand_dig"
 	self.sfx_damage = &"sand_damage"
-	self.sprite = ShapeSprite.SAND
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.Sand]
 	self.is_destructible = true
 	self.absorb_dig = true
 	return self.preset_layer_foreground()
 	
 func preset_tileset_background() -> Shape:
-	self.sprite = ShapeSprite.WALL
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.Wall]
 	self.is_destructible = false
 	self.absorb_dig = false
 	return self.preset_layer_background()
 	
 func preset_tileset_bone() -> Shape:
-	self.sprite = ShapeSprite.BONE
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.Bone]
 	self.is_destructible = true
 	self.is_fragile = true
 	self.sfx_fragile_break = &"bone_break";
@@ -364,21 +364,21 @@ func preset_tileset_bone() -> Shape:
 	return self.preset_layer_treasure()
 
 func preset_treasure_bracelet() -> Shape:
-	self.sprite = ShapeSprite.BRACELET
-	self.shape_name =  GE.ShapeName.Bracelet
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.Bracelet]
+	self.shape_name = GE.ShapeName.Bracelet
 	self.add_tile_rect_size(3,3)
 	self.remove_tile(Vector2i(1,1))
 	return self.preset_treasure()
 	
 func preset_treasure_bat_talisman() -> Shape:
-	self.sprite = ShapeSprite.BAT_TALISMAN
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.BatTalisman]
 	self.shape_name =  GE.ShapeName.BatTalisman
 	self.add_tile_rect_size(3,1)
 	self.sfx_visibility_gain_total = &"bat_talisman"
 	return self.preset_treasure()
 	
 func preset_treasure_boomerang() -> Shape:
-	self.sprite = ShapeSprite.BOOMERANG
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.Boomerang]
 	self.shape_name =  GE.ShapeName.Boomerang
 	self.add_all_tile(
 		[
@@ -388,14 +388,14 @@ func preset_treasure_boomerang() -> Shape:
 	return self.preset_treasure()
 
 func preset_treasure_diamound() -> Shape:
-	self.sprite = ShapeSprite.DIAMOUND
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.Diamound]
 	self.shape_name =  GE.ShapeName.Diamound
 	self.add_tile_rect_size(2,2)
 	self.sfx_visibility_gain_total = &"diamound"
 	return self.preset_treasure()
 
 func preset_treasure_snake() -> Shape:
-	self.sprite = ShapeSprite.SNAKE
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.Snake]
 	self.shape_name =  GE.ShapeName.Snake
 	self.add_tile_rect_size(5,3)
 	self.remove_tile(Vector2i(1,1))
@@ -405,7 +405,7 @@ func preset_treasure_snake() -> Shape:
 	return self.preset_treasure()
 
 func preset_treasure_glued_stone() -> Shape:
-	self.sprite = ShapeSprite.GLUED_STONE
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.GluedStone]
 	self.shape_name =  GE.ShapeName.GluedStone
 	self.add_tile_rect_size(3,3)
 	self.remove_tile(Vector2i(0,0))
@@ -414,28 +414,28 @@ func preset_treasure_glued_stone() -> Shape:
 	return self.preset_treasure()
 
 func preset_treasure_horseshoe_crab() -> Shape:
-	self.sprite = ShapeSprite.HORSESHOE_CRAB
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.HorshoeCrab]
 	self.shape_name =  GE.ShapeName.HorshoeCrab
 	self.add_tile_rect_size(3,3)
 	self.sfx_visibility_gain_total = &"horseshoe_crab"
 	return self.preset_treasure()
 
 func preset_treasure_peru_knife() -> Shape:
-	self.sprite = ShapeSprite.PERU_KNIFE
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.PeruKnife]
 	self.shape_name =  GE.ShapeName.PeruKnife
 	self.add_tile_rect_size(1,3)
 	self.sfx_visibility_gain_total = &"peru_knife"
 	return self.preset_treasure()
 
 func preset_treasure_red_gem() -> Shape:
-	self.sprite = ShapeSprite.RED_GEM
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.RedGem]
 	self.shape_name =  GE.ShapeName.RedGem
 	self.add_tile_rect_size(2,2)
 	self.sfx_visibility_gain_total = &"red_gem"
 	return self.preset_treasure()
 
 func preset_treasure_roman_ruler() -> Shape:
-	self.sprite = ShapeSprite.ROMAN_RULER
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.RomanRuler]
 	self.shape_name =  GE.ShapeName.RomanRuler
 	self.add_tile_rect_size(1,3)
 	self.add_tile_rect(Rect2i(0,2,3,1))
@@ -443,39 +443,39 @@ func preset_treasure_roman_ruler() -> Shape:
 	return self.preset_treasure()
 
 func preset_treasure_ruby() -> Shape:
-	self.sprite = ShapeSprite.RUBY
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.Ruby]
 	self.shape_name =  GE.ShapeName.Ruby
 	self.add_tile_rect_size(2,2)
 	return self.preset_treasure()
 
 func preset_treasure_shell() -> Shape:
-	self.sprite = ShapeSprite.SHELL
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.Shell]
 	self.shape_name =  GE.ShapeName.Shell
 	self.add_tile_rect_size(3,3)
 	return self.preset_treasure()
 
 func preset_treasure_skara_brae() -> Shape:
-	self.sprite = ShapeSprite.SKARA_BRAE
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.SkaraBrae]
 	self.shape_name =  GE.ShapeName.SkaraBrae
 	self.add_tile_rect_size(3,1)
 	self.add_tile(Vector2i(1,1))
 	return self.preset_treasure()
 
 func preset_treasure_skull_saber() -> Shape:
-	self.sprite = ShapeSprite.SKULL_SABER
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.SkullSaber]
 	self.shape_name =  GE.ShapeName.SkullSaber
 	self.sfx_visibility_gain_total = &"skull_saber"
 	self.add_tile_rect_size(3,3)
 	return self.preset_treasure()
 
 func preset_treasure_tenon_head() -> Shape:
-	self.sprite = ShapeSprite.TENON_HEAD
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.TenonHead]
 	self.shape_name =  GE.ShapeName.TenonHead
 	self.add_tile_rect_size(2,2)
 	return self.preset_treasure()
 
 func preset_treasure_trex() -> Shape:
-	self.sprite = ShapeSprite.TREX
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.Trex]
 	self.shape_name =  GE.ShapeName.Trex
 	self.add_tile_rect_size(5,4)
 	self.remove_tile(Vector2i(0,2))
@@ -484,7 +484,7 @@ func preset_treasure_trex() -> Shape:
 	return self.preset_treasure()
 
 func preset_treasure_microwave() -> Shape:
-	self.sprite = ShapeSprite.MICROWAV
+	self.sprite = ShapeSprite.SHAPE_DEF[GE.ShapeName.Microwav]
 	self.shape_name =  GE.ShapeName.Microwav
 	self.add_tile_rect_size(3,2)
 	self.sfx_visibility_gain_total = &"microwave"

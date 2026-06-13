@@ -18,8 +18,8 @@ func on_popped() -> void:
 # Called when the scene is pushed on the scene stack (in scene_manager)
 func on_pushed(_context : SceneContext, _settings : SceneSettings) -> void:
 	setup_screen()
-	money_panel.init(_context)
-	treasure_selling.init(_context)
+	_init_children_panel.call_deferred(_context, _settings)
+
 
 func setup_screen():
 	get_tree().root.content_scale_factor = scale_factor
@@ -32,6 +32,10 @@ func on_paused() -> void:
 func on_resumed() -> void:
 	pass
 
+func _init_children_panel(_context : SceneContext, _settings : SceneSettings) -> void:
+	money_panel.with_data(_context)
+	treasure_selling.with_data(_context)
+	
 func _unhandled_input(event: InputEvent) -> void:
 	if (event.is_action_pressed("ui_cancel")):
 		SceneManager.pop_scene()

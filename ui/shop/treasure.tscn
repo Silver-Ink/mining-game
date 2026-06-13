@@ -28,7 +28,8 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="ScalingContainer" type="Container" parent="MarginContainer/Content" unique_id=1004379505]
+[node name="TreasureSprite" type="Container" parent="MarginContainer/Content" unique_id=1004379505]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 3
@@ -38,4 +39,5 @@ texture = ExtResource("1_dpoke")
 metadata/_custom_type_script = "uid://clix244xnmjdi"
 
 [node name="MoneyButton" parent="MarginContainer/Content" unique_id=1422552932 instance=ExtResource("3_qnbno")]
+unique_name_in_owner = true
 layout_mode = 2

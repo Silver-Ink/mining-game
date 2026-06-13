@@ -1,12 +1,9 @@
 class_name Inventory
 
-enum DummyEnum{
-	ItemA,
-	ItemB
-}
 
-var items : Dictionary[DummyEnum, int] = {
-	DummyEnum.ItemA: 2,
-	DummyEnum.ItemB: 1,
-}
+var items : Array[Item] = [
+	Item.new(GE.ShapeName.Bracelet),
+	Item.new(GE.ShapeName.Bracelet),
+	Item.new(GE.ShapeName.PeruKnife),
+]
 var money : int = 55

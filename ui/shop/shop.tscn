@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://dc7aq3wkhp457" path="res://ui/shop/shop.gd" id="1_foe6g"]
 [ext_resource type="PackedScene" uid="uid://d3fgxfurtu88x" path="res://ui/shop/shop_panel.tscn" id="2_5wpfl"]
-[ext_resource type="PackedScene" uid="uid://pox7n7l5qutn" path="res://ui/shop/treasure.tscn" id="2_qn6t7"]
 [ext_resource type="PackedScene" uid="uid://coxbi55qccp4y" path="res://ui/shop/selling_item.tscn" id="4_n5hkn"]
 [ext_resource type="Script" uid="uid://dhnyicldwyuix" path="res://ui/shop/money_panel.gd" id="5_8b6ar"]
 [ext_resource type="Script" uid="uid://clix244xnmjdi" path="res://ui/scaling_container.gd" id="5_fre4r"]
@@ -38,21 +37,6 @@ theme_override_constants/h_separation = 6
 theme_override_constants/v_separation = 6
 columns = 2
 metadata/_edit_use_anchors_ = true
-
-[node name="Treasure2" parent="TreasureSelling/GridContainer" unique_id=1558843872 instance=ExtResource("2_qn6t7")]
-layout_mode = 2
-
-[node name="Treasure3" parent="TreasureSelling/GridContainer" unique_id=439500509 instance=ExtResource("2_qn6t7")]
-layout_mode = 2
-
-[node name="Treasure4" parent="TreasureSelling/GridContainer" unique_id=26240663 instance=ExtResource("2_qn6t7")]
-layout_mode = 2
-
-[node name="Treasure5" parent="TreasureSelling/GridContainer" unique_id=1649991831 instance=ExtResource("2_qn6t7")]
-layout_mode = 2
-
-[node name="Treasure" parent="TreasureSelling/GridContainer" unique_id=324635968 instance=ExtResource("2_qn6t7")]
-layout_mode = 2
 
 [node name="ExcavatePanel" parent="." unique_id=975217594 node_paths=PackedStringArray("children_container") instance=ExtResource("2_5wpfl")]
 layout_mode = 1
