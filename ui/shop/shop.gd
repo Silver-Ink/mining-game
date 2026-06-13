@@ -5,8 +5,8 @@ var scale_factor := 2.
 
 class ShopSettings extends SceneSettings:
 	pass
-@onready var money_panel: MoneyPanel = $MoneyPanel
-@onready var treasure_selling: TreasureSelling = $TreasureSelling
+@onready var money_panel: MoneyPanel = %MoneyPanel
+@onready var treasure_selling: ShopPanel = %TreasureSellingPanel
 
 func _ready() -> void:
 	setup_screen()

@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://pox7n7l5qutn"]
 
-[ext_resource type="Script" uid="uid://d28o4p38fp2sg" path="res://ui/shop/treasure.gd" id="1_6p1qm"]
-[ext_resource type="Texture2D" uid="uid://cryqh1j2hcevb" path="res://assets/element/diamound.png" id="1_dpoke"]
-[ext_resource type="Script" uid="uid://clix244xnmjdi" path="res://ui/scaling_container.gd" id="1_qnbno"]
-[ext_resource type="PackedScene" uid="uid://c64r1ufd6mp7a" path="res://ui/shop/money_button.tscn" id="3_qnbno"]
+[ext_resource type="Script" uid="uid://d28o4p38fp2sg" path="res://ui/shop/treasure_selling_item.gd" id="1_k86c1"]
+[ext_resource type="Script" uid="uid://clix244xnmjdi" path="res://ui/scaling_container.gd" id="2_lp35w"]
+[ext_resource type="Texture2D" uid="uid://cryqh1j2hcevb" path="res://assets/element/diamound.png" id="3_5p53e"]
+[ext_resource type="PackedScene" uid="uid://c64r1ufd6mp7a" path="res://ui/shop/money_button.tscn" id="4_dwlac"]
 
-[node name="Treasure" type="PanelContainer" unique_id=1918277729]
+[node name="TreasureSellingItem" type="PanelContainer" unique_id=1918277729]
 custom_minimum_size = Vector2(55, 0)
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-script = ExtResource("1_6p1qm")
+script = ExtResource("1_k86c1")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=719041332]
 layout_mode = 2
@@ -34,10 +34,12 @@ custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 2.88
-script = ExtResource("1_qnbno")
-texture = ExtResource("1_dpoke")
+script = ExtResource("2_lp35w")
+texture = ExtResource("3_5p53e")
 metadata/_custom_type_script = "uid://clix244xnmjdi"
 
-[node name="MoneyButton" parent="MarginContainer/Content" unique_id=1422552932 instance=ExtResource("3_qnbno")]
+[node name="MoneyButton" parent="MarginContainer/Content" unique_id=1422552932 instance=ExtResource("4_dwlac")]
 unique_name_in_owner = true
 layout_mode = 2
+
+[connection signal="button_pressed" from="MarginContainer/Content/MoneyButton" to="." method="_on_money_button_button_pressed"]

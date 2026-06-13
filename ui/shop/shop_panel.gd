@@ -1,5 +1,5 @@
 extends Panel
-class_name  TreasureSelling
+class_name ShopPanel
 
 @export var children_container : Container
 @onready var margin_container: MarginContainer = %MarginContainer
@@ -10,9 +10,9 @@ func _ready() -> void:
 	if (is_instance_valid(children_container)):
 		children_container.reparent(margin_container, false)
 		
-func with_data(context : SceneContext) -> TreasureSelling:
+func with_data(context : SceneContext) -> ShopPanel:
 	var items := context.inventory.items
 	for item : Item in items:
-		var treasure : TreasureUI = TREASURE.instantiate().with_data(item)
+		var treasure : TreasureSellingItem = TREASURE.instantiate().with_data(context, item)
 		children_container.add_child(treasure)
 	return self

@@ -17,7 +17,8 @@ grow_vertical = 2
 script = ExtResource("1_foe6g")
 metadata/_edit_use_anchors_ = true
 
-[node name="TreasureSelling" parent="." unique_id=1408962235 node_paths=PackedStringArray("children_container") instance=ExtResource("2_5wpfl")]
+[node name="TreasureSellingPanel" parent="." unique_id=1408962235 node_paths=PackedStringArray("children_container") instance=ExtResource("2_5wpfl")]
+unique_name_in_owner = true
 layout_mode = 1
 anchor_left = 0.62604165
 anchor_top = 0.45462963
@@ -25,7 +26,7 @@ anchor_right = 0.95520836
 anchor_bottom = 0.9685185
 children_container = NodePath("GridContainer")
 
-[node name="GridContainer" type="GridContainer" parent="TreasureSelling" unique_id=1540301264]
+[node name="GridContainer" type="GridContainer" parent="TreasureSellingPanel" unique_id=1540301264]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -39,6 +40,7 @@ columns = 2
 metadata/_edit_use_anchors_ = true
 
 [node name="ExcavatePanel" parent="." unique_id=975217594 node_paths=PackedStringArray("children_container") instance=ExtResource("2_5wpfl")]
+unique_name_in_owner = true
 layout_mode = 1
 anchor_left = 0.0171875
 anchor_top = 0.0064814813
@@ -89,6 +91,7 @@ custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
 [node name="MiningPanel" parent="." unique_id=975108179 node_paths=PackedStringArray("children_container") instance=ExtResource("2_5wpfl")]
+unique_name_in_owner = true
 layout_mode = 1
 anchor_left = 0.32395834
 anchor_top = 0.0037037036
@@ -104,6 +107,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="MoneyPanel" type="Panel" parent="." unique_id=2049045902]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.6234375
