@@ -2,7 +2,7 @@
 extends Control
 class_name TiledShapeDefinerGui
 
-signal gui_resource_changed(tiles : Tiles)
+signal gui_resource_changed(tiles : Shape)
 
 @onready var grid_container: GridContainer = %GridContainer
 @onready var spin_box_x: SpinBox = %SpinBoxX
@@ -25,7 +25,7 @@ func get_focusable_elements() -> Array[Control]:
 	elements.append_array([all_button, none_button])
 	return elements
 	
-func set_from_resource(tiles : Tiles) -> void:
+func set_from_resource(tiles : Shape) -> void:
 	if (_initilized):
 		return
 	_initilized = true

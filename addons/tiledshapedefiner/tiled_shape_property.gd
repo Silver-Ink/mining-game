@@ -25,8 +25,8 @@ func _on_gui_ready() -> void:
 
 func _update_property() -> void:
 	var prop = get_edited_object()[get_edited_property()]
-	if (prop is Tiles):
+	if (prop is Shape):
 		_gui.set_from_resource(prop)
 	
-func _on_gui_resource_changed(tiles : Tiles):
+func _on_gui_resource_changed(tiles : Shape):
 	emit_changed(get_edited_property(), tiles)
