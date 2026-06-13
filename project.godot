@@ -21,6 +21,13 @@ CustomCursor="*uid://b4kqni15kcqb5"
 BetterTerrain="*uid://0pp76f38ncdl"
 SceneManager="*uid://cx7ivsoitf4t1"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/aspect="expand"
+window/stretch/scale_mode="integer"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/better-terrain/plugin.cfg")

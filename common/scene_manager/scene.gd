@@ -1,5 +1,5 @@
+@abstract class_name Scene
 extends Node
-class_name Scene
 
 
 # If true, the scene instance won't be freed when popped from the scene stack
