@@ -1,10 +1,11 @@
 [gd_scene format=3 uid="uid://pox7n7l5qutn"]
 
+[ext_resource type="Script" uid="uid://d28o4p38fp2sg" path="res://ui/shop/treasure.gd" id="1_6p1qm"]
 [ext_resource type="Texture2D" uid="uid://cryqh1j2hcevb" path="res://assets/element/diamound.png" id="1_dpoke"]
 [ext_resource type="Script" uid="uid://clix244xnmjdi" path="res://ui/scaling_container.gd" id="1_qnbno"]
 [ext_resource type="PackedScene" uid="uid://c64r1ufd6mp7a" path="res://ui/shop/money_button.tscn" id="3_qnbno"]
 
-[node name="Panel" type="PanelContainer" unique_id=1918277729]
+[node name="Treasure" type="PanelContainer" unique_id=1918277729]
 custom_minimum_size = Vector2(55, 0)
 anchors_preset = 15
 anchor_right = 1.0
@@ -13,6 +14,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+script = ExtResource("1_6p1qm")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=719041332]
 layout_mode = 2

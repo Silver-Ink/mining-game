@@ -5,4 +5,8 @@ enum DummyEnum{
 	ItemB
 }
 
-var items : Dictionary[DummyEnum, int] = {}
+var items : Dictionary[DummyEnum, int] = {
+	DummyEnum.ItemA: 2,
+	DummyEnum.ItemB: 1,
+}
+var money : int = 55

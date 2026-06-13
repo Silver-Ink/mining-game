@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://d3fgxfurtu88x" path="res://ui/shop/shop_panel.tscn" id="2_5wpfl"]
 [ext_resource type="PackedScene" uid="uid://pox7n7l5qutn" path="res://ui/shop/treasure.tscn" id="2_qn6t7"]
 [ext_resource type="PackedScene" uid="uid://coxbi55qccp4y" path="res://ui/shop/selling_item.tscn" id="4_n5hkn"]
+[ext_resource type="Script" uid="uid://dhnyicldwyuix" path="res://ui/shop/money_panel.gd" id="5_8b6ar"]
 [ext_resource type="Script" uid="uid://clix244xnmjdi" path="res://ui/scaling_container.gd" id="5_fre4r"]
 [ext_resource type="Texture2D" uid="uid://byud853m38kut" path="res://assets/element/coin/coin.tres" id="6_kcwo1"]
 
@@ -127,6 +128,7 @@ anchor_right = 0.95729166
 anchor_bottom = 0.43888888
 grow_horizontal = 0
 grow_vertical = 2
+script = ExtResource("5_8b6ar")
 metadata/_edit_use_anchors_ = true
 
 [node name="MarginContainer" type="MarginContainer" parent="MoneyPanel" unique_id=1294220016]
